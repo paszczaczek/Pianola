@@ -9,16 +9,11 @@ public class ScoreSystem : FrameworkElement
     protected override void OnInitialized(EventArgs e)
     {
         // jak selektywnie dodawać wizualne informacje pomocnicze
-        if (Name == "System2") Score.SetShowVisualHelper(this, true);
+        // if (Name == "System2") Score.SetShowVisualHelpers(this, true);
     }
 
     protected override void OnRender(DrawingContext drawingContext)
     {
-        if (!Score.GetShowVisualHelper(this)) return;
-        
-        var score = this.FindVisualParent<Score>();
-        if (!Score.GetShowVisualHelper(score)) return;
-        
-        this.AddVisualHelpers(drawingContext);
+        if (this.ShowVisualHelpers())  this.AddVisualHelpers(drawingContext);
     }
 }

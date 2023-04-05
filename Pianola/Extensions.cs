@@ -28,7 +28,23 @@ public static class Extensions
             new Rect(0, 0, fe.ActualWidth, fe.ActualHeight));
     }
 
-    public static T FindVisualParent<T>(this DependencyObject childObject)
+    public static bool ShowVisualHelpers(this FrameworkElement fe)
+    {
+        var showVisualHelper = false;
+        
+        var score = fe.FindVisualParent<Score>();
+        var scoreShowVisualHelper = Score.GetShowVisualHelpers(score);
+        if (scoreShowVisualHelper.HasValue)
+            showVisualHelper = scoreShowVisualHelper.Value;
+        
+        var systemShowVisualHelper = Score.GetShowVisualHelpers(fe);
+        if (systemShowVisualHelper.HasValue)
+            showVisualHelper = systemShowVisualHelper.Value;
+
+        return showVisualHelper;
+    }
+
+    private static T FindVisualParent<T>(this DependencyObject childObject)
         where T : DependencyObject
     {
         if (childObject == null) return null;

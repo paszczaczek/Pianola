@@ -20,14 +20,14 @@ namespace Pianola
 
         #region ShowVisualHelperProperty
 
-        public static readonly DependencyProperty ShowVisualHelperProperty =
-            DependencyProperty.RegisterAttached("ShowVisualHelper", typeof(bool), typeof(Score));
+        public static readonly DependencyProperty ShowVisualHelpersProperty =
+            DependencyProperty.RegisterAttached("ShowVisualHelpers", typeof(bool?), typeof(Score));
 
-        public static bool GetShowVisualHelper(UIElement target) =>
-            (bool) target.GetValue(ShowVisualHelperProperty);
+        public static bool? GetShowVisualHelpers(UIElement target) =>
+            (bool?) target.GetValue(ShowVisualHelpersProperty);
 
-        public static void SetShowVisualHelper(UIElement target, bool value) =>
-            target.SetValue(ShowVisualHelperProperty, value);
+        public static void SetShowVisualHelpers(UIElement target, bool? value) =>
+            target.SetValue(ShowVisualHelpersProperty, value);
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace Pianola
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (GetShowVisualHelper(this)) this.AddVisualHelpers(drawingContext);
+            if (GetShowVisualHelpers(this) is true) this.AddVisualHelpers(drawingContext);
         }
     }
 }

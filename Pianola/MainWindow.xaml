@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score" Width="400" Height="270">
-    <local:Score Margin="10" ShowVisualHelper="True" />
+    <local:Score Margin="10" ShowVisualHelpers="True" />
 </Window>
