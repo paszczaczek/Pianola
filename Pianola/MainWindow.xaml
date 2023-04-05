@@ -6,18 +6,5 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score" Width="400" Height="270">
-    <local:Score>
-        <!-- <local:Score.Resources> -->
-        <!--     <Thickness x:Key="SystemMargin">5</Thickness> -->
-        <!-- </local:Score.Resources> -->
-        <!-- <StackPanel Orientation="Vertical" Margin="{StaticResource SystemMargin}"> -->
-        <!--     <StackPanel.Resources> -->
-        <!--         <Style TargetType="{x:Type local:ScoreSystem}"> -->
-        <!--             <Setter Property="Margin" Value="{StaticResource SystemMargin}" /> -->
-        <!--         </Style> -->
-        <!--     </StackPanel.Resources> -->
-        <!--     <local:ScoreSystem x:Name="System1" Height="100" /> -->
-        <!--     <local:ScoreSystem x:Name="System2" Height="100" /> -->
-        <!-- </StackPanel> -->
-    </local:Score>
+    <local:Score Margin="10" ShowVisualHelper="True" />
 </Window>
