@@ -31,26 +31,26 @@ namespace Pianola
 
         #endregion
 
-        private static readonly Thickness SystemMargin = new(15);
-        private readonly ICollection<ScoreSystem> _systems = new Collection<ScoreSystem>();
+        // private static readonly Thickness SystemMargin = new(15);
+        private readonly ICollection<GrandStaff> _grandStaves = new Collection<GrandStaff>();
 
         public Score()
         {
-            _systems.Add(new() {Name = "System1", Height = 90});
-            _systems.Add(new() {Name = "System2", Height = 90});
+            _grandStaves.Add(new GrandStaff {Name = "_1"});
+            _grandStaves.Add(new GrandStaff {Name = "_2"});
 
             var stackPanel = new StackPanel()
             {
-                Margin = SystemMargin
+                // Margin = SystemMargin
             };
-            foreach (var system in _systems) stackPanel.Children.Add(system);
+            foreach (var grandStaff in _grandStaves) stackPanel.Children.Add(grandStaff);
 
             Content = stackPanel;
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            if (GetShowVisualHelpers(this) is true) this.AddVisualHelpers(drawingContext);
-        }
+        // protected override void OnRender(DrawingContext drawingContext)
+        // {
+        //     if (GetShowVisualHelpers(this) is true) this.AddVisualHelpers(drawingContext);
+        // }
     }
 }
