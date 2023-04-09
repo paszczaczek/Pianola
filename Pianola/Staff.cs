@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -7,88 +6,76 @@ using Pianola.Clefs;
 
 namespace Pianola;
 
-public class Staff : Canvas
+public class Staff : Grid
 {
     #region TypeProperty
 
-    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
-        nameof(Type), typeof(Types), typeof(Staff),
+    public static readonly DependencyProperty ClefTypeProperty = DependencyProperty.Register(
+        nameof(ClefType), typeof(Clef.Type), typeof(Staff),
         new FrameworkPropertyMetadata(
-            Types.Treble,
+            Clef.Type.Treble,
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
             propertyChangedCallback: (d, e) =>
             {
-                // zmieniono typ pięciolinii (wiolinowa/basowa) - pokaż właściwy symbol klucza
+                // ustawiono typ pięciolinii (wiolinowa/basowa) - pokaż właściwy symbol klucza
                 var staff = (Staff) d;
-                // staff._clef.Text = e.NewValue switch
-                // {
-                //     Types.Treble => Symbol.TrebleClef,
-                //     Types.Bass => Symbol.BassClef,
-                //     _ => throw new ArgumentOutOfRangeException()
-                // };
-                staff._clef = e.NewValue switch
-                {
-                    Types.Treble => new TrebleClef(),
-                    Types.Bass => new BassClef(),
-                    _ => throw new ArgumentOutOfRangeException()
-                };
-                staff.UpdateLayout();
+                staff._stackPanel.Children.Remove(staff._clef);
+                staff._clef = e.NewValue is TrebleClef ? new TrebleClef() : new BassClef();
+                SetTop(staff._clef, 6);
+                staff._stackPanel.Children.Add(staff._clef);
             }));
 
-    public Types Type
+    public Clef.Type ClefType
     {
-        get => (Types) GetValue(TypeProperty);
-        set => SetValue(TypeProperty, value);
-    }
-
-    public enum Types
-    {
-        Treble,
-        Bass
+        get => (Clef.Type) GetValue(ClefTypeProperty);
+        set => SetValue(ClefTypeProperty, value);
     }
 
     #endregion
 
-    private Clef _clef = new TrebleClef();
-    private readonly Line[] _lines = new Line[5];
+    private Clef _clef;
+    private readonly StackPanel _stackPanel;
+
+    private static void SetTop(FrameworkElement element, int position)
+    {
+        var top =
+            -Glyph.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+            + Glyph.HeadHeight * position / 2; // przesun baseline znaku w dol we wskazywaną pozycję na pięciolinii
+        element.Margin = new Thickness(0, top, 0, 0);
+    }
 
     public Staff()
     {
-        // odstęp pomiędzy liniami pięciolinii
+        // utworz pięciolinię
+        var lines = new Canvas();
         var lineSpacing = Glyph.HeadHeight;
-        
-        // dodaj linie pięciolinii
-        for (var i = 0; i < _lines.Length; i++)
+        for (var i = 0; i < 5; i++)
         {
-            _lines[i] = new Line
+            var line = new Line
             {
                 X1 = 0,
                 Y1 = i * lineSpacing,
+                X2 = 20, // TODO automatyczna długoś pięciolinii
                 Y2 = i * lineSpacing,
                 Stroke = Brushes.Gray,
                 StrokeThickness = 1,
                 SnapsToDevicePixels = true
             };
-            Children.Add(_lines[i]);
+            lines.Children.Add(line);
         }
 
-        // dodaj klucz 
-        var secondLineY = lineSpacing * 3;
-        var clefTop = secondLineY - Glyph.BaseLine;
-        SetTop(_clef, clefTop);
-        Children.Add(_clef);
-
-        // ustaw wysokość pięciolinii
-        Height = (_lines.Length - 1) * lineSpacing;
-    }
-
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        // ustaw długości linii w pieciolinii
-        if (sizeInfo.WidthChanged)
-            foreach (var line in _lines)
-                line.X2 = sizeInfo.NewSize.Width;
-
-        base.OnRenderSizeChanged(sizeInfo);
+        // utwórz klucz 
+        _clef = new TrebleClef();
+        SetTop(_clef, 6);
+        
+        // utwórz stack panel dla elementów umieszczanych na pięciolinii
+        // i dodaj do niej niego klucz, skalę i metrum a później takty
+        _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
+        _stackPanel.Children.Add(_clef);
+        // TODO dodaj skalę i metrum
+        
+        // dodaj do grida pięciolinię a nad nią stack panel z elementami na pięciolinii
+        Children.Add(lines);
+        Children.Add(_stackPanel);
     }
 }

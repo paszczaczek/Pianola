@@ -30,30 +30,30 @@ public static class Extensions
 
     public static bool ShowVisualHelpers(this FrameworkElement fe)
     {
-        var showVisualHelper = false;
-        
-        var score = fe.FindVisualParent<Score>();
-        var scoreShowVisualHelper = Score.GetShowVisualHelpers(score);
-        if (scoreShowVisualHelper.HasValue)
-            showVisualHelper = scoreShowVisualHelper.Value;
-        
-        var systemShowVisualHelper = Score.GetShowVisualHelpers(fe);
-        if (systemShowVisualHelper.HasValue)
-            showVisualHelper = systemShowVisualHelper.Value;
-
-        return showVisualHelper;
+        // var showVisualHelper = false;
+        //
+        // var score = fe.FindVisualParent<Score>();
+        // var scoreShowVisualHelper = Score.GetShowVisualHelpers(score);
+        // if (scoreShowVisualHelper.HasValue)
+        //     showVisualHelper = scoreShowVisualHelper.Value;
+        //
+        // var systemShowVisualHelper = Score.GetShowVisualHelpers(fe);
+        // if (systemShowVisualHelper.HasValue)
+        //     showVisualHelper = systemShowVisualHelper.Value;
+        //
+        // return showVisualHelper;
+        return false;
     }
 
-    private static T FindVisualParent<T>(this DependencyObject childObject)
-        where T : DependencyObject
-    {
-        if (childObject == null) return null;
-        var parentObj = VisualTreeHelper.GetParent(childObject);
-        return parentObj switch
-        {
-            null => null,
-            T parent => parent,
-            _ => FindVisualParent<T>(parentObj)
-        };
-    }
+    // private static T? FindVisualParent<T>(this DependencyObject childObject)
+    //     where T : DependencyObject
+    // {
+    //     var parentObj = VisualTreeHelper.GetParent(childObject);
+    //     return parentObj switch
+    //     {
+    //         null => null,
+    //         T parent => parent,
+    //         _ => FindVisualParent<T>(parentObj)
+    //     };
+    // }
 }

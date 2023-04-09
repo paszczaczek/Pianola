@@ -36,5 +36,6 @@ public class Glyph : TextBlock
     {
         base.FontFamily = new FontFamily(FontFamily);
         base.FontSize = FontSize;
+        BaselineOffset = 2400;
     }
 }

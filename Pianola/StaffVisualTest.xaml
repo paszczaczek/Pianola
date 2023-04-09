@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
-             mc:Ignorable="d"
-             d:DesignWidth="200" d:DesignHeight="300">
-    <!-- Designer w Rider nie reaguje na ustawianie Type. -->
-    <!-- Nie wykonuje propertyChangedCallback w TypeProperty w designerze. -->
-    <!-- VisualStudio reaguje poprawnie. -->
-    <local:Staff Type="{x:Static local:Staff+Types.Bass}"/>
+             xmlns:clefs="clr-namespace:Pianola.Clefs"
+             mc:Ignorable="d">
+    <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
+    <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
+    <!-- Designer w VisualStudio reaguje poprawnie. -->
+    <!-- <local:Staff ClefType="{x:Static clefs:Clef+Type.Bass}"/> -->
+    <local:Staff />
 </UserControl>
 

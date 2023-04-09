@@ -2,13 +2,14 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Pianola.Clefs;
 
 namespace Pianola;
 
 public class GrandStaff : StackPanel
 {
-    private readonly Staff _trebleStaff = new Staff {Type = Staff.Types.Treble};
-    private readonly Staff _bassStaff = new Staff {Type = Staff.Types.Bass};
+    private readonly Staff _trebleStaff = new Staff {ClefType = Clef.Type.Treble};
+    private readonly Staff _bassStaff = new Staff {ClefType = Clef.Type.Bass};
 
     public GrandStaff()
     {
