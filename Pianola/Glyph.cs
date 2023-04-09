@@ -5,16 +5,22 @@ using System.Windows.Media;
 
 namespace Pianola;
 
-public class Symbol : TextBlock
+public class Glyph : TextBlock
 {
     private new const string FontFamily = "feta26";
     private new const double FontSize = 48;
+
     public static readonly double BaseLine;
     public static readonly double HeadHeight;
 
-    static Symbol()
+    protected const string TrebleClef = "\x00c9";
+    protected const string BassClef = "\x00c7";
+    private const string BlackNoteHead = "\x0056";
+    public const string WhiteNoteHead = "\x0055";
+
+    static Glyph()
     {
-        // wyznacz baseline i wysokość główki nuty
+        // wyznacz baseline i wysokość główki nuty (przy starcie aplikacji)
         var ft = new FormattedText(
             BlackNoteHead,
             CultureInfo.InvariantCulture,
@@ -26,15 +32,9 @@ public class Symbol : TextBlock
         HeadHeight = ft.Extent;
     }
 
-    public Symbol()
+    protected Glyph()
     {
         base.FontFamily = new FontFamily(FontFamily);
         base.FontSize = FontSize;
-        // Background = Brushes.Bisque;
     }
-
-    public const string TrebleClef = "\x00c9";
-    public const string BassClef = "\x00c7";
-    private const string BlackNoteHead = "\x0056";
-    public const string WhiteNoteHead = "\x0055";
 }

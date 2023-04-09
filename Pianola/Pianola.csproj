@@ -52,19 +52,27 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Clefs\BassClef.cs" />
+        <Compile Include="Clefs\BassClefVisualTest.xaml.cs">
+          <DependentUpon>BassClefVisualTest.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Clefs\Clef.cs" />
+        <Compile Include="Clefs\TrebleClef.cs" />
+        <Compile Include="Clefs\TrebleClefVisualTest.xaml.cs">
+          <DependentUpon>TrebleClefVisualTest.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Extensions.cs" />
         <Compile Include="GrandStaff.cs" />
         <Compile Include="GrandStaffVisualTester.xaml.cs">
           <DependentUpon>GrandStaffVisualTester.xaml</DependentUpon>
         </Compile>
-        <Compile Include="Symbol.cs" />
+        <Compile Include="Glyph.cs" />
         <Compile Include="Staff.cs" />
         <Compile Include="StaffVisualTest.xaml.cs">
           <DependentUpon>StaffVisualTest.xaml</DependentUpon>
         </Compile>
-        <Compile Include="SymbolVisualTest.xaml.cs">
-          <DependentUpon>SymbolVisualTest.xaml</DependentUpon>
-        </Compile>
+        <Page Include="Clefs\BassClefVisualTest.xaml" />
+        <Page Include="Clefs\TrebleClefVisualTest.xaml" />
         <Page Include="GrandStaffVisualTester.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -80,7 +88,6 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="StaffVisualTest.xaml" />
-        <Page Include="SymbolVisualTest.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Properties\AssemblyInfo.cs">

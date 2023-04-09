@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Pianola.Clefs;
 
 namespace Pianola;
 
@@ -17,14 +18,21 @@ public class Staff : Canvas
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
             propertyChangedCallback: (d, e) =>
             {
-                // zmieniono typ pięciolinii (wiolinowa/basowa) - pokaz właściwy symbol klucza
+                // zmieniono typ pięciolinii (wiolinowa/basowa) - pokaż właściwy symbol klucza
                 var staff = (Staff) d;
-                staff._clefSymbol.Text = e.NewValue switch
+                // staff._clef.Text = e.NewValue switch
+                // {
+                //     Types.Treble => Symbol.TrebleClef,
+                //     Types.Bass => Symbol.BassClef,
+                //     _ => throw new ArgumentOutOfRangeException()
+                // };
+                staff._clef = e.NewValue switch
                 {
-                    Types.Treble => Symbol.TrebleClef,
-                    Types.Bass => Symbol.BassClef,
+                    Types.Treble => new TrebleClef(),
+                    Types.Bass => new BassClef(),
                     _ => throw new ArgumentOutOfRangeException()
                 };
+                staff.UpdateLayout();
             }));
 
     public Types Type
@@ -41,13 +49,13 @@ public class Staff : Canvas
 
     #endregion
 
-    private readonly Symbol _clefSymbol = new() {Text = Symbol.TrebleClef};
+    private Clef _clef = new TrebleClef();
     private readonly Line[] _lines = new Line[5];
 
     public Staff()
     {
         // odstęp pomiędzy liniami pięciolinii
-        var lineSpacing = Symbol.HeadHeight;
+        var lineSpacing = Glyph.HeadHeight;
         
         // dodaj linie pięciolinii
         for (var i = 0; i < _lines.Length; i++)
@@ -66,9 +74,9 @@ public class Staff : Canvas
 
         // dodaj klucz 
         var secondLineY = lineSpacing * 3;
-        var clefTop = secondLineY - Symbol.BaseLine;
-        SetTop(_clefSymbol, clefTop);
-        Children.Add(_clefSymbol);
+        var clefTop = secondLineY - Glyph.BaseLine;
+        SetTop(_clef, clefTop);
+        Children.Add(_clef);
 
         // ustaw wysokość pięciolinii
         Height = (_lines.Length - 1) * lineSpacing;

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="Pianola.SymbolVisualTest"
+﻿<UserControl x:Class="Pianola.Clefs.TrebleClefVisualTest"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Pianola"
-             mc:Ignorable="d"             >
-    <local:Symbol Text="{x:Static local:Symbol.TrebleClef}" />
+             xmlns:local="clr-namespace:Pianola.Clefs"
+             mc:Ignorable="d">
+    <local:TrebleClef />
 </UserControl>

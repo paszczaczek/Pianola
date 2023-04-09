@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score"  Width="400" Height="270">
-    <!-- <local:Staff Type="{x:Static local:Staff+Types.Bass}"/> -->
+    <local:Staff Type="{x:Static local:Staff+Types.Bass}"/>
     <!-- <local:MusicalSymbol Text="{x:Static local:MusicalSymbol.TrebleClef}"/> -->
-    <local:Score ShowVisualHelpers="True" />
+    <!-- <local:Score ShowVisualHelpers="True" /> -->
     <!-- <StackPanel> -->
     <!--     <local:Staff Background="Azure" /> -->
     <!--     <local:Staff Background="Bisque" Margin="0, 30, 0, 0" /> -->
