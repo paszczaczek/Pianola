@@ -43,7 +43,7 @@ public class Staff : Grid
          *      StaffLines
          *      StackPanel
          *          Clef
-         *          Scale TODO
+         *          Scale
          *          Metrum TODO
          */
         
@@ -56,7 +56,7 @@ public class Staff : Grid
         // utwórz klucz
         _clef = new TrebleClef();
 
-        // dodaj do niej niego klucz, skalę i metrum a później takty
+        // utwórz stack panel i odaj do niego niego klucz, skalę i metrum a później takty
         _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
         _stackPanel.Children.Add(_clef);
         _stackPanel.Children.Add(new CesScale());
