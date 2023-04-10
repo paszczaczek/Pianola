@@ -41,7 +41,7 @@ public class Scale : Canvas
 
     protected override void OnRender(DrawingContext dc)
     {
-        // Width = Children.Cast<FrameworkElement>().Sum(child => child.ActualWidth);
+        // rozmieszczamy znaki chromatyczne w poziome, tak by były jeden za drugim
         var width = .0;
         foreach (FrameworkElement chromatic in Children)
         {
@@ -50,21 +50,6 @@ public class Scale : Canvas
         }
         
         Width = width;
-    }
-
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        // po narysowaniu znaków chromatycznych zaktualizuj szerokość canvas
-        // Width = Children.Cast<FrameworkElement>().Sum(child => child.ActualWidth);
-        // var width = .0;
-        // foreach (FrameworkElement chromatic in Children)
-        // {
-        //     SetLeft(chromatic, width);
-        //     width += chromatic.ActualWidth;
-        // }
-        //
-        // Width = width;
-        base.OnRenderSizeChanged(sizeInfo);
     }
 }
 

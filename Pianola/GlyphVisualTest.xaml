@@ -5,5 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <local:Glyph Text="{x:Static local:Glyph.Natural}" />
+    <StackPanel Orientation="Horizontal">
+        <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" />
+        <local:Glyph Text="{x:Static local:Glyph.BassClef}" />
+        <local:Glyph Text="{x:Static local:Glyph.BlackNoteHead}" />
+        <local:Glyph Text="{x:Static local:Glyph.WhiteNoteHead}" />
+        <local:Glyph Text="{x:Static local:Glyph.Sharp}" />
+        <local:Glyph Text="{x:Static local:Glyph.Flat}" />
+        <local:Glyph Text="{x:Static local:Glyph.Natural}" />
+    </StackPanel>
 </UserControl>

@@ -31,22 +31,16 @@ public class Chromatic : Canvas
         var glyph = new Glyph {Text = glyphText};
         Children.Add(glyph);
         SetTop(glyph, top);
+        // Background = Brushes.Aquamarine;
     }
 
     protected override void OnRender(DrawingContext dc)
     {
+        // aktualizujemy wymiary znaku chromatycznego na podstawie wymiarów glypha 
         var glyph = (Glyph)Children[0];
         Width = glyph.ActualWidth;
         Height = glyph.ActualHeight;
         base.OnRender(dc);
-    }
-
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        // po narysowaniu glypg zaktualizuj szerokość canvas
-        var glyph = (Glyph) Children[0];
-        Width = glyph.ActualWidth;
-        base.OnRenderSizeChanged(sizeInfo);
     }
 }
 

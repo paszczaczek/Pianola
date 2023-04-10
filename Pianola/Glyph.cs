@@ -18,8 +18,8 @@ public class Glyph : TextBlock
     public const string Sharp = "\x002e";
     public const string Flat = "\x003a";
     public const string Natural = "\x0036";
-    private const string BlackNoteHead = "\x0056";
-    // private const string WhiteNoteHead = "\x0055";
+    public const string BlackNoteHead = "\x0056";
+    public const string WhiteNoteHead = "\x0055";
 
     static Glyph()
     {
@@ -39,6 +39,6 @@ public class Glyph : TextBlock
     {
         FontFamily = new FontFamily(FamilyName);
         base.FontSize = FontSize;
-        // Background = Brushes.Aqua;
+        // Background = Brushes.Aquamarine;
     }
 }

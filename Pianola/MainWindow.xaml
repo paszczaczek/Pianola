@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score"  Width="400" Height="270">
-    <local:Staff ClefType="{x:Static local:Clef+Type.Treble}"/>
+    <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" Margin="30"/>
     <!-- <local:Staff Width="100" HorizontalAlignment="Left" /> -->
     <!-- <local:StaffLines Width="300" /> -->
     <!-- <local:ClefsVisualTest /> -->
