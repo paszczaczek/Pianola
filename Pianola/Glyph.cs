@@ -16,7 +16,7 @@ public class Glyph : TextBlock
     protected const string TrebleClef = "\x00c9";
     protected const string BassClef = "\x00c7";
     private const string BlackNoteHead = "\x0056";
-    public const string WhiteNoteHead = "\x0055";
+    // private const string WhiteNoteHead = "\x0055";
 
     static Glyph()
     {
@@ -36,7 +36,6 @@ public class Glyph : TextBlock
     {
         FontFamily = new FontFamily(FamilyName);
         base.FontSize = FontSize;
-        BaselineOffset = 2400;
         
         // przesuń baseline znaku w górę do współrzędnej zerowej
         Margin = new Thickness(0, -BaseLine, 0, 0);

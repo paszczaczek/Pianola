@@ -6,19 +6,24 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
     <UserControl.Resources>
+        <!-- ramka pokazująca granice klucza na tle pięciolinii -->
         <Style TargetType="{x:Type ListViewItem}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListViewItem}">
-                        <Border BorderBrush="BlueViolet" BorderThickness="1">
-                            <ContentPresenter />
+                        <Border Margin="0 60 0 0" BorderBrush="BlueViolet" BorderThickness="1">
+                            <Grid>
+                                <ContentPresenter VerticalAlignment="Top" />
+                                <local:StaffLines VerticalAlignment="Top" Width="50"/>
+                            </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <!-- klucze pokazywane w poziomie -->
         <ItemsPanelTemplate x:Key="ListViewItemsPanel1">
-            <StackPanel Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal" />
         </ItemsPanelTemplate>
     </UserControl.Resources>
 
@@ -26,4 +31,9 @@
         <local:TrebleClef />
         <local:BassClef />
     </ListView>
+
+    <!-- <Grid> -->
+    <!--     <TextBlock Height="100" Background="Aqua" VerticalAlignment="Top">Ala ma kaszel</TextBlock> -->
+    <!--     <TextBlock Height="20" Background="BlueViolet" VerticalAlignment="Top">XXXX</TextBlock> -->
+    <!-- </Grid> -->
 </UserControl>
