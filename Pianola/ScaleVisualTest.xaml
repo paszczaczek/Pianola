@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <!-- <StackPanel Orientation="Horizontal" Height="100"> -->
-    <local:CesScale Width="200" Height="200" Background="BlueViolet"/>
-    <!-- <local:CisScale /> -->
-    <!-- </StackPanel> -->
+    <StackPanel Orientation="Horizontal" Height="100" Margin="0 30 0 0">
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:CesScale />
+        </Border>
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:CisScale />
+        </Border>
+    </StackPanel>
 </UserControl>

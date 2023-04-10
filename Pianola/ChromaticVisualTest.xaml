@@ -5,9 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal">
-        <local:Sharp />
-        <local:Flat />
-        <local:Natural />
+    <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:Sharp />
+        </Border>
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:Flat />
+        </Border>
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:Natural />
+        </Border>
     </StackPanel>
 </UserControl>

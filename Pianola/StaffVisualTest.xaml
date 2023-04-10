@@ -8,8 +8,7 @@
     <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
     <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
     <!-- Designer w VisualStudio reaguje poprawnie. -->
-    <local:Staff
-        Width="300" Height="100"
-        ClefType="{x:Static local:Clef+Type.Treble}" />
+    <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="40">
+        <local:Staff ClefType="{x:Static local:Clef+Type.Bass}" />
+    </Border>
 </UserControl>
-
