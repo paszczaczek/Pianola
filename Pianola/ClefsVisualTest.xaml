@@ -5,5 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <local:TrebleClef Width="100" Height="100" />
+    <StackPanel Orientation="Horizontal" Height="100">
+        <local:TrebleClef />
+        <local:BassClef />
+    </StackPanel>
 </UserControl>

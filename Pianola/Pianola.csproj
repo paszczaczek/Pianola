@@ -52,6 +52,10 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Chromatic.cs" />
+        <Compile Include="ChromaticVisualTest.xaml.cs">
+          <DependentUpon>ChromaticVisualTest.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Clefs.cs" />
         <Compile Include="ClefsVisualTest.xaml.cs">
           <DependentUpon>ClefsVisualTest.xaml</DependentUpon>
@@ -73,6 +77,7 @@
         <Compile Include="StaffVisualTest.xaml.cs">
           <DependentUpon>StaffVisualTest.xaml</DependentUpon>
         </Compile>
+        <Page Include="ChromaticVisualTest.xaml" />
         <Page Include="ClefsVisualTest.xaml" />
         <Page Include="GlyphVisualTest.xaml" />
         <Page Include="GrandStaffVisualTester.xaml" />

@@ -15,6 +15,9 @@ public class Glyph : TextBlock
 
     public const string TrebleClef = "\x00c9";
     public const string BassClef = "\x00c7";
+    public const string Sharp = "\x002e";
+    public const string Flat = "\x002a";
+    public const string Natural = "\x0036";
     private const string BlackNoteHead = "\x0056";
     // private const string WhiteNoteHead = "\x0055";
 

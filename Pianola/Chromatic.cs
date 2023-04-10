@@ -1,37 +1,37 @@
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Pianola;
 
-public class Clef : Canvas
+public class Chromatic : Canvas
 {
     public enum Type
     {
-        Treble,
-        Bass
+        Sharp,
+        Flat,
+        Natural
     }
 
-    public static Clef Create(Type type)
+    public static Chromatic Create(Type type)
     {
         return type switch
         {
-            Type.Treble => new TrebleClef(),
-            Type.Bass => new BassClef(),
+            Type.Sharp => new Sharp(),
+            Type.Flat => new Flat(),
+            Type.Natural => new Natural(),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }
 
-    protected Clef(string glyphText, Staff.Line staffLine)
+    protected Chromatic(string glyphText)
     {
-        var top =
-            -Glyph.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            + Staff.TopOf(staffLine); // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+        var top = -Glyph.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
         var glyph = new Glyph {Text = glyphText};
         Children.Add(glyph);
         SetTop(glyph, top);
     }
-
+    
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
         // po narysowaniu glypg zaktualizuj szerokość canvas
@@ -41,16 +41,23 @@ public class Clef : Canvas
     }
 }
 
-public class TrebleClef : Clef
+public class Sharp : Chromatic
 {
-    public TrebleClef() : base(Glyph.TrebleClef, Staff.Line.Second)
+    public Sharp() : base(Glyph.Sharp)
     {
     }
 }
 
-public class BassClef : Clef
+public class Flat : Chromatic
 {
-    public BassClef() : base(Glyph.BassClef, Staff.Line.Fourth)
+    public Flat() : base(Glyph.Flat)
+    {
+    }
+}
+
+public class Natural : Chromatic
+{
+    public Natural() : base(Glyph.Natural)
     {
     }
 }

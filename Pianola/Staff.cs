@@ -33,7 +33,7 @@ public class Staff : Grid
 
 
     private readonly StaffLines _staffLines;
-    private Clef _clef = new TrebleClef();
+    private Clef _clef;
     private readonly StackPanel _stackPanel;
 
     public Staff()
@@ -52,11 +52,17 @@ public class Staff : Grid
         {
             VerticalAlignment = VerticalAlignment.Top
         };
+        
+        // utwórz klucz
+        _clef = new TrebleClef();
 
         // dodaj do niej niego klucz, skalę i metrum a później takty
         _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
         _stackPanel.Children.Add(_clef);
         // TODO dodaj skalę i metrum
+        _stackPanel.Children.Add(new Sharp());
+        _stackPanel.Children.Add(new Flat());
+        _stackPanel.Children.Add(new Natural());
 
         // dodaj do grida pięciolinię a nad nią stack panel z elementami
         Children.Add(_staffLines);
