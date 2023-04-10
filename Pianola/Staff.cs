@@ -2,13 +2,12 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Pianola.Clefs;
 
 namespace Pianola;
 
 public class Staff : Grid
 {
-    #region TypeProperty
+    #region ClefTypeProperty
 
     public static readonly DependencyProperty ClefTypeProperty = DependencyProperty.Register(
         nameof(ClefType), typeof(Clef.Type), typeof(Staff),
@@ -17,7 +16,7 @@ public class Staff : Grid
             FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
             propertyChangedCallback: (d, e) =>
             {
-                // ustawiono typ pięciolinii (wiolinowa/basowa) - pokaż właściwy symbol klucza
+                // ustawiono typ pięciolinii (wiolinowa/basowa) - dodaj do pięciolinii właściwy klucz
                 var staff = (Staff) d;
                 staff._stackPanel.Children.Remove(staff._clef);
                 staff._clef = e.NewValue is TrebleClef ? new TrebleClef() : new BassClef();
@@ -36,14 +35,6 @@ public class Staff : Grid
     private Clef _clef;
     private readonly StackPanel _stackPanel;
 
-    private static void SetTop(FrameworkElement element, int position)
-    {
-        var top =
-            -Glyph.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            + Glyph.HeadHeight * position / 2; // przesun baseline znaku w dol we wskazywaną pozycję na pięciolinii
-        element.Margin = new Thickness(0, top, 0, 0);
-    }
-
     public Staff()
     {
         // utworz pięciolinię
@@ -55,7 +46,7 @@ public class Staff : Grid
             {
                 X1 = 0,
                 Y1 = i * lineSpacing,
-                X2 = 20, // TODO automatyczna długoś pięciolinii
+                X2 = 20, // TODO automatyczna długość pięciolinii
                 Y2 = i * lineSpacing,
                 Stroke = Brushes.Gray,
                 StrokeThickness = 1,
@@ -66,7 +57,7 @@ public class Staff : Grid
 
         // utwórz klucz 
         _clef = new TrebleClef();
-        SetTop(_clef, 6);
+        SetTop(_clef, LineSecond);
         
         // utwórz stack panel dla elementów umieszczanych na pięciolinii
         // i dodaj do niej niego klucz, skalę i metrum a później takty
@@ -74,8 +65,19 @@ public class Staff : Grid
         _stackPanel.Children.Add(_clef);
         // TODO dodaj skalę i metrum
         
-        // dodaj do grida pięciolinię a nad nią stack panel z elementami na pięciolinii
+        // dodaj do grida pięciolinię a nad nią stack panel z elementami
         Children.Add(lines);
         Children.Add(_stackPanel);
     }
+
+    private static void SetTop(FrameworkElement element, int position)
+    {
+        var top =
+            element.Margin.Top
+            // -Glyph.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+            + Glyph.HeadHeight * position / 2; // przesun baseline znaku w dol we wskazywaną pozycję na pięciolinii
+        element.Margin = new Thickness(0, top, 0, 0);
+    }
+
+    private const int LineSecond = 6+2;
 }

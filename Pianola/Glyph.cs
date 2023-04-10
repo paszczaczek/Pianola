@@ -7,10 +7,10 @@ namespace Pianola;
 
 public class Glyph : TextBlock
 {
-    private new const string FontFamily = "feta26";
+    private const string FamilyName = "feta26";
     private new const double FontSize = 48;
 
-    public static readonly double BaseLine;
+    private static readonly double BaseLine;
     public static readonly double HeadHeight;
 
     protected const string TrebleClef = "\x00c9";
@@ -25,7 +25,7 @@ public class Glyph : TextBlock
             BlackNoteHead,
             CultureInfo.InvariantCulture,
             FlowDirection.LeftToRight,
-            new Typeface(FontFamily),
+            new Typeface(FamilyName),
             FontSize,
             Brushes.Black, 1);
         BaseLine = ft.Baseline;
@@ -34,8 +34,11 @@ public class Glyph : TextBlock
 
     protected Glyph()
     {
-        base.FontFamily = new FontFamily(FontFamily);
+        FontFamily = new FontFamily(FamilyName);
         base.FontSize = FontSize;
         BaselineOffset = 2400;
+        
+        // przesuń baseline znaku w górę do współrzędnej zerowej
+        Margin = new Thickness(0, -BaseLine, 0, 0);
     }
 }

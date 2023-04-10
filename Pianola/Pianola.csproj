@@ -52,14 +52,9 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Clefs\BassClef.cs" />
-        <Compile Include="Clefs\BassClefVisualTest.xaml.cs">
-          <DependentUpon>BassClefVisualTest.xaml</DependentUpon>
-        </Compile>
-        <Compile Include="Clefs\Clef.cs" />
-        <Compile Include="Clefs\TrebleClef.cs" />
-        <Compile Include="Clefs\TrebleClefVisualTest.xaml.cs">
-          <DependentUpon>TrebleClefVisualTest.xaml</DependentUpon>
+        <Compile Include="Clefs.cs" />
+        <Compile Include="ClefsVisualTester.xaml.cs">
+          <DependentUpon>ClefsVisualTester.xaml</DependentUpon>
         </Compile>
         <Compile Include="Extensions.cs" />
         <Compile Include="GrandStaff.cs" />
@@ -71,8 +66,7 @@
         <Compile Include="StaffVisualTest.xaml.cs">
           <DependentUpon>StaffVisualTest.xaml</DependentUpon>
         </Compile>
-        <Page Include="Clefs\BassClefVisualTest.xaml" />
-        <Page Include="Clefs\TrebleClefVisualTest.xaml" />
+        <Page Include="ClefsVisualTester.xaml" />
         <Page Include="GrandStaffVisualTester.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>

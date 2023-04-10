@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pianola"
-        xmlns:clefs="clr-namespace:Pianola.Clefs"
         mc:Ignorable="d"
         Title="Score"  Width="400" Height="270">
-    <!-- <local:Staff ClefType="{x:Static clefs:Clef+Type.Bass}"/> -->
-    <local:Staff />
+    <local:Staff ClefType="{x:Static local:Clef+Type.Bass}"/>
+    <!-- <local:Staff /> -->
 </Window>
