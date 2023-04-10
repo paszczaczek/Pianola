@@ -10,11 +10,11 @@ public class Glyph : TextBlock
     private const string FamilyName = "feta26";
     private new const double FontSize = 48;
 
-    private static readonly double BaseLine;
+    public static readonly double BaseLine;
     public static readonly double HeadHeight;
 
-    protected const string TrebleClef = "\x00c9";
-    protected const string BassClef = "\x00c7";
+    public const string TrebleClef = "\x00c9";
+    public const string BassClef = "\x00c7";
     private const string BlackNoteHead = "\x0056";
     // private const string WhiteNoteHead = "\x0055";
 
@@ -32,12 +32,9 @@ public class Glyph : TextBlock
         HeadHeight = ft.Extent;
     }
 
-    protected Glyph()
+    public Glyph()
     {
         FontFamily = new FontFamily(FamilyName);
         base.FontSize = FontSize;
-        
-        // przesuń baseline znaku w górę do współrzędnej zerowej
-        Margin = new Thickness(0, -BaseLine, 0, 0);
     }
 }

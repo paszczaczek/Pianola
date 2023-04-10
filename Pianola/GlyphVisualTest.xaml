@@ -1,15 +1,9 @@
-﻿<UserControl x:Class="Pianola.StaffVisualTest"
+﻿<UserControl x:Class="Pianola.GlyphVisualTest"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
-    <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
-    <!-- Designer w VisualStudio reaguje poprawnie. -->
-    <local:Staff
-        Width="150" Height="100"
-        ClefType="{x:Static local:Clef+Type.Treble}" />
+    <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" />
 </UserControl>
-
