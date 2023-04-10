@@ -69,6 +69,9 @@
           <DependentUpon>GrandStaffVisualTester.xaml</DependentUpon>
         </Compile>
         <Compile Include="Glyph.cs" />
+        <Compile Include="ScaleVisualTest.xaml.cs">
+          <DependentUpon>ScaleVisualTest.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Staff.cs" />
         <Compile Include="StaffLines.cs" />
         <Compile Include="StaffLinesVisualTest.xaml.cs">
@@ -77,6 +80,7 @@
         <Compile Include="StaffVisualTest.xaml.cs">
           <DependentUpon>StaffVisualTest.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Scale.cs" />
         <Page Include="ChromaticVisualTest.xaml" />
         <Page Include="ClefsVisualTest.xaml" />
         <Page Include="GlyphVisualTest.xaml" />
@@ -94,6 +98,7 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="ScaleVisualTest.xaml" />
         <Page Include="StaffLinesVisualTest.xaml" />
         <Page Include="StaffVisualTest.xaml" />
     </ItemGroup>

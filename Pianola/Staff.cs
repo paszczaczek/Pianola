@@ -59,10 +59,9 @@ public class Staff : Grid
         // dodaj do niej niego klucz, skalę i metrum a później takty
         _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
         _stackPanel.Children.Add(_clef);
-        // TODO dodaj skalę i metrum
-        _stackPanel.Children.Add(new Sharp());
-        _stackPanel.Children.Add(new Flat());
-        _stackPanel.Children.Add(new Natural());
+        _stackPanel.Children.Add(new CesScale());
+        _stackPanel.Children.Add(new CisScale());
+        // TODO dodaj metrum
 
         // dodaj do grida pięciolinię a nad nią stack panel z elementami
         Children.Add(_staffLines);
@@ -91,6 +90,8 @@ public class Staff : Grid
 
     public enum Space
     {
+        FirstAbove = -1,
+        
         Fourth = 0,
         Third = 1,
         Second = 2,

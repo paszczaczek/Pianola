@@ -10,4 +10,5 @@
     <!-- <local:Staff Width="100" HorizontalAlignment="Left" /> -->
     <!-- <local:StaffLines Width="300" /> -->
     <!-- <local:ClefsVisualTest /> -->
+    <!-- <local:CesScale /> -->
 </Window>

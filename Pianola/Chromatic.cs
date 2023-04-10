@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Pianola;
 
@@ -31,7 +32,15 @@ public class Chromatic : Canvas
         Children.Add(glyph);
         SetTop(glyph, top);
     }
-    
+
+    protected override void OnRender(DrawingContext dc)
+    {
+        var glyph = (Glyph)Children[0];
+        Width = glyph.ActualWidth;
+        Height = glyph.ActualHeight;
+        base.OnRender(dc);
+    }
+
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
         // po narysowaniu glypg zaktualizuj szerokość canvas
