@@ -2,9 +2,9 @@
 
 namespace Pianola;
 
-public partial class GlyphVisualTest : UserControl
+public partial class SignVisualTest : UserControl
 {
-    public GlyphVisualTest()
+    public SignVisualTest()
     {
         InitializeComponent();
     }

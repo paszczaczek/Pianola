@@ -19,7 +19,7 @@ public class Sign : Canvas
     private const string FamilyName = "feta26"; // ok
     private const double FontSize = 48; // ok
 
-    public static readonly double BaseLine;
+    // public static readonly double BaseLine;
     public static readonly double HeadHeight;
 
     public const string TrebleClef = "\x00c9";
@@ -71,43 +71,43 @@ public class Sign : Canvas
             (d, e) =>
             {
                 // zmieniła się prarametr określający czy wyświetlać liniie pomocnicze
-                var glyph = (Sign) d;
+                var sign = (Sign) d;
                 var newIsVisible = (bool) e.NewValue;
                 if (newIsVisible)
                 {
                     // linie mają być wyświetlane
-                    var m = glyph.Measure();
+                    var m = sign.Measure();
 
                     // dodaj linię bazową dla znaku
                     var baseLine = new Line
                     {
                         X1 = 0,
                         Y1 = m.baseline,
-                        X2 = glyph.Width,
+                        X2 = sign.Width,
                         Y2 = m.baseline,
                         Stroke = Brushes.Violet,
                         StrokeDashArray = new DoubleCollection(new double[] {1}),
                         StrokeThickness = 1,
                         SnapsToDevicePixels = true
                     };
-                    glyph.Children.Add(baseLine);
+                    sign.Children.Add(baseLine);
 
                     // dodaj ramkę wokół znaku
                     var border = new Border
                     {
-                        Width = glyph.Width,
-                        Height = glyph.Height,
+                        Width = sign.Width,
+                        Height = sign.Height,
                         BorderBrush = Brushes.BlueViolet,
                         BorderThickness = new Thickness(1),
                         SnapsToDevicePixels = true
                     };
-                    glyph.Children.Add(border);
+                    sign.Children.Add(border);
                 }
                 else
                 {
                     // linie mają nie być wyświetlane - usuń je
-                    var lines = glyph.Children.OfType<Line>();
-                    foreach (var line in lines) glyph.Children.Remove(line);
+                    var lines = sign.Children.OfType<Line>();
+                    foreach (var line in lines) sign.Children.Remove(line);
                 }
             }));
 
@@ -129,6 +129,19 @@ public class Sign : Canvas
             FontSize = FontSize
         };
         Children.Add(textBlock);
+    }
+    
+    static Sign()
+    {
+        // wysokość główki nuty (przy starcie aplikacji)
+        var ft = new FormattedText(
+            BlackNoteHead,
+            CultureInfo.InvariantCulture,
+            FlowDirection.LeftToRight,
+            new Typeface(FamilyName),
+            FontSize,
+            Brushes.Black, 1);
+        HeadHeight = ft.Extent;
     }
 
     private TextBlock TextBlock => (TextBlock) Children[0];

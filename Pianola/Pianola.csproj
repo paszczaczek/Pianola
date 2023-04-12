@@ -61,8 +61,8 @@
       <DependentUpon>ClefsVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
-    <Compile Include="GlyphVisualTest.xaml.cs">
-      <DependentUpon>GlyphVisualTest.xaml</DependentUpon>
+    <Compile Include="SignVisualTest.xaml.cs">
+      <DependentUpon>SignVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="GrandStaff.cs" />
     <Compile Include="GrandStaffVisualTester.xaml.cs">
@@ -86,7 +86,7 @@
     </Compile>
     <Page Include="ChromaticVisualTest.xaml" />
     <Page Include="ClefsVisualTest.xaml" />
-    <Page Include="GlyphVisualTest.xaml" />
+    <Page Include="SignVisualTest.xaml" />
     <Page Include="GrandStaffVisualTester.xaml" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

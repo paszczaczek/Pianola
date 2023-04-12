@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -13,6 +14,29 @@ public class Chromatic : Canvas
         Natural
     }
 
+    #region IsHelperLinesVisibleProperty
+
+    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsGuidLinesVisible), typeof(bool), typeof(Chromatic),
+        new FrameworkPropertyMetadata(
+            default(bool),
+            (d, e) =>
+            {
+                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
+                var chromatic = (Chromatic) d;
+                var isVisible = (bool) e.NewValue;
+                chromatic.Sign.IsGuidLinesVisible = isVisible;
+            }));
+
+
+    public bool IsGuidLinesVisible
+    {
+        get => (bool) GetValue(IsGuidLinesVisibleProperty);
+        set => SetValue(IsGuidLinesVisibleProperty, value);
+    }
+
+    #endregion
+    
     public static Chromatic Create(Type type)
     {
         return type switch
@@ -24,21 +48,30 @@ public class Chromatic : Canvas
         };
     }
 
-    protected Chromatic(string glyphText)
+    protected Chromatic(string chromaticText)
     {
-        var top = -Sign.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-        var glyph = new Sign {Text = glyphText};
-        Children.Add(glyph);
-        SetTop(glyph, top);
-        // Background = Brushes.Aquamarine;
+        // dodaj do canvas znak
+        var sign = new Sign {Text = chromaticText};
+        Children.Add(sign);
+
+        // i ustaw jego wymiary
+        Width = Sign.ActualWidth;
+        Height = Sign.Height;
+        
+        // var top = -Sign.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+        // var glyph = new Sign {Text = chromaticText};
+        // Children.Add(glyph);
+        // SetTop(glyph, top);
     }
 
+    private Sign Sign => (Sign) Children[0];
+
+    
     protected override void OnRender(DrawingContext dc)
     {
-        // aktualizujemy wymiary znaku chromatycznego na podstawie wymiarów glypha 
-        var glyph = (Sign)Children[0];
-        Width = glyph.ActualWidth;
-        Height = glyph.ActualHeight;
+        // po narysowaniu znaku zaktualizuj wymiary canvas
+        Width = Sign.ActualWidth;
+        Height = Sign.ActualHeight;
         base.OnRender(dc);
     }
 }

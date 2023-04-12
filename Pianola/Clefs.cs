@@ -29,9 +29,8 @@ public class Clef : Canvas
             {
                 // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
                 var clef = (Clef) d;
-                var sign = (Sign) clef.Children[0];
                 var isVisible = (bool) e.NewValue;
-                sign.IsGuidLinesVisible = isVisible;
+                clef.Sign.IsGuidLinesVisible = isVisible;
             }));
 
 
