@@ -2,9 +2,9 @@
 
 namespace Pianola;
 
-public partial class ClefsVisualTest : UserControl
+public partial class ChromaticSignVisualTest : UserControl
 {
-    public ClefsVisualTest()
+    public ChromaticSignVisualTest()
     {
         InitializeComponent();
     }

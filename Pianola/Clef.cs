@@ -19,7 +19,6 @@ public class Clef : Canvas
         Bass
     }
 
-
     #region IsHelperLinesVisibleProperty
 
     public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
@@ -31,7 +30,7 @@ public class Clef : Canvas
                 // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
                 var clef = (Clef) d;
                 var isVisible = (bool) e.NewValue;
-                // clef.Sign.IsGuidLinesVisible = isVisible;
+                clef.ClefSign.IsGuidLinesVisible = isVisible;
             }));
 
 
@@ -53,19 +52,16 @@ public class Clef : Canvas
         };
     }
 
-    protected Clef(ClefSign.Type clefType, double clefTop)
+    protected Clef(Type clefType, double clefTop)
     {
         // dodaj do canvas znak
-        var clefSign = Pianola.ClefSign.Create(clefType);
-        // var clef = new Sign {Text = clefText};
+        var clefSign = ClefSign.Create(clefType);
         Children.Add(clefSign);
 
         // i ustaw go na wskazywaną pozycję na pięciolinii
-        var top = 0
-                  - clefSign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-                  + clefTop // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-            // + Staff.TopOf(Staff.Line.Fifth) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-            ;
+        var top =
+            -clefSign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+            + clefTop; // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
         SetTop(clefSign, top);
 
         // ustaw jego wymiary
@@ -86,14 +82,14 @@ public class Clef : Canvas
 
 public class TrebleClef : Clef
 {
-    public TrebleClef() : base(ClefSign.Type.Treble, Staff.TopOf(Staff.Line.Second))
+    public TrebleClef() : base(Type.Treble, Staff.TopOf(Staff.Line.Second))
     {
     }
 }
 
 public class BassClef : Clef
 {
-    public BassClef() : base(ClefSign.Type.Bass, Staff.TopOf(Staff.Line.Fourth))
+    public BassClef() : base(Type.Bass, Staff.TopOf(Staff.Line.Fourth))
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Pianola.ClefsVisualTest"
+﻿<UserControl x:Class="Pianola.ClefVisualTest"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,11 +6,7 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
             <local:TrebleClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
             <local:BassClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
-        </Border>
     </StackPanel>
 </UserControl>

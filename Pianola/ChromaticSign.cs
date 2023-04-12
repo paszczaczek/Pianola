@@ -4,20 +4,13 @@ namespace Pianola;
 
 public class ChromaticSign : Sign
 {
-    public enum Type
-    {
-        Sharp,
-        Flat,
-        Natural
-    }
-
-    public static ChromaticSign Create(Type type)
+    public static ChromaticSign Create(Chromatic.Type type)
     {
         return type switch
         {
-            Type.Sharp => new SharpSign(),
-            Type.Flat => new FlatSign(),
-            Type.Natural => new NaturalSing(),
+            Chromatic.Type.Sharp => new SharpSign(),
+            Chromatic.Type.Flat => new FlatSign(),
+            Chromatic.Type.Natural => new NaturalSing(),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }

@@ -14,7 +14,7 @@ public class Scale : Canvas
         Ces,
         Cis
     }
-    
+
     #region IsHelperLinesVisibleProperty
 
     public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
@@ -24,9 +24,9 @@ public class Scale : Canvas
             (d, e) =>
             {
                 // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
-                var clef = (Clef) d;
+                var scale = (Scale) d;
                 var isVisible = (bool) e.NewValue;
-                // clef.Sign.IsGuidLinesVisible = isVisible;
+                //scale.Chromatics.IsGuidLinesVisible = isVisible;
             }));
 
 
@@ -48,29 +48,21 @@ public class Scale : Canvas
         };
     }
 
-    protected Scale(ChromaticSign.Type chromaticType, IList<double> chromaticTops)
+    protected Scale(Chromatic.Type chromaticType, IList<double> chromaticTops)
     {
         for (var i = 0; i < chromaticTops.Count; i++)
         {
-            // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            // chromaticTops[i] -= -Glyph.BaseLine;
-            
-            // dodaj do canvas znak
-            var chromatic = ChromaticSign.Create(chromaticType);
+            // dodaj do canvas znak chromatyczny
+            var chromatic = Chromatic.Create(chromaticType, chromaticTops[i]);
             Children.Add(chromatic);
-            
-            // i ustaw go na wskazywaną pozycję na pięciolinii
-            var top = 0
-                       -chromatic.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-                      + chromaticTops[i] // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-                ;
-            SetTop(chromatic, top);
-            
-            // SetTop(chromatic, chromaticTops[i]);    
-            SetLeft(chromatic, i* 20); // OnRender ustawi prawdziwe wartości
+
+            SetLeft(chromatic, i * 20); // OnRender ustawi prawdziwe wartości
             Width = 100;
         }
     }
+    
+    private IEnumerable<Chromatic> Chromatics => Children.OfType<Chromatic>();
+
 
     protected override void OnRender(DrawingContext dc)
     {
@@ -81,14 +73,14 @@ public class Scale : Canvas
             SetLeft(chromatic, width);
             width += chromatic.ActualWidth;
         }
-        
+
         Width = width;
     }
 }
 
 public class CesScale : Scale
 {
-    public CesScale() : base(ChromaticSign.Type.Flat, new double[]
+    public CesScale() : base(Chromatic.Type.Flat, new double[]
     {
         Staff.TopOf(Staff.Line.Third),
         Staff.TopOf(Staff.Space.Fourth),
@@ -104,7 +96,7 @@ public class CesScale : Scale
 
 public class CisScale : Scale
 {
-    public CisScale() : base(ChromaticSign.Type.Sharp, new double[]
+    public CisScale() : base(Chromatic.Type.Sharp, new double[]
     {
         Staff.TopOf(Staff.Line.Fifth),
         Staff.TopOf(Staff.Space.Third),

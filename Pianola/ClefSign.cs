@@ -4,18 +4,12 @@ namespace Pianola;
 
 public class ClefSign : Sign
 {
-    public enum Type
-    {
-        Treble,
-        Bass
-    }
-
-    public static ClefSign Create(Type type)
+    public static ClefSign Create(Clef.Type type)
     {
         return type switch
         {
-            Type.Treble => new TrebleClefSign(),
-            Type.Bass => new BassClefSign(),
+            Clef.Type.Treble => new TrebleClefSign(),
+            Clef.Type.Bass => new BassClefSign(),
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
     }

@@ -52,14 +52,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Chromatic.cs" />
     <Compile Include="ChromaticSign.cs" />
-    <Compile Include="ChromaticVisualTest.xaml.cs">
-      <DependentUpon>ChromaticVisualTest.xaml</DependentUpon>
+    <Compile Include="ChromaticSignVisualTest.xaml.cs">
+      <DependentUpon>ChromaticSignVisualTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Clefs.cs" />
+    <Compile Include="Clef.cs" />
     <Compile Include="ClefSign.cs" />
-    <Compile Include="ClefsVisualTest.xaml.cs">
-      <DependentUpon>ClefsVisualTest.xaml</DependentUpon>
+    <Compile Include="ClefSignVisualTest.xaml.cs">
+      <DependentUpon>ClefSignVisualTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClefVisualTest.xaml.cs">
+      <DependentUpon>ClefVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="SignVisualTest.xaml.cs">
@@ -82,8 +86,9 @@
       <DependentUpon>StaffVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scale.cs" />
-    <Page Include="ChromaticVisualTest.xaml" />
-    <Page Include="ClefsVisualTest.xaml" />
+    <Page Include="ChromaticSignVisualTest.xaml" />
+    <Page Include="ClefSignVisualTest.xaml" />
+    <Page Include="ClefVisualTest.xaml" />
     <Page Include="SignVisualTest.xaml" />
     <Page Include="GrandStaffVisualTester.xaml" />
     <Page Include="MainWindow.xaml">
