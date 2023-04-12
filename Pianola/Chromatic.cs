@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace Pianola;
 
-public class Chromatic : Canvas
+public class Chromatic : Sign
 {
     public enum Type
     {
@@ -14,28 +14,28 @@ public class Chromatic : Canvas
         Natural
     }
 
-    #region IsHelperLinesVisibleProperty
-
-    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGuidLinesVisible), typeof(bool), typeof(Chromatic),
-        new FrameworkPropertyMetadata(
-            default(bool),
-            (d, e) =>
-            {
-                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
-                var chromatic = (Chromatic) d;
-                var isVisible = (bool) e.NewValue;
-                chromatic.Sign.IsGuidLinesVisible = isVisible;
-            }));
-
-
-    public bool IsGuidLinesVisible
-    {
-        get => (bool) GetValue(IsGuidLinesVisibleProperty);
-        set => SetValue(IsGuidLinesVisibleProperty, value);
-    }
-
-    #endregion
+    // #region IsHelperLinesVisibleProperty
+    //
+    // public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
+    //     nameof(IsGuidLinesVisible), typeof(bool), typeof(Chromatic),
+    //     new FrameworkPropertyMetadata(
+    //         default(bool),
+    //         (d, e) =>
+    //         {
+    //             // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
+    //             var chromatic = (Chromatic) d;
+    //             var isVisible = (bool) e.NewValue;
+    //             chromatic.Sign.IsGuidLinesVisible = isVisible;
+    //         }));
+    //
+    //
+    // public bool IsGuidLinesVisible
+    // {
+    //     get => (bool) GetValue(IsGuidLinesVisibleProperty);
+    //     set => SetValue(IsGuidLinesVisibleProperty, value);
+    // }
+    //
+    // #endregion
     
     public static Chromatic Create(Type type)
     {
@@ -50,13 +50,22 @@ public class Chromatic : Canvas
 
     protected Chromatic(string chromaticText)
     {
-        // dodaj do canvas znak
-        var sign = new Sign {Text = chromaticText};
-        Children.Add(sign);
+        Text = chromaticText;
 
+        // dodaj do canvas znak
+        // var sign = new Sign {Text = chromaticText};
+        // Children.Add(sign);
+        
+        // i ustaw go na wskazywaną pozycję na pięciolinii
+        // var top = 0
+                // -sign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+            // + Staff.TopOf(staffLine); // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+            ;
+        // SetTop(sign, top);
+        
         // i ustaw jego wymiary
-        Width = Sign.ActualWidth;
-        Height = Sign.Height;
+        // Width = Sign.ActualWidth;
+        // Height = Sign.Height;
         
         // var top = -Sign.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
         // var glyph = new Sign {Text = chromaticText};
@@ -64,16 +73,17 @@ public class Chromatic : Canvas
         // SetTop(glyph, top);
     }
 
-    private Sign Sign => (Sign) Children[0];
+    // private Sign Sign => (Sign) Children[0];
 
+    // public double BaseLine => Sign.BaseLine;
     
-    protected override void OnRender(DrawingContext dc)
-    {
+    // protected override void OnRender(DrawingContext dc)
+    // {
         // po narysowaniu znaku zaktualizuj wymiary canvas
-        Width = Sign.ActualWidth;
-        Height = Sign.ActualHeight;
-        base.OnRender(dc);
-    }
+        // Width = Sign.ActualWidth;
+        // Height = Sign.ActualHeight;
+        // base.OnRender(dc);
+    // }
 }
 
 public class Sharp : Chromatic

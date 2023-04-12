@@ -81,9 +81,6 @@
       <DependentUpon>StaffVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Scale.cs" />
-    <Compile Include="TesterWindow.xaml.cs">
-      <DependentUpon>TesterWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="ChromaticVisualTest.xaml" />
     <Page Include="ClefsVisualTest.xaml" />
     <Page Include="SignVisualTest.xaml" />
@@ -104,10 +101,6 @@
     <Page Include="ScaleVisualTest.xaml" />
     <Page Include="StaffLinesVisualTest.xaml" />
     <Page Include="StaffVisualTest.xaml" />
-    <Page Include="TesterWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

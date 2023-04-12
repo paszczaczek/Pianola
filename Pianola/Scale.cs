@@ -14,6 +14,29 @@ public class Scale : Canvas
         Ces,
         Cis
     }
+    
+    #region IsHelperLinesVisibleProperty
+
+    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsGuidLinesVisible), typeof(bool), typeof(Scale),
+        new FrameworkPropertyMetadata(
+            default(bool),
+            (d, e) =>
+            {
+                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
+                var clef = (Clef) d;
+                var isVisible = (bool) e.NewValue;
+                // clef.Sign.IsGuidLinesVisible = isVisible;
+            }));
+
+
+    public bool IsGuidLinesVisible
+    {
+        get => (bool) GetValue(IsGuidLinesVisibleProperty);
+        set => SetValue(IsGuidLinesVisibleProperty, value);
+    }
+
+    #endregion
 
     public static Scale Create(Type type)
     {
@@ -31,10 +54,20 @@ public class Scale : Canvas
         {
             // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
             // chromaticTops[i] -= -Glyph.BaseLine;
+            
+            // dodaj do canvas znak
             var chromatic = Chromatic.Create(chromaticType);
             Children.Add(chromatic);
-            SetTop(chromatic, chromaticTops[i]);    
-            SetLeft(chromatic, i* 20);
+            
+            // i ustaw go na wskazywaną pozycję na pięciolinii
+            var top = 0
+                       -chromatic.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+                      + chromaticTops[i] // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+                ;
+            SetTop(chromatic, top);
+            
+            // SetTop(chromatic, chromaticTops[i]);    
+            SetLeft(chromatic, i* 20); // OnRender ustawi prawdziwe wartości
             Width = 100;
         }
     }

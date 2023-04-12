@@ -19,6 +19,7 @@ public class Clef : Canvas
         Bass
     }
 
+
     #region IsHelperLinesVisibleProperty
 
     public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
@@ -30,7 +31,7 @@ public class Clef : Canvas
                 // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
                 var clef = (Clef) d;
                 var isVisible = (bool) e.NewValue;
-                clef.Sign.IsGuidLinesVisible = isVisible;
+                // clef.Sign.IsGuidLinesVisible = isVisible;
             }));
 
 
@@ -52,22 +53,23 @@ public class Clef : Canvas
         };
     }
 
-    protected Clef(string clefText, Staff.Line staffLine)
+    protected Clef(string clefText, double clefTop)
     {
         // dodaj do canvas znak
-        var sign = new Sign {Text = clefText};
-        Children.Add(sign);
+        var clef = new Sign {Text = clefText};
+        Children.Add(clef);
 
         // i ustaw go na wskazywaną pozycję na pięciolinii
         var top = 0
-                 -Sign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            + Staff.TopOf(staffLine) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+                  - clef.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+                  + clefTop // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+            // + Staff.TopOf(Staff.Line.Fifth) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
             ;
-        SetTop(sign, top);
+        SetTop(clef, top);
 
         // ustaw jego wymiary
-        Width = Sign.ActualWidth;
-        Height = Sign.Height;
+        Width = clef.ActualWidth;
+        Height = clef.Height;
     }
 
     private Sign Sign => (Sign) Children[0];
@@ -83,14 +85,14 @@ public class Clef : Canvas
 
 public class TrebleClef : Clef
 {
-    public TrebleClef() : base(Sign.TrebleClef, Staff.Line.Second)
+    public TrebleClef() : base(Sign.TrebleClef, Staff.TopOf(Staff.Line.Second))
     {
     }
 }
 
 public class BassClef : Clef
 {
-    public BassClef() : base(Sign.BassClef, Staff.Line.Fourth)
+    public BassClef() : base(Sign.BassClef, Staff.TopOf(Staff.Line.Fourth))
     {
     }
 }

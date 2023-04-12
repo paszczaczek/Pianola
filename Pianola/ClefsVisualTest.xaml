@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal" >
-            <local:TrebleClef IsGuidLinesVisible="True" Margin="2" VerticalAlignment="Top"/>
-            <local:BassClef IsGuidLinesVisible="True" Margin="2" VerticalAlignment="Top"/>
+    <StackPanel Orientation="Horizontal">
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:TrebleClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
+        </Border>
+        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
+            <local:BassClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
+        </Border>
     </StackPanel>
 </UserControl>
