@@ -14,7 +14,7 @@ namespace Pianola;
 ///         TextBlock
 /// </code>
 /// </remarks>
-public class Glyph : Canvas
+public class Sign : Canvas
 {
     private const string FamilyName = "feta26"; // ok
     private const double FontSize = 48; // ok
@@ -33,14 +33,14 @@ public class Glyph : Canvas
     #region TextProperty
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-        nameof(Text), typeof(string), typeof(Glyph),
+        nameof(Text), typeof(string), typeof(Sign),
         new FrameworkPropertyMetadata(
             default(string),
             FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
             (o, args) =>
             {
                 // zmienił się tekst znaku
-                var glyph = (Glyph) o;
+                var glyph = (Sign) o;
                 var text = (string) args.NewValue;
 
                 // uaktualij tekst znaku
@@ -64,14 +64,14 @@ public class Glyph : Canvas
     #region IsHelperLinesVisibleProperty
 
     public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGuidLinesVisible), typeof(bool), typeof(Glyph),
+        nameof(IsGuidLinesVisible), typeof(bool), typeof(Sign),
         new FrameworkPropertyMetadata(
             default(bool),
             FrameworkPropertyMetadataOptions.AffectsRender,
             (d, e) =>
             {
                 // zmieniła się prarametr określający czy wyświetlać liniie pomocnicze
-                var glyph = (Glyph) d;
+                var glyph = (Sign) d;
                 var newIsVisible = (bool) e.NewValue;
                 if (newIsVisible)
                 {
@@ -120,7 +120,7 @@ public class Glyph : Canvas
 
     #endregion
 
-    public Glyph()
+    public Sign()
     {
         // dodaj do canvas znak
         var textBlock = new TextBlock

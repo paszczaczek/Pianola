@@ -68,7 +68,7 @@
     <Compile Include="GrandStaffVisualTester.xaml.cs">
       <DependentUpon>GrandStaffVisualTester.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Glyph.cs" />
+    <Compile Include="Sign.cs" />
     <Compile Include="ScaleVisualTest.xaml.cs">
       <DependentUpon>ScaleVisualTest.xaml</DependentUpon>
     </Compile>

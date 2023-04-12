@@ -10,7 +10,7 @@ public class StaffLines : Canvas
     public StaffLines()
     {
         // utworz linie pięciolinii
-        var lineSpacing = Glyph.HeadHeight;
+        var lineSpacing = Sign.HeadHeight;
         const int lineCount = 5;
         
         for (var i = 0; i < lineCount; i++)

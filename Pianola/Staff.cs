@@ -75,7 +75,7 @@ public class Staff : Grid
         _staffLines.Width = sizeInfo.NewSize.Width;
     }
 
-    private static double SpaceHeight => Glyph.HeadHeight;
+    private static double SpaceHeight => Sign.HeadHeight;
     public static double TopOf(Line staffLine) => (int) staffLine * SpaceHeight;
     public static double TopOf(Space staffSpace) => (int) staffSpace * SpaceHeight + SpaceHeight / 2;
 

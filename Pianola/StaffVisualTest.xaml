@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
         <UserControl.Resources>
-        <Style TargetType="local:Glyph">
+        <Style TargetType="local:Sign">
             <Setter Property="IsGuidLinesVisible" Value="True" />
             <Setter Property="Margin" Value="2" />
         </Style>

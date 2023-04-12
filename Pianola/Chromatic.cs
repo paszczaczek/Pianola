@@ -26,8 +26,8 @@ public class Chromatic : Canvas
 
     protected Chromatic(string glyphText)
     {
-        var top = -Glyph.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-        var glyph = new Glyph {Text = glyphText};
+        var top = -Sign.BaseLine; // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+        var glyph = new Sign {Text = glyphText};
         Children.Add(glyph);
         SetTop(glyph, top);
         // Background = Brushes.Aquamarine;
@@ -36,7 +36,7 @@ public class Chromatic : Canvas
     protected override void OnRender(DrawingContext dc)
     {
         // aktualizujemy wymiary znaku chromatycznego na podstawie wymiarów glypha 
-        var glyph = (Glyph)Children[0];
+        var glyph = (Sign)Children[0];
         Width = glyph.ActualWidth;
         Height = glyph.ActualHeight;
         base.OnRender(dc);
@@ -45,21 +45,21 @@ public class Chromatic : Canvas
 
 public class Sharp : Chromatic
 {
-    public Sharp() : base(Glyph.Sharp)
+    public Sharp() : base(Sign.Sharp)
     {
     }
 }
 
 public class Flat : Chromatic
 {
-    public Flat() : base(Glyph.Flat)
+    public Flat() : base(Sign.Flat)
     {
     }
 }
 
 public class Natural : Chromatic
 {
-    public Natural() : base(Glyph.Natural)
+    public Natural() : base(Sign.Natural)
     {
     }
 }
