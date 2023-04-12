@@ -59,7 +59,10 @@ public class Clef : Canvas
         Children.Add(sign);
 
         // i ustaw go na wskazywaną pozycję na pięciolinii
-        var top = Staff.TopOf(staffLine);
+        var top = 0
+                 -Sign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+            + Staff.TopOf(staffLine) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+            ;
         SetTop(sign, top);
 
         // ustaw jego wymiary

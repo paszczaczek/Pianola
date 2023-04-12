@@ -5,17 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-        <UserControl.Resources>
+    <UserControl.Resources>
         <Style TargetType="local:Sign">
             <Setter Property="IsGuidLinesVisible" Value="True" />
             <Setter Property="Margin" Value="2" />
         </Style>
     </UserControl.Resources>
-    
+
     <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
     <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
     <!-- Designer w VisualStudio reaguje poprawnie. -->
-    <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="40">
-        <local:Staff ClefType="{x:Static local:Clef+Type.Bass}" />
-    </Border>
+    <local:Staff ClefType="{x:Static local:Clef+Type.Bass}" />
 </UserControl>

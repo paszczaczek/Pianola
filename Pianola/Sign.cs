@@ -19,7 +19,7 @@ public class Sign : Canvas
     private const string FamilyName = "feta26"; // ok
     private const double FontSize = 48; // ok
 
-    // public static readonly double BaseLine;
+    public double BaseLine { get; private set; }
     public static readonly double HeadHeight;
 
     public const string TrebleClef = "\x00c9";
@@ -40,17 +40,18 @@ public class Sign : Canvas
             (o, args) =>
             {
                 // zmienił się tekst znaku
-                var glyph = (Sign) o;
+                var sign = (Sign) o;
                 var text = (string) args.NewValue;
 
                 // uaktualij tekst znaku
-                glyph.TextBlock.Text = text;
+                sign.TextBlock.Text = text;
 
                 // uaktualnij pozycję i wymiary znaku
-                var m = glyph.Measure();
-                SetTop(glyph.TextBlock, m.top);
-                glyph.Height = m.height;
-                glyph.Width = m.widht;
+                var m = sign.Measure();
+                SetTop(sign.TextBlock, m.top);
+                sign.Height = m.height;
+                sign.Width = m.widht;
+                sign.BaseLine = m.baseline;
             }));
 
     public string Text
@@ -106,8 +107,9 @@ public class Sign : Canvas
                 else
                 {
                     // linie mają nie być wyświetlane - usuń je
-                    var lines = sign.Children.OfType<Line>();
-                    foreach (var line in lines) sign.Children.Remove(line);
+                    var lines = sign.Children.OfType<Line>().ToList();
+                    foreach (var line in lines) 
+                        sign.Children.Remove(line);
                 }
             }));
 
@@ -142,6 +144,7 @@ public class Sign : Canvas
             FontSize,
             Brushes.Black, 1);
         HeadHeight = ft.Extent;
+        // BaseLine = ft.Baseline;
     }
 
     private TextBlock TextBlock => (TextBlock) Children[0];

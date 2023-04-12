@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -36,8 +37,8 @@ public class StaffLines : Canvas
                 else
                 {
                     // linie mają nie być wyświetlane - usuń je
-                    foreach (Line line in staffLines.Lines)
-                        staffLines.Lines.Remove(line);
+                    foreach (var line in staffLines.Lines)
+                        staffLines.Children.Remove(line);
                 }
             }));
 
@@ -50,13 +51,13 @@ public class StaffLines : Canvas
 
     #endregion
 
-    
+
     public StaffLines()
     {
         // utworz linie pięciolinii
         var lineSpacing = Sign.HeadHeight;
         const int lineCount = 5;
-        
+
         for (var i = 0; i < lineCount; i++)
         {
             var line = new Line
@@ -75,14 +76,14 @@ public class StaffLines : Canvas
         Height = lineSpacing * (lineCount - 1);
     }
 
-    private UIElementCollection Lines => Children;
+    private IEnumerable<Line> Lines => Children.OfType<Line>();
 
-    
+
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
         // zsynchronizuj długość linii pięciolinii z długością elementu
-        foreach (Line line in Lines)
-            line.X2 = Width;
+        foreach (var line in Lines)
+            line.X2 = sizeInfo.NewSize.Width;
         base.OnRenderSizeChanged(sizeInfo);
     }
 }
