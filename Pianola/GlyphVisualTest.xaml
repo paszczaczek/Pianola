@@ -4,21 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
-             mc:Ignorable="d">
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" VerticalContentAlignment="Top">
     <UserControl.Resources>
         <Style TargetType="local:Glyph">
-            <Setter Property="IsGuidLinesVisible" Value="True" />
             <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" />
-        <local:Glyph Text="{x:Static local:Glyph.BassClef}" />
-        <local:Glyph Text="{x:Static local:Glyph.BlackNoteHead}" />
-        <local:Glyph Text="{x:Static local:Glyph.WhiteNoteHead}" />
-        <local:Glyph Text="{x:Static local:Glyph.Sharp}" />
-        <local:Glyph Text="{x:Static local:Glyph.Flat}" />
-        <local:Glyph Text="{x:Static local:Glyph.Natural}" />
+        <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.BassClef}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.BlackNoteHead}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.WhiteNoteHead}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.Sharp}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.Flat}" IsGuidLinesVisible="True" />
+        <local:Glyph Text="{x:Static local:Glyph.Natural}" IsGuidLinesVisible="True" />
     </StackPanel>
 </UserControl>

@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -6,10 +7,153 @@ using System.Windows.Shapes;
 
 namespace Pianola;
 
-public class Glyph : TextBlock
+/// <remarks>
+/// Struktura elementu:
+/// <code>
+///     Canvas
+///         TextBlock
+/// </code>
+/// </remarks>
+public class Glyph : Canvas
 {
-    private const string FamilyName = "feta26";
-    private new const double FontSize = 48;
+    #region TextProperty
+
+    public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        nameof(Text), typeof(string), typeof(Glyph),
+        new FrameworkPropertyMetadata(
+            default(string),
+            FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
+            (o, args) =>
+            {
+                // zmienił się tekst znaku
+                var glyph = (Glyph) o;
+                var text = (string) args.NewValue;
+
+                // uaktualij tekst znaku
+                glyph.TextBlock.Text = text;
+
+                // uaktualnij pozycję i wymiary znaku
+                var m = glyph.Measure();
+                SetTop(glyph.TextBlock, m.top);
+                glyph.Height = m.height;
+                glyph.Width = m.widht;
+            }));
+
+    public string Text
+    {
+        get => (string) GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+
+    #endregion
+
+    #region IsHelperLinesVisibleProperty
+
+    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsGuidLinesVisible), typeof(bool), typeof(Glyph),
+        new FrameworkPropertyMetadata(
+            default(bool),
+            (d, e) =>
+            {
+                // zmieniła się prarametr określający czy wyświetlać liniie pomocnicze
+                var glyph = (Glyph) d;
+                var newIsVisible = (bool) e.NewValue;
+                if (newIsVisible)
+                {
+                    // linie mają być wyświetlane
+                    var m = glyph.Measure();
+
+                    // dodaj linię bazową dla znaku
+                    var baseLine = new Line
+                    {
+                        X1 = 0,
+                        Y1 = m.baseline,
+                        X2 = glyph.Width,
+                        Y2 = m.baseline,
+                        Stroke = Brushes.Violet,
+                        StrokeDashArray = new DoubleCollection(new double[] {1}),
+                        StrokeThickness = 1,
+                        SnapsToDevicePixels = true
+                    };
+                    glyph.Children.Add(baseLine);
+
+                    // dodaj ramkę wokół znaku
+                    var border = new Border
+                    {
+                        Width = glyph.Width,
+                        Height = glyph.Height,
+                        BorderBrush = Brushes.BlueViolet,
+                        BorderThickness = new Thickness(1),
+                        SnapsToDevicePixels = true
+                    };
+                    glyph.Children.Add(border);
+                }
+                else
+                {
+                    // linie mają nie być wyświetlane - usuń je
+                    var lines = glyph.Children.OfType<Line>();
+                    foreach (var line in lines) glyph.Children.Remove(line);
+                }
+            }));
+
+
+    public bool IsGuidLinesVisible
+    {
+        get => (bool) GetValue(IsGuidLinesVisibleProperty);
+        set => SetValue(IsGuidLinesVisibleProperty, value);
+    }
+
+    #endregion
+
+
+    public Glyph()
+    {
+        var textBlock = new TextBlock
+        {
+            FontFamily = new FontFamily(FamilyName),
+            FontSize = FontSize
+        };
+        Children.Add(textBlock);
+    }
+
+    private TextBlock TextBlock => (TextBlock) Children[0];
+
+
+    private (double top, double widht, double height, double baseline) Measure()
+    {
+        var ft = new FormattedText(
+            TextBlock.Text,
+            CultureInfo.InvariantCulture,
+            FlowDirection.LeftToRight,
+            new Typeface(FamilyName),
+            FontSize,
+            Brushes.Black,
+            VisualTreeHelper.GetDpi(this).PixelsPerDip);
+
+        // odległość pomiędzy górną krawędzią textblock'u a nawyższym czarnym pikselem
+        // na ogół ma wartość ujemną bo znak na ogół nie wykracza poza granice textblock'u
+        var overhangBefore =
+            ft.Height // wysokość tekstblock'u
+            + ft.OverhangAfter // odległość pomiędzy dolną krawędzią textblocku a najniższym czarnym pikselem, na ogół ma wartość ujemną bo znak na ogół nie wykracza poza granice textblock'u
+            - ft.Extent; // odległość pomiędzy najwyższym czarnym pikselem a najniższym czarnym pikselem
+
+        // o ile trzeba przesunąć tekstblock żeby najwyższy czarny piksel znalazł się w punkcie Y = 0
+        var top = -overhangBefore;
+
+        // szerokość tekstblock'u
+        var width = ft.Width;
+
+        // wysokość tekstblock'u
+        var height = ft.Extent;
+
+        // linia bazowa
+        var baseline = ft.Baseline - overhangBefore;
+
+        return (top, width, height, baseline);
+    }
+
+    private const string FamilyName = "feta26"; // ok
+    private const double FontSize = 48; // ok
 
     public static readonly double BaseLine;
     public static readonly double HeadHeight;
@@ -21,56 +165,4 @@ public class Glyph : TextBlock
     public const string Natural = "\x0036";
     public const string BlackNoteHead = "\x0056";
     public const string WhiteNoteHead = "\x0055";
-
-    private static readonly SolidColorBrush GuidLinesBrush = new(Brushes.Violet.Color) { Opacity = 0.3 };
-
-    #region IsHelperLinesVisibleProperty
-
-    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGuidLinesVisible), typeof(bool), typeof(Glyph),
-        new FrameworkPropertyMetadata(false,
-            (d, e) =>
-            {
-                var glyph = (Glyph)d;
-                var isHelperLinesVisible = (bool)e.NewValue;
-                glyph.Background = isHelperLinesVisible
-                    ? GuidLinesBrush
-                    : Brushes.Transparent;
-            }));
-
-    public bool IsGuidLinesVisible
-    {
-        get => (bool)GetValue(IsGuidLinesVisibleProperty);
-        set => SetValue(IsGuidLinesVisibleProperty, value);
-    }
-
-    #endregion
-
-    static Glyph()
-    {
-        // wyznacz baseline i wysokość główki nuty (przy starcie aplikacji)
-        var ft = new FormattedText(
-            BlackNoteHead,
-            CultureInfo.InvariantCulture,
-            FlowDirection.LeftToRight,
-            new Typeface(FamilyName),
-            FontSize,
-            Brushes.Black, 1);
-        BaseLine = ft.Baseline;
-        HeadHeight = ft.Extent;
-    }
-
-    public Glyph()
-    {
-        FontFamily = new FontFamily(FamilyName);
-        base.FontSize = FontSize;
-
-        var line = new Line
-        {
-            X1 = 0, Y1 = 10, X2 = 10, Y2 = 10 ,
-            Stroke = Brushes.Black, 
-            StrokeThickness = 10
-        };
-        Inlines.Add(line);
-    }
 }
