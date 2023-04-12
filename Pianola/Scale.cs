@@ -48,7 +48,7 @@ public class Scale : Canvas
         };
     }
 
-    protected Scale(Chromatic.Type chromaticType, IList<double> chromaticTops)
+    protected Scale(ChromaticSign.Type chromaticType, IList<double> chromaticTops)
     {
         for (var i = 0; i < chromaticTops.Count; i++)
         {
@@ -56,7 +56,7 @@ public class Scale : Canvas
             // chromaticTops[i] -= -Glyph.BaseLine;
             
             // dodaj do canvas znak
-            var chromatic = Chromatic.Create(chromaticType);
+            var chromatic = ChromaticSign.Create(chromaticType);
             Children.Add(chromatic);
             
             // i ustaw go na wskazywaną pozycję na pięciolinii
@@ -88,7 +88,7 @@ public class Scale : Canvas
 
 public class CesScale : Scale
 {
-    public CesScale() : base(Chromatic.Type.Flat, new double[]
+    public CesScale() : base(ChromaticSign.Type.Flat, new double[]
     {
         Staff.TopOf(Staff.Line.Third),
         Staff.TopOf(Staff.Space.Fourth),
@@ -104,7 +104,7 @@ public class CesScale : Scale
 
 public class CisScale : Scale
 {
-    public CisScale() : base(Chromatic.Type.Sharp, new double[]
+    public CisScale() : base(ChromaticSign.Type.Sharp, new double[]
     {
         Staff.TopOf(Staff.Line.Fifth),
         Staff.TopOf(Staff.Space.Third),

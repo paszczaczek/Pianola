@@ -53,46 +53,47 @@ public class Clef : Canvas
         };
     }
 
-    protected Clef(string clefText, double clefTop)
+    protected Clef(ClefSign.Type clefType, double clefTop)
     {
         // dodaj do canvas znak
-        var clef = new Sign {Text = clefText};
-        Children.Add(clef);
+        var clefSign = Pianola.ClefSign.Create(clefType);
+        // var clef = new Sign {Text = clefText};
+        Children.Add(clefSign);
 
         // i ustaw go na wskazywaną pozycję na pięciolinii
         var top = 0
-                  - clef.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+                  - clefSign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
                   + clefTop // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
             // + Staff.TopOf(Staff.Line.Fifth) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
             ;
-        SetTop(clef, top);
+        SetTop(clefSign, top);
 
         // ustaw jego wymiary
-        Width = clef.ActualWidth;
-        Height = clef.Height;
+        Width = clefSign.ActualWidth;
+        Height = clefSign.Height;
     }
 
-    private Sign Sign => (Sign) Children[0];
+    private ClefSign ClefSign => (ClefSign) Children[0];
 
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
         // po narysowaniu znaku zaktualizuj wymiary canvas
-        Width = Sign.ActualWidth;
-        Height = Sign.Height;
+        Width = ClefSign.ActualWidth;
+        Height = ClefSign.Height;
         base.OnRenderSizeChanged(sizeInfo);
     }
 }
 
 public class TrebleClef : Clef
 {
-    public TrebleClef() : base(Sign.TrebleClef, Staff.TopOf(Staff.Line.Second))
+    public TrebleClef() : base(ClefSign.Type.Treble, Staff.TopOf(Staff.Line.Second))
     {
     }
 }
 
 public class BassClef : Clef
 {
-    public BassClef() : base(Sign.BassClef, Staff.TopOf(Staff.Line.Fourth))
+    public BassClef() : base(ClefSign.Type.Bass, Staff.TopOf(Staff.Line.Fourth))
     {
     }
 }

@@ -52,11 +52,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Chromatic.cs" />
+    <Compile Include="ChromaticSign.cs" />
     <Compile Include="ChromaticVisualTest.xaml.cs">
       <DependentUpon>ChromaticVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Clefs.cs" />
+    <Compile Include="ClefSign.cs" />
     <Compile Include="ClefsVisualTest.xaml.cs">
       <DependentUpon>ClefsVisualTest.xaml</DependentUpon>
     </Compile>

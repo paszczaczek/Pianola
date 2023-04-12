@@ -55,10 +55,10 @@ public class Staff : Grid
         // utwórz klucz
         _clef = new TrebleClef();
         
-        var top = 0
+        // var top = 0
                   // -_clef.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
                   // + TopOf(Line.Second) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-            ;
+            // ;
         // SetTop(_clef, top);
 
         // utwórz stack panel i odaj do niego niego klucz, skalę i metrum a później takty
