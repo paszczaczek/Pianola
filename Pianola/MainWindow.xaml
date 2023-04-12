@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score" Width="400" Height="200">
-    <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="40">
-        <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" />
-    </Border>
+    <!-- <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="40"> -->
+        <!-- <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" /> -->
+    <!-- </Border> -->
+
+    <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" IsGuidLinesVisible="True"/>
+
 </Window>

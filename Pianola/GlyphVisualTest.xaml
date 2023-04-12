@@ -5,27 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="local:Glyph">
+            <Setter Property="IsGuidLinesVisible" Value="True" />
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </UserControl.Resources>
+
     <StackPanel Orientation="Horizontal">
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.BassClef}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.BlackNoteHead}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.WhiteNoteHead}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.Sharp}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.Flat}" />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:Glyph Text="{x:Static local:Glyph.Natural}" />
-        </Border>
+        <local:Glyph Text="{x:Static local:Glyph.TrebleClef}" />
+        <local:Glyph Text="{x:Static local:Glyph.BassClef}" />
+        <local:Glyph Text="{x:Static local:Glyph.BlackNoteHead}" />
+        <local:Glyph Text="{x:Static local:Glyph.WhiteNoteHead}" />
+        <local:Glyph Text="{x:Static local:Glyph.Sharp}" />
+        <local:Glyph Text="{x:Static local:Glyph.Flat}" />
+        <local:Glyph Text="{x:Static local:Glyph.Natural}" />
     </StackPanel>
 </UserControl>
