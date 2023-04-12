@@ -4,6 +4,13 @@ using System.Windows.Controls;
 
 namespace Pianola;
 
+/// <remarks>
+/// Struktura elementu:
+/// <code>
+///     Canvas
+///         Glyph
+/// </code>
+/// </remarks>
 public class Clef : Canvas
 {
     public enum Type
@@ -11,6 +18,30 @@ public class Clef : Canvas
         Treble,
         Bass
     }
+
+    #region IsHelperLinesVisibleProperty
+
+    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsGuidLinesVisible), typeof(bool), typeof(Clef),
+        new FrameworkPropertyMetadata(
+            default(bool),
+            (d, e) =>
+            {
+                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
+                var clef = (Clef) d;
+                var glyph = (Glyph) clef.Children[0];
+                var isVisible = (bool) e.NewValue;
+                glyph.IsGuidLinesVisible = isVisible;
+            }));
+
+
+    public bool IsGuidLinesVisible
+    {
+        get => (bool) GetValue(IsGuidLinesVisibleProperty);
+        set => SetValue(IsGuidLinesVisibleProperty, value);
+    }
+
+    #endregion
 
     public static Clef Create(Type type)
     {
@@ -24,19 +55,26 @@ public class Clef : Canvas
 
     protected Clef(string glyphText, Staff.Line staffLine)
     {
-        var top =
-            -Glyph.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            + Staff.TopOf(staffLine); // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
+        // dodaj do canvas znak
         var glyph = new Glyph {Text = glyphText};
         Children.Add(glyph);
+
+        // i ustaw go na wskazywaną pozycję na pięciolinii
+        var top = Staff.TopOf(staffLine);
         SetTop(glyph, top);
+
+        // ustaw jego wymiary
+        Width = Glyph.ActualWidth;
+        Height = Glyph.Height;
     }
+
+    private Glyph Glyph => (Glyph) Children[0];
 
     protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
     {
-        // po narysowaniu glypg zaktualizuj szerokość canvas
-        var glyph = (Glyph) Children[0];
-        Width = glyph.ActualWidth;
+        // po narysowaniu znaku zaktualizuj wymiary canvas
+        Width = Glyph.ActualWidth;
+        Height = Glyph.Height;
         base.OnRenderSizeChanged(sizeInfo);
     }
 }

@@ -16,6 +16,20 @@ namespace Pianola;
 /// </remarks>
 public class Glyph : Canvas
 {
+    private const string FamilyName = "feta26"; // ok
+    private const double FontSize = 48; // ok
+
+    public static readonly double BaseLine;
+    public static readonly double HeadHeight;
+
+    public const string TrebleClef = "\x00c9";
+    public const string BassClef = "\x00c7";
+    public const string Sharp = "\x002e";
+    public const string Flat = "\x003a";
+    public const string Natural = "\x0036";
+    public const string BlackNoteHead = "\x0056";
+    public const string WhiteNoteHead = "\x0055";
+    
     #region TextProperty
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
@@ -53,6 +67,7 @@ public class Glyph : Canvas
         nameof(IsGuidLinesVisible), typeof(bool), typeof(Glyph),
         new FrameworkPropertyMetadata(
             default(bool),
+            FrameworkPropertyMetadataOptions.AffectsRender,
             (d, e) =>
             {
                 // zmieniła się prarametr określający czy wyświetlać liniie pomocnicze
@@ -105,9 +120,9 @@ public class Glyph : Canvas
 
     #endregion
 
-
     public Glyph()
     {
+        // dodaj do canvas znak
         var textBlock = new TextBlock
         {
             FontFamily = new FontFamily(FamilyName),
@@ -117,7 +132,6 @@ public class Glyph : Canvas
     }
 
     private TextBlock TextBlock => (TextBlock) Children[0];
-
 
     private (double top, double widht, double height, double baseline) Measure()
     {
@@ -151,18 +165,4 @@ public class Glyph : Canvas
 
         return (top, width, height, baseline);
     }
-
-    private const string FamilyName = "feta26"; // ok
-    private const double FontSize = 48; // ok
-
-    public static readonly double BaseLine;
-    public static readonly double HeadHeight;
-
-    public const string TrebleClef = "\x00c9";
-    public const string BassClef = "\x00c7";
-    public const string Sharp = "\x002e";
-    public const string Flat = "\x003a";
-    public const string Natural = "\x0036";
-    public const string BlackNoteHead = "\x0056";
-    public const string WhiteNoteHead = "\x0055";
 }
