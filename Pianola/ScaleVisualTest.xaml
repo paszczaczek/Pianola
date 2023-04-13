@@ -6,11 +6,11 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal" Height="100" Margin="0 30 0 0">
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:CesScale />
-        </Border>
-        <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2">
-            <local:CisScale />
-        </Border>
+        <!-- <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2"> -->
+            <local:CesScale IsGridLinesVisible="True"/>
+        <!-- </Border> -->
+        <!-- <Border BorderBrush="BlueViolet" BorderThickness="1" Margin="2"> -->
+            <local:CisScale IsGridLinesVisible="True"/>
+        <!-- </Border> -->
     </StackPanel>
 </UserControl>

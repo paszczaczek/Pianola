@@ -65,6 +65,7 @@
     <Compile Include="ClefVisualTest.xaml.cs">
       <DependentUpon>ClefVisualTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomizedCanvas.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="SignVisualTest.xaml.cs">
       <DependentUpon>SignVisualTest.xaml</DependentUpon>
