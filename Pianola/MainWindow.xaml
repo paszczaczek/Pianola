@@ -14,6 +14,8 @@
     <!-- <local:Chromatic IsGridLinesVisible="True"/>     -->
     <!-- <local:Sign Text="{x:Static local:Sign.TrebleClef}" IsGuidLinesVisible="True" /> -->
     
-    <local:TestCustomizedCanvas IsGridLinesVisible="True"/>
+    <!-- <local:TestCustomizedCanvas IsGridLinesVisible="True"/> -->
+    <!-- <local:Chromatic Type="{x:Static local:Chromatic+Types.Sharp}"  IsGridLinesVisible="True" /> -->
+    <local:ChromaticVisualTest />
 
 </Window>

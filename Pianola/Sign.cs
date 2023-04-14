@@ -28,6 +28,8 @@ public class Sign : CustomizedCanvas
     public const string BlackNoteHead = "\x0056";
     public const string WhiteNoteHead = "\x0055";
 
+    private TextBlock TextBlock => (TextBlock) Children[0];
+    
     public Sign()
     {
         // dodaj do canvas znak
@@ -52,7 +54,6 @@ public class Sign : CustomizedCanvas
         HeadHeight = ft.Extent;
     }
 
-    private TextBlock TextBlock => (TextBlock) Children[0];
 
     #region TextProperty
 
@@ -88,7 +89,7 @@ public class Sign : CustomizedCanvas
 
     #endregion
 
-    private (double top, double widht, double height, double baseline) Measure()
+    public (double top, double widht, double height, double baseline) Measure()
     {
         var ft = new FormattedText(
             TextBlock.Text,

@@ -64,8 +64,8 @@ public class Staff : Grid
         // utwórz stack panel i odaj do niego niego klucz, skalę i metrum a później takty
         _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
         _stackPanel.Children.Add(_clef);
-        _stackPanel.Children.Add(new CesScale());
-        _stackPanel.Children.Add(new CisScale());
+        // _stackPanel.Children.Add(new CesScale());
+        // _stackPanel.Children.Add(new CisScale());
         // TODO dodaj metrum
 
         // dodaj do grida pięciolinię a nad nią stack panel z elementami
@@ -80,7 +80,10 @@ public class Staff : Grid
         _staffLines.Width = sizeInfo.NewSize.Width;
     }
 
-    private static double SpaceHeight => Sign.HeadHeight;
+    public static double SpaceHeight => Sign.HeadHeight;
+
+    public static double LinesHeight => SpaceHeight * 4;
+    // public new static double Height => SpaceHeight * 8;
     public static double TopOf(Line staffLine) => (int) staffLine * SpaceHeight;
     public static double TopOf(Space staffSpace) => (int) staffSpace * SpaceHeight + SpaceHeight / 2;
 

@@ -5,5 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <local:Chromatic IsGridLinesVisible="True" />
+    <UserControl.Resources>
+        <Style TargetType="local:Chromatic">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="IsGridlinesVisible" Value="True" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+        <Style TargetType="local:Sign">
+            <Setter Property="IsGridlinesVisible" Value="False" />
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel Orientation="Horizontal">
+        <local:Chromatic Type="{x:Static local:Chromatic+Types.Flat}" />
+        <!-- <local:Chromatic Type="{x:Static local:Chromatic+Types.Flat}" /> -->
+        <!-- <local:Chromatic Type="{x:Static local:Chromatic+Types.Natural}" /> -->
+    </StackPanel>
 </UserControl>

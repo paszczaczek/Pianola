@@ -9,16 +9,17 @@
         <Style TargetType="local:Sign">
             <Setter Property="Margin" Value="2" />
             <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="IsGridlinesVisible" Value="True" />
         </Style>
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <local:Sign Text="{x:Static local:Sign.TrebleClef}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.BassClef}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.BlackNoteHead}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.WhiteNoteHead}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Sharp}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Flat}" IsGridLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Natural}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.TrebleClef}" />
+        <local:Sign Text="{x:Static local:Sign.BassClef}" />
+        <local:Sign Text="{x:Static local:Sign.BlackNoteHead}" />
+        <local:Sign Text="{x:Static local:Sign.WhiteNoteHead}" />
+        <local:Sign Text="{x:Static local:Sign.Sharp}" />
+        <local:Sign Text="{x:Static local:Sign.Flat}" />
+        <local:Sign Text="{x:Static local:Sign.Natural}" />
     </StackPanel>
 </UserControl>

@@ -35,15 +35,15 @@ public class CustomizedCanvas : Canvas
         GetBindingExpression(HeightProperty)?.UpdateTarget();
     }
 
-    #region IsGridLinesVisibleProperty
+    #region IsGridlinesVisibleProperty
 
-    public static readonly DependencyProperty IsGridLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGridLinesVisible), typeof(bool), typeof(CustomizedCanvas),
+    public static readonly DependencyProperty IsGridlinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsGridlinesVisible), typeof(bool), typeof(CustomizedCanvas),
         new FrameworkPropertyMetadata(
             default(bool),
-            IsGridLinesVisiblePropertyChangedCallback));
+            IsGridlinesVisiblePropertyChangedCallback));
 
-    private static void IsGridLinesVisiblePropertyChangedCallback(
+    private static void IsGridlinesVisiblePropertyChangedCallback(
         DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         // zmieniła się prarametr określający - czy linie pomocnicze mają być wyświetlana?
@@ -61,7 +61,7 @@ public class CustomizedCanvas : Canvas
                 SnapsToDevicePixels = true
             };
             customizedCanvas.Children.Add(border);
-
+            
             // ramka ma dostosowywać swoje wymiary do wymiarów płótna
             border.SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = customizedCanvas});
             border.SetBinding(HeightProperty, new Binding(nameof(Height)) {Source = customizedCanvas});
@@ -74,10 +74,51 @@ public class CustomizedCanvas : Canvas
         }
     }
 
-    public bool IsGridLinesVisible
+    public bool IsGridlinesVisible
     {
-        get => (bool) GetValue(IsGridLinesVisibleProperty);
-        set => SetValue(IsGridLinesVisibleProperty, value);
+        get => (bool) GetValue(IsGridlinesVisibleProperty);
+        set => SetValue(IsGridlinesVisibleProperty, value);
+    }
+
+    #endregion
+    
+    #region IsStaffLinesVisibleProperty
+
+    public static readonly DependencyProperty IsStaffLinesVisibleProperty = DependencyProperty.Register(
+        nameof(IsStaffLinesVisible), typeof(bool), typeof(CustomizedCanvas),
+        new FrameworkPropertyMetadata(
+            default(bool),
+            IsStaffLinesVisiblePropertyChangedCallback));
+
+    private static void IsStaffLinesVisiblePropertyChangedCallback(
+        DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        // zmieniła się prarametr określający czy pięciolinia ma być wyświetlana?
+        var customizedCanvas = (CustomizedCanvas) d;
+        var newIsVisible = (bool) e.NewValue;
+        if (newIsVisible)
+        {
+            // pięciolinia ma być wyświetlane
+
+            // dodaj pięciolinię do plótna
+            var staffLines = new StaffLines();
+            customizedCanvas.Children.Add(staffLines);
+            
+            // szrokość pięciolinii ma dostosowywać swoją szerokość do szerokości płótna
+            staffLines.SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = customizedCanvas});
+        }
+        else
+        {
+            // linie mają nie być wyświetlane - usuń je
+            var staffLines = customizedCanvas.Children.OfType<StaffLines>().First();
+            customizedCanvas.Children.Remove(staffLines);
+        }
+    }
+
+    public bool IsStaffLinesVisible
+    {
+        get => (bool) GetValue(IsGridlinesVisibleProperty);
+        set => SetValue(IsGridlinesVisibleProperty, value);
     }
 
     #endregion
@@ -91,7 +132,7 @@ public class TestCustomizedCanvas : CustomizedCanvas
         {
             Width = 50,
             Height = 50,
-            Fill = Brushes.Gray
+            Fill = Brushes.LightGray
         };
         Children.Add(ellipse);
     }

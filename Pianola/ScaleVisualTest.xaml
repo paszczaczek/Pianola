@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal" Height="100" Margin="30">
-        <local:CesScale IsGridLinesVisible="True" />
+        <!-- <local:CesScale IsGridLinesVisible="True" /> -->
         <!-- <local:CisScale IsGridLinesVisible="True" /> -->
     </StackPanel>
 </UserControl>

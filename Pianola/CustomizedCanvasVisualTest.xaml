@@ -5,5 +5,5 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <local:TestCustomizedCanvas IsGridLinesVisible="True" Margin="2"/>
+    <local:TestCustomizedCanvas IsGridlinesVisible="True" Margin="2"/>
 </UserControl>
