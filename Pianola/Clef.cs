@@ -32,6 +32,7 @@ public class Clef : CustomizedCanvas
         
         // przesuń klucz na właściwą linię pięciolinii
         SetClefTop(clefSign, Types.Treble);
+
         
         // płótno ma dostosowywać swoją szerokość do szerokości klucza
         SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = clefSign});

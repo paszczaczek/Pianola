@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Pianola;
 
@@ -34,28 +32,13 @@ public class Staff : Grid
         };
         Children.Add(stackPanel);
 
-        // var rect = new Rectangle
-        // {
-        //     Width = 100,
-        //     Height = 34,
-        //     Fill = Brushes.Chartreuse,
-        //     VerticalAlignment = VerticalAlignment.Top
-        // };
-        // Children.Add(rect);
-        // return;
-
         // dodaj do stackpanelu klucz
-        var clef = new Clef
-        {
-            VerticalAlignment = VerticalAlignment.Top,
-            Height = 35
-        };
+        var clef = new Clef {VerticalAlignment = VerticalAlignment.Top};
         stackPanel.Children.Add(clef);
-        
-        // dodaj do stackpanelu skalę
-        var scale = new CesScale();
-        stackPanel.Children.Add(scale);
 
+        // dodaj do stackpanelu skalę
+        var scale = new CesScale {VerticalAlignment = VerticalAlignment.Top};
+        stackPanel.Children.Add(scale);
     }
 
     #region ClefTypeProperty
@@ -69,7 +52,6 @@ public class Staff : Grid
 
     private static void ClefTypePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        return;
         // ustawiono typ znaku chromatycznego
         var staff = (Staff) d;
         var clefType = (Clef.Types) e.NewValue;
@@ -83,16 +65,46 @@ public class Staff : Grid
             Type = clefType,
             VerticalAlignment = VerticalAlignment.Top
         };
-        staff.Children.Add(clef);
-
-        // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        // clef.SetTop(chromaticSign, -chromaticSign.BaseLine);
+        stackPanel.Children.Insert(0, clef);
     }
 
     public Clef.Types ClefType
     {
         get => (Clef.Types) GetValue(ClefTypeProperty);
         set => SetValue(ClefTypeProperty, value);
+    }
+
+    #endregion
+    
+    #region ScaleTypeProperty
+
+    public static readonly DependencyProperty ScaleTypeProperty = DependencyProperty.Register(
+        nameof(ScaleType), typeof(Scale.Types), typeof(Staff),
+        new FrameworkPropertyMetadata(
+            // default(Scale.Types),
+            Scale.Types.Ces,
+            FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
+            ScaleTypePropertyChangedCallback));
+
+    private static void ScaleTypePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        // ustawiono typ skali
+        var staff = (Staff) d;
+        var scaleType = (Scale.Types) e.NewValue;
+
+        // usuń starą skalę i dodaj nowa właściwego typu
+        var stackPanel = staff.Children.OfType<StackPanel>().First();
+        var scale = stackPanel.Children.OfType<Scale>().First();
+        stackPanel.Children.Remove(scale);
+        scale = Scale.Create(scaleType);
+        scale.VerticalAlignment = VerticalAlignment.Top;
+        stackPanel.Children.Insert(1, scale);
+    }
+
+    public Scale.Types ScaleType
+    {
+        get => (Scale.Types) GetValue(ScaleTypeProperty);
+        set => SetValue(ScaleTypeProperty, value);
     }
 
     #endregion

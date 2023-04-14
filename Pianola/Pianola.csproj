@@ -58,7 +58,6 @@
       <DependentUpon>ChromaticVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Clef.cs" />
-    <Compile Include="ClefSign.cs" />
     <Compile Include="ClefVisualTest.xaml.cs">
       <DependentUpon>ClefVisualTest.xaml</DependentUpon>
     </Compile>

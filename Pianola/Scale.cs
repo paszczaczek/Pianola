@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -43,6 +44,17 @@ public class Scale : CustomizedCanvas
     {
         Ces,
         Cis
+    }
+
+    // TODO zamiem Create na ctor Scale() tak jak w Clef.cs
+    public static Scale Create(Types type)
+    {
+        return type switch
+        {
+            Types.Ces => new CesScale(),
+            Types.Cis => new CisScale(),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
     }
 
     protected Scale(Chromatic.Types type, IEnumerable<double> tops)
