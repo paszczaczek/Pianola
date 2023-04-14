@@ -1,8 +1,23 @@
 using System;
+using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Pianola;
+
+// public class TrebleClef : Clef
+// {
+//     public TrebleClef() : base(Types.Treble, Staff.TopOf(Staff.Line.Second))
+//     {
+//     }
+// }
+//
+// public class BassClef : Clef
+// {
+//     public BassClef() : base(Types.Bass, Staff.TopOf(Staff.Line.Fourth))
+//     {
+//     }
+// }
 
 /// <remarks>
 /// Struktura elementu:
@@ -11,85 +26,115 @@ namespace Pianola;
 ///         Sign
 /// </code>
 /// </remarks>
-public class Clef : Canvas
+public class Clef : CustomizedCanvas
 {
-    public enum Type
+    public enum Types
     {
         Treble,
         Bass
     }
 
-    #region IsHelperLinesVisibleProperty
+    private Sign Sign => Children.OfType<Sign>().First();
+    
+    // public static Clef Create(Types type)
+    // {
+    //     return type switch
+    //     {
+    //         Types.Treble => new TrebleClef(),
+    //         Types.Bass => new BassClef(),
+    //         _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+    //     };
+    // }
+    
+    
 
-    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGuidLinesVisible), typeof(bool), typeof(Clef),
-        new FrameworkPropertyMetadata(
-            default(bool),
-            (d, e) =>
-            {
-                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
-                var clef = (Clef) d;
-                var isVisible = (bool) e.NewValue;
-                // clef.ClefSign.IsGuidLinesVisible = isVisible;
-            }));
-
-
-    public bool IsGuidLinesVisible
+    public Clef()
     {
-        get => (bool) GetValue(IsGuidLinesVisibleProperty);
-        set => SetValue(IsGuidLinesVisibleProperty, value);
+        // // utwórz znak klucza
+        // var clefSignText = type switch
+        // {
+        //     Types.Treble => Sign.TrebleClef,
+        //     Types.Bass => Sign.BassClef,
+        //     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        // };
+        // var clefSign = new Sign
+        // {
+        //     Text = clefSignText,
+        //     VerticalAlignment = VerticalAlignment.Top
+        // };
+        //
+        // // dodaj go do płótna i ustaw w pionie tak aby wskaywał właściwą linię pięciolinii
+        // Children.Add(clefSign);
+        // SetTop(clefSign, -clefSign.BaseLine + top);
+        //
+        // // płótno ma dostosowywać swoją szerokość do szerokości klucza
+        // SetBinding(WidthProperty, new Binding(nameof(ActualWidth)) {Source = clefSign});
+        //
+        // // a wysokość do wysokości pięciolinii
+        // Height = Staff.LinesHeight;
+        
+        // dodaj do płótna znak klucza
+        var clefSign = new Sign {Text = Sign.TrebleClef};
+        Children.Add(clefSign);
+
+        // przesuń znak klucz na pozycję piątej linii w pięciolinii
+        // SetTop(clefSign, -clefSign.BaseLine);
+
+        // płótno ma dostosowywać swoją szerokość do szerokości klucza
+        SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = clefSign});
+
+        // a wysokość do wysokości pięciolinii
+        Height = Staff.LinesHeight;
+    }
+    
+    #region TypeProperty
+
+    public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+        nameof(Type), typeof(Types), typeof(Clef),
+        new FrameworkPropertyMetadata(
+            default(Types),
+            FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
+            TypePropertyChangedCallback));
+
+    private static void TypePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        // ustawiono typ klucza
+        var clef = (Clef) d;
+        var type = (Types) e.NewValue;
+
+        // ustaw odpowiedni tekst klucza
+        var clefSign = clef.Sign;
+        clefSign.Text = type switch
+        {
+            Types.Treble => Sign.TrebleClef,
+            Types.Bass => Sign.BassClef,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        // przesuń znak klucza na pozycję piątej linii w pięciolinii
+        SetTop(clefSign, -clefSign.BaseLine);
+        
+        // //
+        //
+        // // ustaw odpowiedni tekst znaku chromatycznego
+        // var chromaticSign = clef.Sign;
+        // chromaticSign.Text = type switch
+        // {
+        //     Types.Sharp => Sign.Sharp,
+        //     Types.Flat => Sign.Flat,
+        //     Types.Natural => Sign.Natural,
+        //     _ => throw new ArgumentOutOfRangeException()
+        // };
+        //
+        // // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
+        // SetTop(chromaticSign, -chromaticSign.BaseLine);
+    }
+
+    public Types Type
+    {
+        get => (Types) GetValue(TypeProperty);
+        set => SetValue(TypeProperty, value);
     }
 
     #endregion
-
-    public static Clef Create(Type type)
-    {
-        return type switch
-        {
-            Type.Treble => new TrebleClef(),
-            Type.Bass => new BassClef(),
-            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-        };
-    }
-
-    protected Clef(Type clefType, double clefTop)
-    {
-        // dodaj do canvas znak
-        var clefSign = ClefSign.Create(clefType);
-        Children.Add(clefSign);
-
-        // i ustaw go na wskazywaną pozycję na pięciolinii
-        var top =
-            -clefSign.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-            + clefTop; // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-        SetTop(clefSign, top);
-
-        // ustaw jego wymiary
-        Width = clefSign.ActualWidth;
-        Height = clefSign.Height;
-    }
-
-    private ClefSign ClefSign => (ClefSign) Children[0];
-
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        // po narysowaniu znaku zaktualizuj wymiary canvas
-        Width = ClefSign.ActualWidth;
-        Height = ClefSign.Height;
-        base.OnRenderSizeChanged(sizeInfo);
-    }
-}
-
-public class TrebleClef : Clef
-{
-    public TrebleClef() : base(Type.Treble, Staff.TopOf(Staff.Line.Second))
-    {
-    }
-}
-
-public class BassClef : Clef
-{
-    public BassClef() : base(Type.Bass, Staff.TopOf(Staff.Line.Fourth))
-    {
-    }
 }

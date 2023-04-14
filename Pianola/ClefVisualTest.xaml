@@ -5,8 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="local:Clef">
+            <Setter Property="Margin" Value="2 20 2 40" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="IsGridlinesVisible" Value="True" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+    </UserControl.Resources>
+
     <StackPanel Orientation="Horizontal">
-            <local:TrebleClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
-            <local:BassClef IsGuidLinesVisible="True" VerticalAlignment="Top" />
+        <local:Clef Type="Treble"/>
+        <local:Clef Type="Bass"/>
     </StackPanel>
 </UserControl>

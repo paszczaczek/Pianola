@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <local:GrandStaff />
+    <!-- <local:GrandStaff /> -->
 </UserControl>

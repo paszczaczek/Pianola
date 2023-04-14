@@ -19,14 +19,14 @@ public class Chromatic : CustomizedCanvas
     public Chromatic()
     {
         // dodaj do płótna znak chromatyczny
-        var sign = new Sign {Text = Sign.Sharp};
-        Children.Add(sign);
+        var chromaticSign = new Sign {Text = Sign.Sharp};
+        Children.Add(chromaticSign);
 
         // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        SetTop(sign, -sign.BaseLine);
+        SetTop(chromaticSign, -chromaticSign.BaseLine);
 
         // płótno ma dostosowywać swoją szerokość do szerokości znaku chromatycznego
-        SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = sign});
+        SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = chromaticSign});
 
         // a wysokość do wysokości pięciolinii
         Height = Staff.LinesHeight;
@@ -48,8 +48,8 @@ public class Chromatic : CustomizedCanvas
         var type = (Types) e.NewValue;
 
         // ustaw odpowiedni tekst znaku chromatycznego
-        var sign = chromatic.Sign;
-        sign.Text = type switch
+        var chromaticSign = chromatic.Sign;
+        chromaticSign.Text = type switch
         {
             Types.Sharp => Sign.Sharp,
             Types.Flat => Sign.Flat,
@@ -58,7 +58,7 @@ public class Chromatic : CustomizedCanvas
         };
 
         // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        SetTop(sign, -sign.BaseLine);
+        SetTop(chromaticSign, -chromaticSign.BaseLine);
     }
 
     public Types Type
@@ -68,33 +68,4 @@ public class Chromatic : CustomizedCanvas
     }
 
     #endregion
-
-    //
-    // #region PositionProperty
-    //
-    // public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
-    //     nameof(Position), typeof(int), typeof(Chromatic),
-    //     new FrameworkPropertyMetadata(
-    //         default(int),
-    //         FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
-    //         PositionPropertyChangedCallback));
-    //
-    // private static void PositionPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    // {
-    //     // ustawiono pozycję znaku chromatycznego na pięciolinii
-    //     var chromatic = (Chromatic) d;
-    //     var position = (int) e.NewValue;
-    //
-    //     Staff.TopOf()
-    //     var sign = chromatic.Sign;
-    //     SetTop(sign, -sign.BaseLine);
-    // }
-    //
-    // public int Position
-    // {
-    //     get => (int) GetValue(PositionProperty);
-    //     set => SetValue(PositionProperty, value);
-    // }
-    //
-    // #endregion
 }

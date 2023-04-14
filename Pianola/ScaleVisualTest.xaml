@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal" Height="100" >
-        <local:CesScale IsGridlinesVisible="True" IsStaffLinesVisible="True"/>
-        <local:CisScale IsGridlinesVisible="True" IsStaffLinesVisible="True"/>
+    <StackPanel Orientation="Horizontal">
+        <local:CesScale IsGridlinesVisible="True" IsStaffLinesVisible="True" Margin="2 20 2 10"/>
+        <local:CisScale IsGridlinesVisible="True" IsStaffLinesVisible="True" Margin="2 20 2 10"/>
     </StackPanel>
 </UserControl>

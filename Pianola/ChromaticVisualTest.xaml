@@ -7,7 +7,7 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="local:Chromatic">
-            <Setter Property="Margin" Value="2" />
+            <Setter Property="Margin" Value="2 30 2 2" />
             <Setter Property="VerticalAlignment" Value="Top" />
             <Setter Property="IsGridlinesVisible" Value="True" />
             <Setter Property="IsStaffLinesVisible" Value="True" />
@@ -18,8 +18,8 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <local:Chromatic Type="{x:Static local:Chromatic+Types.Sharp}" />
-        <local:Chromatic Type="{x:Static local:Chromatic+Types.Flat}" />
-        <local:Chromatic Type="{x:Static local:Chromatic+Types.Natural}" />
+        <local:Chromatic Type="Sharp" />
+        <local:Chromatic Type="Flat" />
+        <local:Chromatic Type="Natural" />
     </StackPanel>
 </UserControl>

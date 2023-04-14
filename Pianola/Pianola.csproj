@@ -54,18 +54,11 @@
     </ApplicationDefinition>
     <Compile Include="ChildrenBoundaryConverter.cs" />
     <Compile Include="Chromatic.cs" />
-    <Compile Include="ChromaticSign.cs" />
-    <Compile Include="ChromaticSignVisualTest.xaml.cs">
-      <DependentUpon>ChromaticSignVisualTest.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ChromaticVisualTest.xaml.cs">
       <DependentUpon>ChromaticVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Clef.cs" />
     <Compile Include="ClefSign.cs" />
-    <Compile Include="ClefSignVisualTest.xaml.cs">
-      <DependentUpon>ClefSignVisualTest.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ClefVisualTest.xaml.cs">
       <DependentUpon>ClefVisualTest.xaml</DependentUpon>
     </Compile>
@@ -97,9 +90,7 @@
     <Compile Include="VisualTest.xaml.cs">
       <DependentUpon>VisualTest.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChromaticSignVisualTest.xaml" />
     <Page Include="ChromaticVisualTest.xaml" />
-    <Page Include="ClefSignVisualTest.xaml" />
     <Page Include="ClefVisualTest.xaml" />
     <Page Include="CustomizedCanvasVisualTest.xaml" />
     <Page Include="SignVisualTest.xaml" />

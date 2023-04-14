@@ -8,5 +8,5 @@
     <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
     <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
     <!-- Designer w VisualStudio reaguje poprawnie. -->
-    <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" Margin="30"/>
+    <!-- <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" Margin="30"/> -->
 </UserControl>
