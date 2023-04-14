@@ -11,7 +11,7 @@ public class CustomizedCanvas : Canvas
 {
     protected CustomizedCanvas()
     {
-        // płótno ma dostosowywac swoje wymiary do wymiarów przestrzeni jaką okupują dodaneelementy
+        // płótno ma dostosowywac swoje wymiary do wymiarów przestrzeni jaką okupują dodane elementy
         SetBinding(WidthProperty, new Binding()
         {
             Source = Children,

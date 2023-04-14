@@ -13,25 +13,24 @@ public class Chromatic : CustomizedCanvas
         Flat,
         Natural
     }
-    
+
     private Sign Sign => Children.OfType<Sign>().First();
 
     public Chromatic()
     {
         // dodaj do płótna znak chromatyczny
-        var sign = new Sign{Text = Sign.Sharp};
+        var sign = new Sign {Text = Sign.Sharp};
         Children.Add(sign);
 
         // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        // SetTop(sign, -sign.BaseLine);
-        
+        SetTop(sign, -sign.BaseLine);
+
         // płótno ma dostosowywać swoją szerokość do szerokości znaku chromatycznego
         SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = sign});
-        
+
         // a wysokość do wysokości pięciolinii
         Height = Staff.LinesHeight;
     }
-
 
     #region TypeProperty
 
@@ -57,18 +56,19 @@ public class Chromatic : CustomizedCanvas
             Types.Natural => Sign.Natural,
             _ => throw new ArgumentOutOfRangeException()
         };
-        
+
         // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        // SetTop(sign, -sign.BaseLine);
+        SetTop(sign, -sign.BaseLine);
     }
-    
+
     public Types Type
     {
         get => (Types) GetValue(TypeProperty);
         set => SetValue(TypeProperty, value);
     }
-    
+
     #endregion
+
     //
     // #region PositionProperty
     //

@@ -5,17 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
-        Title="Score" Width="200" Height="100">
-    <!-- <local:StaffVisualTest /> -->
-    <!-- <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" /> -->
-
-    <!-- <local:CesScale IsGridLinesVisible="True" Left="0" Top="0" Width="100" Height="100"/> -->
-
-    <!-- <local:Chromatic IsGridLinesVisible="True"/>     -->
-    <!-- <local:Sign Text="{x:Static local:Sign.TrebleClef}" IsGuidLinesVisible="True" /> -->
-    
-    <!-- <local:TestCustomizedCanvas IsGridLinesVisible="True"/> -->
-    <!-- <local:Chromatic Type="{x:Static local:Chromatic+Types.Sharp}"  IsGridLinesVisible="True" /> -->
-    <local:ChromaticVisualTest />
-
+        Title="Score" >
+    <local:ScaleVisualTest />
 </Window>
