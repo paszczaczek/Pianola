@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Pianola;
 
-public class Chromatic : Canvas
+public class Chromatic : CustomizedCanvas
 {
     public enum Type
     {
@@ -13,29 +13,16 @@ public class Chromatic : Canvas
         Flat,
         Natural
     }
-    
-    #region IsHelperLinesVisibleProperty
 
-    public static readonly DependencyProperty IsGuidLinesVisibleProperty = DependencyProperty.Register(
-        nameof(IsGuidLinesVisible), typeof(bool), typeof(Chromatic),
-        new FrameworkPropertyMetadata(
-            default(bool),
-            (d, e) =>
-            {
-                // zmieniła się prarametr określający czy wyświetlać linie pomocnicze
-                var chromatic = (Chromatic) d;
-                var isVisible = (bool) e.NewValue;
-                chromatic.ChromaticSign.IsGuidLinesVisible = isVisible;
-            }));
-
-
-    public bool IsGuidLinesVisible
+    public Chromatic()
     {
-        get => (bool) GetValue(IsGuidLinesVisibleProperty);
-        set => SetValue(IsGuidLinesVisibleProperty, value);
+        var chromatic = ChromaticSign.Create(Type.Natural);
+        // chromatic.Width = 123;
+        // chromatic.Height = 321;
+        Children.Add(chromatic);
+        SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = chromatic});
+        SetBinding(HeightProperty, new Binding(nameof(Height)) {Source = chromatic});
     }
-
-    #endregion
 
     public static Chromatic Create(Type type, double position)
     {
@@ -54,18 +41,19 @@ public class Chromatic : Canvas
             // dodaj do canvas znak
             var chromatic = ChromaticSign.Create(chromaticType);
             Children.Add(chromatic);
-            
+
             // i ustaw go na wskazywaną pozycję na pięciolinii
             var top = 0
-                       -chromatic.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
+                      - chromatic.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
                       + chromaticTop // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
                 ;
             SetTop(chromatic, top);
-            
-            Width = 100;
+
+            // SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = chromatic});
+            // SetBinding(HeightProperty, new Binding(nameof(Height)) {Source = chromatic});
         }
     }
-    
+
     private ChromaticSign ChromaticSign => (ChromaticSign) Children[0];
 
 
@@ -78,7 +66,7 @@ public class Chromatic : Canvas
             SetLeft(chromatic, width);
             width += chromatic.ActualWidth;
         }
-        
+
         Width = width;
     }
 }

@@ -13,12 +13,12 @@
     </UserControl.Resources>
 
     <StackPanel Orientation="Horizontal">
-        <local:Sign Text="{x:Static local:Sign.TrebleClef}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.BassClef}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.BlackNoteHead}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.WhiteNoteHead}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Sharp}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Flat}" IsGuidLinesVisible="True" />
-        <local:Sign Text="{x:Static local:Sign.Natural}" IsGuidLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.TrebleClef}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.BassClef}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.BlackNoteHead}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.WhiteNoteHead}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.Sharp}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.Flat}" IsGridLinesVisible="True" />
+        <local:Sign Text="{x:Static local:Sign.Natural}" IsGridLinesVisible="True" />
     </StackPanel>
 </UserControl>

@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
     <StackPanel Orientation="Horizontal">
-        <local:SharpSign IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" />
-        <local:FlatSign IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" />
-        <local:NaturalSing IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" />
+        <!-- <local:SharpSign IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" /> -->
+        <!-- <local:FlatSign IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" /> -->
+        <!-- <local:NaturalSing IsGuidLinesVisible="True" VerticalAlignment="Top" Margin="2" /> -->
     </StackPanel>
 </UserControl>
