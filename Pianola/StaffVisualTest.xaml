@@ -5,8 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <!-- Designer w Rider nie reaguje na ustawianie ClefType. -->
-    <!-- Nie wykonuje propertyChangedCallback w ClefTypeProperty w designerze. -->
-    <!-- Designer w VisualStudio reaguje poprawnie. -->
-    <!-- <local:Staff ClefType="{x:Static local:Clef+Type.Treble}" Margin="30"/> -->
+    <UserControl.Resources>
+        <Style TargetType="local:Clef">
+            <Setter Property="Margin" Value="2 20 2 40" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <!-- <Setter Property="IsGridlinesVisible" Value="True" /> -->
+            <!-- <Setter Property="IsStaffLinesVisible" Value="True" /> -->
+        </Style>
+        <Style TargetType="local:Scale">
+            <!-- <Setter Property="Margin" Value="2 20 2 40" /> -->
+            <!-- <Setter Property="VerticalAlignment" Value="Top" /> -->
+            <Setter Property="IsGridlinesVisible" Value="True" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+    </UserControl.Resources>
+    <local:Staff ClefType="Treble" />
 </UserControl>

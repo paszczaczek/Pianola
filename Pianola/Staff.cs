@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Pianola;
 
 public class Staff : Grid
 {
-    private readonly StaffLines _staffLines;
-
     public Staff()
     {
         /*
@@ -20,54 +19,44 @@ public class Staff : Grid
          *          Metrum TODO
          */
 
-        // utworz pięciolinię
-        _staffLines = new StaffLines {VerticalAlignment = VerticalAlignment.Top};
+        // dodaj do płótna pięciolinię
+        var staffLines = new StaffLines
+        {
+            VerticalAlignment = VerticalAlignment.Top
+        };
+        Children.Add(staffLines);
 
-        // utwórz klucz
-        // var clef = new TrebleClef();
+        // dodaj do płótna stackpanel, będą do niego dodawane klucz, skala itd.
+        var stackPanel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            VerticalAlignment = VerticalAlignment.Top
+        };
+        Children.Add(stackPanel);
 
-        // var top = 0
-        // -_clef.BaseLine // przesun baseline znaku w gore do poczatku ukladu wspolrzednych
-        // + TopOf(Line.Second) // przesun baseline znaku w dol na wskazywaną pozycję na pięciolinii
-        // ;
-        // SetTop(_clef, top);
+        // var rect = new Rectangle
+        // {
+        //     Width = 100,
+        //     Height = 34,
+        //     Fill = Brushes.Chartreuse,
+        //     VerticalAlignment = VerticalAlignment.Top
+        // };
+        // Children.Add(rect);
+        // return;
 
-        // utwórz stack panel i odaj do niego niego klucz, skalę i metrum a później takty
-        _stackPanel = new StackPanel {Orientation = Orientation.Horizontal};
-        // _stackPanel.Children.Add(clef);
-        // _stackPanel.Children.Add(new CesScale());
-        // _stackPanel.Children.Add(new CisScale());
-        // TODO dodaj metrum
+        // dodaj do stackpanelu klucz
+        var clef = new Clef
+        {
+            VerticalAlignment = VerticalAlignment.Top,
+            Height = 35
+        };
+        stackPanel.Children.Add(clef);
+        
+        // dodaj do stackpanelu skalę
+        var scale = new CesScale();
+        stackPanel.Children.Add(scale);
 
-        // dodaj do grida pięciolinię a nad nią stack panel z elementami
-        Children.Add(_staffLines);
-        Children.Add(_stackPanel);
     }
-
-    // #region ClefTypeProperty
-    //
-    // public static readonly DependencyProperty ClefTypeProperty = DependencyProperty.Register(
-    //     nameof(ClefType), typeof(Clef.Type), typeof(Staff),
-    //     new FrameworkPropertyMetadata(
-    //         Clef.Type.Treble,
-    //         FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender,
-    //         propertyChangedCallback: (d, e) =>
-    //         {
-    //             // ustawiono typ pięciolinii (wiolinowa/basowa) - dodaj do pięciolinii właściwy klucz
-    //             var staff = (Staff) d;
-    //             var newClefType = (Clef.Type) e.NewValue;
-    //             staff._stackPanel.Children.Remove(staff._clef);
-    //             // staff._clef = Clef.Create(newClefType);
-    //             staff._stackPanel.Children.Add(staff._clef);
-    //         }));
-    //
-    // public Clef.Type ClefType
-    // {
-    //     get => (Clef.Type) GetValue(ClefTypeProperty);
-    //     set => SetValue(ClefTypeProperty, value);
-    // }
-    //
-    // #endregion
 
     #region ClefTypeProperty
 
@@ -80,27 +69,24 @@ public class Staff : Grid
 
     private static void ClefTypePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
+        return;
         // ustawiono typ znaku chromatycznego
-        // var staff = (Staff) d;
-        // var clefType = (Clef.Types) e.NewValue;
+        var staff = (Staff) d;
+        var clefType = (Clef.Types) e.NewValue;
 
-        // var clef = staff.Children.OfType<Clef>().First();
-        // staff.Children.Remove(clef);
-        // new Clef(clefType);
-        // staff.Children.Add()
-        
-        // ustaw odpowiedni tekst znaku chromatycznego
-        // var chromaticSign = chromatic.Sign;
-        // chromaticSign.Text = type switch
-        // {
-            // Chromatic.Types.Sharp => Sign.Sharp,
-            // Chromatic.Types.Flat => Sign.Flat,
-            // Chromatic.Types.Natural => Sign.Natural,
-            // _ => throw new ArgumentOutOfRangeException()
-        // };
+        // usuń stary klucz i dodaj nowy właściwego typu
+        var stackPanel = staff.Children.OfType<StackPanel>().First();
+        var clef = stackPanel.Children.OfType<Clef>().First();
+        stackPanel.Children.Remove(clef);
+        clef = new Clef
+        {
+            Type = clefType,
+            VerticalAlignment = VerticalAlignment.Top
+        };
+        staff.Children.Add(clef);
 
         // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        // SetTop(chromaticSign, -chromaticSign.BaseLine);
+        // clef.SetTop(chromaticSign, -chromaticSign.BaseLine);
     }
 
     public Clef.Types ClefType
@@ -110,17 +96,6 @@ public class Staff : Grid
     }
 
     #endregion
-
-    // private Clef _clef;
-
-    private readonly StackPanel _stackPanel;
-
-    protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-    {
-        base.OnRenderSizeChanged(sizeInfo);
-        if (!sizeInfo.WidthChanged) return;
-        _staffLines.Width = sizeInfo.NewSize.Width;
-    }
 
     public static double SpaceHeight => Sign.HeadHeight;
 

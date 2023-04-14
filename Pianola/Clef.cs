@@ -2,22 +2,9 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
+using System.Windows.Diagnostics;
 
 namespace Pianola;
-
-// public class TrebleClef : Clef
-// {
-//     public TrebleClef() : base(Types.Treble, Staff.TopOf(Staff.Line.Second))
-//     {
-//     }
-// }
-//
-// public class BassClef : Clef
-// {
-//     public BassClef() : base(Types.Bass, Staff.TopOf(Staff.Line.Fourth))
-//     {
-//     }
-// }
 
 /// <remarks>
 /// Struktura elementu:
@@ -35,56 +22,35 @@ public class Clef : CustomizedCanvas
     }
 
     private Sign Sign => Children.OfType<Sign>().First();
-    
-    // public static Clef Create(Types type)
-    // {
-    //     return type switch
-    //     {
-    //         Types.Treble => new TrebleClef(),
-    //         Types.Bass => new BassClef(),
-    //         _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-    //     };
-    // }
-    
-    
+
 
     public Clef()
     {
-        // // utwórz znak klucza
-        // var clefSignText = type switch
-        // {
-        //     Types.Treble => Sign.TrebleClef,
-        //     Types.Bass => Sign.BassClef,
-        //     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
-        // };
-        // var clefSign = new Sign
-        // {
-        //     Text = clefSignText,
-        //     VerticalAlignment = VerticalAlignment.Top
-        // };
-        //
-        // // dodaj go do płótna i ustaw w pionie tak aby wskaywał właściwą linię pięciolinii
-        // Children.Add(clefSign);
-        // SetTop(clefSign, -clefSign.BaseLine + top);
-        //
-        // // płótno ma dostosowywać swoją szerokość do szerokości klucza
-        // SetBinding(WidthProperty, new Binding(nameof(ActualWidth)) {Source = clefSign});
-        //
-        // // a wysokość do wysokości pięciolinii
-        // Height = Staff.LinesHeight;
-        
         // dodaj do płótna znak klucza
         var clefSign = new Sign {Text = Sign.TrebleClef};
         Children.Add(clefSign);
-
-        // przesuń znak klucz na pozycję piątej linii w pięciolinii
-        // SetTop(clefSign, -clefSign.BaseLine);
-
+        
+        // przesuń klucz na właściwą linię pięciolinii
+        SetClefTop(clefSign, Types.Treble);
+        
         // płótno ma dostosowywać swoją szerokość do szerokości klucza
         SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = clefSign});
 
         // a wysokość do wysokości pięciolinii
         Height = Staff.LinesHeight;
+    }
+
+    private static void SetClefTop(Sign sign, Types types)
+    {
+        var top = types switch
+        {
+            Types.Treble => Staff.TopOf(Staff.Line.Second),
+            Types.Bass => Staff.TopOf(Staff.Line.Fourth),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        // przesuń znak klucza na pozycję piątej linii w pięciolinii
+        SetTop(sign, -sign.BaseLine + top);
     }
     
     #region TypeProperty
@@ -110,24 +76,8 @@ public class Clef : CustomizedCanvas
             Types.Bass => Sign.BassClef,
             _ => throw new ArgumentOutOfRangeException()
         };
-
-        // przesuń znak klucza na pozycję piątej linii w pięciolinii
-        SetTop(clefSign, -clefSign.BaseLine);
         
-        // //
-        //
-        // // ustaw odpowiedni tekst znaku chromatycznego
-        // var chromaticSign = clef.Sign;
-        // chromaticSign.Text = type switch
-        // {
-        //     Types.Sharp => Sign.Sharp,
-        //     Types.Flat => Sign.Flat,
-        //     Types.Natural => Sign.Natural,
-        //     _ => throw new ArgumentOutOfRangeException()
-        // };
-        //
-        // // przesuń znak chromatyczny na pozycję piątej linii w pięciolinii
-        // SetTop(chromaticSign, -chromaticSign.BaseLine);
+        SetClefTop(clefSign, type);
     }
 
     public Types Type
