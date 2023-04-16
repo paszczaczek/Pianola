@@ -38,7 +38,7 @@ public class Staff : Grid
 
         // dodaj do stackpanelu skalę
         // var scale = new CesScale {VerticalAlignment = VerticalAlignment.Top};
-        var scale = new Scale {Type = Scale.Types.Ces, VerticalAlignment = VerticalAlignment.Top};
+        var scale = new KeySignature {Key = KeySignature.Keys.CFlat, VerticalAlignment = VerticalAlignment.Top};
         stackPanel.Children.Add(scale);
     }
 
@@ -79,11 +79,11 @@ public class Staff : Grid
 
     #region ScaleTypeProperty
 
-    public static readonly DependencyProperty ScaleTypeProperty = DependencyProperty.Register(
-        nameof(ScaleType), typeof(Scale.Types), typeof(Staff),
+    public static readonly DependencyProperty ScaleKeyProperty = DependencyProperty.Register(
+        nameof(ScaleKey), typeof(KeySignature.Keys), typeof(Staff),
         new FrameworkPropertyMetadata(
             // default(Scale.Types),
-            Scale.Types.Ces,
+            KeySignature.Keys.CFlat,
             FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure,
             ScaleTypePropertyChangedCallback));
 
@@ -91,25 +91,25 @@ public class Staff : Grid
     {
         // ustawiono typ skali
         var staff = (Staff) d;
-        var scaleType = (Scale.Types) e.NewValue;
+        var scaleType = (KeySignature.Keys) e.NewValue;
 
         // usuń starą skalę i dodaj nowa właściwego typu
         var stackPanel = staff.Children.OfType<StackPanel>().First();
-        var scale = stackPanel.Children.OfType<Scale>().First();
+        var scale = stackPanel.Children.OfType<KeySignature>().First();
         stackPanel.Children.Remove(scale);
         // scale = Scale.Create(scaleType);
-        scale = new Scale
+        scale = new KeySignature
         {
-            Type = scaleType,
+            Key = scaleType,
             VerticalAlignment = VerticalAlignment.Top
         };
         stackPanel.Children.Insert(1, scale);
     }
 
-    public Scale.Types ScaleType
+    public KeySignature.Keys ScaleKey
     {
-        get => (Scale.Types) GetValue(ScaleTypeProperty);
-        set => SetValue(ScaleTypeProperty, value);
+        get => (KeySignature.Keys) GetValue(ScaleKeyProperty);
+        set => SetValue(ScaleKeyProperty, value);
     }
 
     #endregion

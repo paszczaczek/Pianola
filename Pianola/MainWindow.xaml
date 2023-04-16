@@ -6,5 +6,6 @@
         xmlns:local="clr-namespace:Pianola"
         mc:Ignorable="d"
         Title="Score" >
-    <local:ScaleVisualTest/>
+    <local:KeySignatureVisualTest/>
+    <!-- <local:ClefVisualTest /> -->
 </Window>

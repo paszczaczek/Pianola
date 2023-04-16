@@ -13,14 +13,14 @@
             <Setter Property="IsGridlinesVisible" Value="True" />
             <Setter Property="IsStaffLinesVisible" Value="True" />
         </Style>
-        <Style TargetType="local:Scale">
+        <Style TargetType="local:KeySignature">
             <Setter Property="IsGridlinesVisible" Value="True" />
             <Setter Property="IsStaffLinesVisible" Value="True" />
         </Style>
     </UserControl.Resources>
 
-    <StackPanel Orientation="Vertical">
-        <local:Staff ClefType="Treble" ScaleType="Cis" />
-        <local:Staff ClefType="Bass" ScaleType="Ces"/>
-    </StackPanel>
+    <!-- <StackPanel Orientation="Vertical"> -->
+    <!--     <local:Staff ClefType="Treble" ScaleKey="Cis" /> -->
+    <!--     <local:Staff ClefType="Bass" ScaleKey="Ces"/> -->
+    <!-- </StackPanel> -->
 </UserControl>

@@ -1,8 +1,7 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Diagnostics;
 
 namespace Pianola;
 
@@ -15,25 +14,37 @@ namespace Pianola;
 /// </remarks>
 public class Clef : CustomizedCanvas
 {
+    // typy kluczy
     public enum Types
     {
         Treble,
         Bass
     }
 
-    private Sign Sign => Children.OfType<Sign>().First();
+    // opis typów kluczy
+    private static readonly IReadOnlyDictionary<Types, Description> Descriptions = new Dictionary<Types, Description>
+    {
+        {Types.Treble, new(Sign.TrebleClef, Staff.Position.SecondLine, Pitch.Names.G, Octave.Names.OneLined)},
+        {Types.Bass, new(Sign.BassClef, Staff.Position.FourthLine, Pitch.Names.F, Octave.Names.Small)},
+    };
 
+    private record struct Description(
+        string SignText,
+        Staff.Position StaffPosition,
+        Pitch.Names PitchName,
+        Octave.Names OctaveName);
+
+    private Sign Sign => Children.OfType<Sign>().First();
 
     public Clef()
     {
         // dodaj do płótna znak klucza
-        var clefSign = new Sign {Text = Sign.TrebleClef};
+        var clefSign = new Sign();
         Children.Add(clefSign);
-        
-        // przesuń klucz na właściwą linię pięciolinii
-        SetClefTop(clefSign, Types.Treble);
 
-        
+        // ustaw typ klucza na domyślny (wiolinowy)
+        SetType(Types.Treble);
+
         // płótno ma dostosowywać swoją szerokość do szerokości klucza
         SetBinding(WidthProperty, new Binding(nameof(Width)) {Source = clefSign});
 
@@ -41,19 +52,19 @@ public class Clef : CustomizedCanvas
         Height = Staff.LinesHeight;
     }
 
-    private static void SetClefTop(Sign sign, Types types)
+    private void SetType(Types type)
     {
-        var top = types switch
-        {
-            Types.Treble => Staff.TopOf(Staff.Position.SecondLine),
-            Types.Bass => Staff.TopOf(Staff.Position.FourthLine),
-            _ => throw new ArgumentOutOfRangeException()
-        };
+        var desc = Descriptions[type];
 
-        // przesuń znak klucza na pozycję piątej linii w pięciolinii
+        // ustaw właściwy znak klucza
+        var sign = Sign;
+        sign.Text = desc.SignText;
+
+        // przesuń znak klucza na pozycję odpowiedniej linii w pięciolinii
+        var top = Staff.TopOf(desc.StaffPosition);
         SetTop(sign, -sign.BaseLine + top);
     }
-    
+
     #region TypeProperty
 
     public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
@@ -67,18 +78,8 @@ public class Clef : CustomizedCanvas
     {
         // ustawiono typ klucza
         var clef = (Clef) d;
-        var type = (Types) e.NewValue;
-
-        // ustaw odpowiedni tekst klucza
-        var clefSign = clef.Sign;
-        clefSign.Text = type switch
-        {
-            Types.Treble => Sign.TrebleClef,
-            Types.Bass => Sign.BassClef,
-            _ => throw new ArgumentOutOfRangeException()
-        };
-        
-        SetClefTop(clefSign, type);
+        var clefType = (Types) e.NewValue;
+        clef.SetType(clefType);
     }
 
     public Types Type
@@ -88,4 +89,18 @@ public class Clef : CustomizedCanvas
     }
 
     #endregion
+
+    public static Staff.Position StaffPosition(Pitch.Names pitchName, Octave.Names octaveName, Types type)
+    {
+        var clefTypeDesc = Descriptions[type];
+        var intervals =
+            (int) clefTypeDesc.PitchName + (int) clefTypeDesc.OctaveName * 7
+            - ((int) pitchName + (int) octaveName * 7);
+        // if (intervals > 0)
+            // intervals += 7;
+
+        var staffPosition = clefTypeDesc.StaffPosition + intervals;
+
+        return staffPosition;
+    }
 }

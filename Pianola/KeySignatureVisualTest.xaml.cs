@@ -2,9 +2,9 @@
 
 namespace Pianola;
 
-public partial class ScaleVisualTest : UserControl
+public partial class KeySignatureVisualTest : UserControl
 {
-    public ScaleVisualTest()
+    public KeySignatureVisualTest()
     {
         InitializeComponent();
     }

@@ -74,8 +74,8 @@
       <DependentUpon>GrandStaffVisualTester.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sign.cs" />
-    <Compile Include="ScaleVisualTest.xaml.cs">
-      <DependentUpon>ScaleVisualTest.xaml</DependentUpon>
+    <Compile Include="KeySignatureVisualTest.xaml.cs">
+      <DependentUpon>KeySignatureVisualTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Staff.cs" />
     <Compile Include="StaffLines.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="StaffVisualTest.xaml.cs">
       <DependentUpon>StaffVisualTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Scale.cs" />
+    <Compile Include="KeySignature.cs" />
     <Compile Include="VisualTest.xaml.cs">
       <DependentUpon>VisualTest.xaml</DependentUpon>
     </Compile>
@@ -107,7 +107,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ScaleVisualTest.xaml" />
+    <Page Include="KeySignatureVisualTest.xaml" />
     <Page Include="StaffLinesVisualTest.xaml" />
     <Page Include="StaffVisualTest.xaml" />
     <Page Include="VisualTest.xaml" />

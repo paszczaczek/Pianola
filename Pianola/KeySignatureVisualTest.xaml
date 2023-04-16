@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Pianola.KeySignatureVisualTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Pianola"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="CommonStyle" TargetType="Canvas">
+            <Setter Property="Margin" Value="0 33 10 0" />
+        </Style>
+        <Style TargetType="local:KeySignature" BasedOn="{StaticResource CommonStyle}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="IsGridlinesVisible" Value="True" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+        <Style TargetType="local:Clef" BasedOn="{StaticResource CommonStyle}">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="G"/>
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="D"/>
+        <TextBlock Grid.Row="0" Grid.Column="3" Text="A"/>
+        <TextBlock Grid.Row="0" Grid.Column="4" Text="E"/>
+        <TextBlock Grid.Row="0" Grid.Column="5" Text="B"/>
+        <TextBlock Grid.Row="0" Grid.Column="6" Text="FSharp"/>
+        <TextBlock Grid.Row="0" Grid.Column="7" Text="CSharp"/>
+
+        <local:Clef Grid.Row="1" Grid.Column="0" Type="Treble" />
+        <local:KeySignature Grid.Row="1" Grid.Column="1" ClefType="Treble" Key="G" />
+        <local:KeySignature Grid.Row="1" Grid.Column="2" ClefType="Treble" Key="D" />
+        <local:KeySignature Grid.Row="1" Grid.Column="3" ClefType="Treble" Key="A" />
+        <local:KeySignature Grid.Row="1" Grid.Column="4" ClefType="Treble" Key="E" />
+        <local:KeySignature Grid.Row="1" Grid.Column="5" ClefType="Treble" Key="B" />
+        <local:KeySignature Grid.Row="1" Grid.Column="6" ClefType="Treble" Key="FSharp" />
+        <local:KeySignature Grid.Row="1" Grid.Column="7" ClefType="Treble" Key="CSharp" />
+
+        <local:Clef Type="Treble" Grid.Row="2" Grid.Column="0"/>
+        <local:KeySignature Grid.Row="2" Grid.Column="1" ClefType="Treble" Key="F" />
+        <local:KeySignature Grid.Row="2" Grid.Column="2" ClefType="Treble" Key="BFlat" />
+        <local:KeySignature Grid.Row="2" Grid.Column="3" ClefType="Treble" Key="EFlat" />
+        <local:KeySignature Grid.Row="2" Grid.Column="4" ClefType="Treble" Key="AFlat" />
+        <local:KeySignature Grid.Row="2" Grid.Column="5" ClefType="Treble" Key="DFlat" />
+        <local:KeySignature Grid.Row="2" Grid.Column="6" ClefType="Treble" Key="GFlat" />
+        <local:KeySignature Grid.Row="2" Grid.Column="7" ClefType="Treble" Key="CFlat" />
+
+        <local:Clef Type="Bass" Grid.Row="3" Grid.Column="0"/>
+        <local:KeySignature Grid.Row="3" Grid.Column="1" ClefType="Bass" Key="G" />
+        <local:KeySignature Grid.Row="3" Grid.Column="2" ClefType="Bass" Key="D" />
+        <local:KeySignature Grid.Row="3" Grid.Column="3" ClefType="Bass" Key="A" />
+        <local:KeySignature Grid.Row="3" Grid.Column="4" ClefType="Bass" Key="E" />
+        <local:KeySignature Grid.Row="3" Grid.Column="5" ClefType="Bass" Key="B" />
+        <local:KeySignature Grid.Row="3" Grid.Column="6" ClefType="Bass" Key="FSharp" />
+        <local:KeySignature Grid.Row="3" Grid.Column="7" ClefType="Bass" Key="CSharp" />
+        
+        <local:Clef Type="Bass" Grid.Row="5" Grid.Column="0"/>
+        <local:KeySignature Grid.Row="5" Grid.Column="1" ClefType="Bass" Key="G" />
+        <local:KeySignature Grid.Row="5" Grid.Column="2" ClefType="Bass" Key="D" />
+        <local:KeySignature Grid.Row="5" Grid.Column="3" ClefType="Bass" Key="A" />
+        <local:KeySignature Grid.Row="5" Grid.Column="4" ClefType="Bass" Key="E" />
+        <local:KeySignature Grid.Row="5" Grid.Column="5" ClefType="Bass" Key="B" />
+        <local:KeySignature Grid.Row="5" Grid.Column="6" ClefType="Bass" Key="FSharp" />
+        <local:KeySignature Grid.Row="5" Grid.Column="7" ClefType="Bass" Key="CSharp" />
+    </Grid>
+</UserControl>
