@@ -5,8 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Pianola"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal">
-        <local:CesScale IsGridlinesVisible="True" IsStaffLinesVisible="True" Margin="2 20 2 10"/>
-        <local:CisScale IsGridlinesVisible="True" IsStaffLinesVisible="True" Margin="2 20 2 10"/>
-    </StackPanel>
+    <UserControl.Resources>
+        <Style TargetType="local:Scale">
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="IsGridlinesVisible" Value="True" />
+            <Setter Property="IsStaffLinesVisible" Value="True" />
+        </Style>
+    </UserControl.Resources>
+
+    <WrapPanel Orientation="Horizontal">
+        <local:Scale Type="Ces"/>
+        <local:Scale Type="Cis"/>
+    </WrapPanel>
 </UserControl>

@@ -45,8 +45,8 @@ public class Clef : CustomizedCanvas
     {
         var top = types switch
         {
-            Types.Treble => Staff.TopOf(Staff.Line.Second),
-            Types.Bass => Staff.TopOf(Staff.Line.Fourth),
+            Types.Treble => Staff.TopOf(Staff.Position.SecondLine),
+            Types.Bass => Staff.TopOf(Staff.Position.FourthLine),
             _ => throw new ArgumentOutOfRangeException()
         };
 

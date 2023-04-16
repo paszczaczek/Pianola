@@ -37,7 +37,8 @@ public class Staff : Grid
         stackPanel.Children.Add(clef);
 
         // dodaj do stackpanelu skalę
-        var scale = new CesScale {VerticalAlignment = VerticalAlignment.Top};
+        // var scale = new CesScale {VerticalAlignment = VerticalAlignment.Top};
+        var scale = new Scale {Type = Scale.Types.Ces, VerticalAlignment = VerticalAlignment.Top};
         stackPanel.Children.Add(scale);
     }
 
@@ -75,7 +76,7 @@ public class Staff : Grid
     }
 
     #endregion
-    
+
     #region ScaleTypeProperty
 
     public static readonly DependencyProperty ScaleTypeProperty = DependencyProperty.Register(
@@ -96,8 +97,12 @@ public class Staff : Grid
         var stackPanel = staff.Children.OfType<StackPanel>().First();
         var scale = stackPanel.Children.OfType<Scale>().First();
         stackPanel.Children.Remove(scale);
-        scale = Scale.Create(scaleType);
-        scale.VerticalAlignment = VerticalAlignment.Top;
+        // scale = Scale.Create(scaleType);
+        scale = new Scale
+        {
+            Type = scaleType,
+            VerticalAlignment = VerticalAlignment.Top
+        };
         stackPanel.Children.Insert(1, scale);
     }
 
@@ -109,22 +114,9 @@ public class Staff : Grid
 
     #endregion
 
-    public static double SpaceHeight => Sign.HeadHeight;
+    private static double SpaceHeight => Sign.HeadHeight;
 
     public static double LinesHeight => SpaceHeight * 4;
-
-    // public new static double Height => SpaceHeight * 8;
-    public static double TopOf(Line staffLine) => (int) staffLine * SpaceHeight;
-    public static double TopOf(Space staffSpace) => (int) staffSpace * SpaceHeight + SpaceHeight / 2;
-
-    public enum Line
-    {
-        Fifth = 0,
-        Fourth = 1,
-        Third = 2,
-        Second = 3,
-        First = 4
-    }
 
     public enum Space
     {
@@ -135,4 +127,29 @@ public class Staff : Grid
         Second = 2,
         First = 3
     }
+
+    public enum Position
+    {
+        FirstLineAbove = -2,
+        FirstSpaceAbove = -1,
+
+        FifthLine = 0,
+
+        FourthSpace,
+        FourthLine,
+
+        ThirdSpace,
+        ThirdLine,
+
+        SecondSpace,
+        SecondLine,
+
+        FirstSpace,
+        FirstLine,
+
+        FirsSpaceBelow,
+        FirstLineBelow
+    }
+
+    public static double TopOf(Position position) => (double) position / 2 * SpaceHeight;
 }

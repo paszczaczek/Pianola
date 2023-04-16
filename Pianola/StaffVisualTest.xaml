@@ -13,11 +13,7 @@
             <Setter Property="IsGridlinesVisible" Value="True" />
             <Setter Property="IsStaffLinesVisible" Value="True" />
         </Style>
-        <Style TargetType="local:CesScale">
-            <Setter Property="IsGridlinesVisible" Value="True" />
-            <Setter Property="IsStaffLinesVisible" Value="True" />
-        </Style>
-        <Style TargetType="local:CisScale">
+        <Style TargetType="local:Scale">
             <Setter Property="IsGridlinesVisible" Value="True" />
             <Setter Property="IsStaffLinesVisible" Value="True" />
         </Style>
