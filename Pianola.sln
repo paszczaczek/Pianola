@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pianola.WPF", "Pianola.WPF\Pianola.WPF.csproj", "{41191D02-6D98-4418-8816-A5D692EA440F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pianola", "Pianola\Pianola.csproj", "{2262CD91-50BD-4B83-8B7D-14A4CAA322A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pianola.MAUI", "Pianola.MAUI\Pianola.MAUI.csproj", "{694523F9-DD28-4257-A1C1-866BCDB90E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +17,14 @@ Global
 		{41191D02-6D98-4418-8816-A5D692EA440F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41191D02-6D98-4418-8816-A5D692EA440F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41191D02-6D98-4418-8816-A5D692EA440F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2262CD91-50BD-4B83-8B7D-14A4CAA322A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2262CD91-50BD-4B83-8B7D-14A4CAA322A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2262CD91-50BD-4B83-8B7D-14A4CAA322A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2262CD91-50BD-4B83-8B7D-14A4CAA322A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{694523F9-DD28-4257-A1C1-866BCDB90E91}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
