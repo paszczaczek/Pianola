@@ -11,6 +11,7 @@
              WidthRequest="{Binding Source={x:Reference Label}, Path=Width}"
              HeightRequest="{Binding Source={x:Reference Label}, Path=Height}">
     <Grid>
+        <!-- znak -->
         <Label x:Name="Label"
                HorizontalOptions="Start"
                VerticalOptions="Start"
@@ -19,13 +20,18 @@
                FontSize="{Binding FontSize}"
                TextColor="Black">
         </Label>
-
-        <Line HorizontalOptions="Start"
+        <!-- baseline -->
+        <Line IsVisible="{Binding AreGridlinesVisible}"
+              HorizontalOptions="Start"
               VerticalOptions="Start"
               X1="0"
               Y1="{Binding BaseLine}"
-              X2="{Binding Source={x:Reference Label}, Path=Width}" 
+              X2="{Binding Source={x:Reference Label}, Path=Width}"
               Y2="{Binding BaseLine}"
               Stroke="BlueViolet" />
+        <!-- ramka -->
+        <Border
+            IsVisible="{Binding AreGridlinesVisible}"
+            Stroke="BlueViolet" />
     </Grid>
 </ContentView>

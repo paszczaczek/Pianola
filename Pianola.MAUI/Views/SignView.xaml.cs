@@ -1,9 +1,13 @@
-﻿namespace Pianola.MAUI.Views;
+﻿using System.ComponentModel;
+
+namespace Pianola.MAUI.Views;
 
 public partial class SignView : ContentView
 {
     public string FamilyName { get; } = "feta26";
+
     public double FontSize { get; } = 48;
+
     // TODO
     // W WPF wyznaczałem HeadHeight i BaseLine na przy pomocy FormattedText(). W MaUI ma tej funkcji.
     // Przepiszę wartość wyliczoną na WPF do czasu aż dowiem się jak to wyznaczyć z fontu.
@@ -22,7 +26,6 @@ public partial class SignView : ContentView
     public SignView()
     {
         InitializeComponent();
-        
     }
 
     private static readonly BindableProperty TextProperty = BindableProperty.Create(
@@ -32,5 +35,14 @@ public partial class SignView : ContentView
     {
         get => (string) GetValue(TextProperty);
         set => SetValue(TextProperty, value);
+    }
+
+    private static readonly BindableProperty AreGridlinesVisibleProperty = BindableProperty.Create(
+        nameof(AreGridlinesVisible), typeof(bool), typeof(SignView), false);
+
+    public bool AreGridlinesVisible
+    {
+        get => (bool) GetValue(AreGridlinesVisibleProperty);
+        set => SetValue(AreGridlinesVisibleProperty, value);
     }
 }
