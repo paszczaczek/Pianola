@@ -3,11 +3,29 @@
 <!-- https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/contentview?view=net-maui-7.0 -->
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maui="clr-namespace:Pianola.MAUI"
              x:Class="Pianola.MAUI.Views.SignView"
              x:Name="This"
-             BindingContext="{x:Reference This}">
-    <Label Text="{Binding Glyph}"
-           FontFamily="{Binding FamilyName}"
-           FontSize="{Binding FontSize}"
-           TextColor="Black" />
+             BindingContext="{x:Reference This}"
+             BackgroundColor="Violet"
+             WidthRequest="{Binding Source={x:Reference Label}, Path=Width}"
+             HeightRequest="{Binding Source={x:Reference Label}, Path=Height}">
+    <Grid>
+        <Label x:Name="Label"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               Text="{Binding Text}"
+               FontFamily="{Binding FamilyName}"
+               FontSize="{Binding FontSize}"
+               TextColor="Black">
+        </Label>
+
+        <Line HorizontalOptions="Start"
+              VerticalOptions="Start"
+              X1="0"
+              Y1="{Binding BaseLine}"
+              X2="{Binding Source={x:Reference Label}, Path=Width}" 
+              Y2="{Binding BaseLine}"
+              Stroke="BlueViolet" />
+    </Grid>
 </ContentView>

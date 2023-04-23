@@ -3,15 +3,13 @@
 public partial class SignView : ContentView
 {
     public string FamilyName { get; } = "feta26";
-
     public double FontSize { get; } = 48;
-
     // TODO
-    // W WPF wyznaczałem HeadHeight na przy pomocy FormattedText().
-    // W MaUI nie wiem jak to wyznaczyć. Przepiszę wartość wyliczoną na WP;
-    // Jeśli zmienię FontSize, to HeadHeight będzie niewłaściwa.
-    // Nie wiadomo tez jak to zachowa się na androidzie.
+    // W WPF wyznaczałem HeadHeight i BaseLine na przy pomocy FormattedText(). W MaUI ma tej funkcji.
+    // Przepiszę wartość wyliczoną na WPF do czasu aż dowiem się jak to wyznaczyć z fontu.
+    // Tera, jeśli zmienię FontSize, to HeadHeight i BaseLine będą niewłaściwe.
     public double HeadHeight { get; } = 15.056000000000005;
+    public double BaseLine { get; private set; } = 60.951999999999998;
 
     public const string TrebleClef = "\x00c9";
     public const string BassClef = "\x00c7";
@@ -24,15 +22,13 @@ public partial class SignView : ContentView
     public SignView()
     {
         InitializeComponent();
-        // https://swharden.com/blog/2021-10-16-maui-graphics-measurestring/
-        // SizeF f;
-        // (Content as Label).FontFamily.Get
+        
     }
 
     private static readonly BindableProperty TextProperty = BindableProperty.Create(
-        nameof(Glyph), typeof(string), typeof(SignView), string.Empty);
+        nameof(Text), typeof(string), typeof(SignView), string.Empty);
 
-    public string Glyph
+    public string Text
     {
         get => (string) GetValue(TextProperty);
         set => SetValue(TextProperty, value);
