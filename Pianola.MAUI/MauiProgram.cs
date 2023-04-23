@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Pianola.MAUI.Views;
 
 namespace Pianola.MAUI
 {
@@ -14,9 +15,15 @@ namespace Pianola.MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            
+            // https://youtu.be/xx1mve2AQr4?t=617
+            // https://learn.microsoft.com/en-us/dotnet/architecture/maui/dependency-injection
+            builder.Services
+                .AddSingleton<MainPage>()
+                .AddSingleton<SignView>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
