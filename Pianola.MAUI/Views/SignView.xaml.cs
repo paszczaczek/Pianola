@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Pianola.MAUI.Views;
 
@@ -28,21 +30,41 @@ public partial class SignView : ContentView
         InitializeComponent();
     }
 
+    [RelayCommand]
+    void Refresh()
+    {
+    }
+
+    
+    [RelayCommand]
+    void PointerEntered()
+    {
+    }
+    
+    [RelayCommand]
+    void PointerExited()
+    {
+    }
+    
     private static readonly BindableProperty TextProperty = BindableProperty.Create(
         nameof(Text), typeof(string), typeof(SignView), string.Empty);
 
     public string Text
     {
-        get => (string) GetValue(TextProperty);
+        get => (string)GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
 
     private static readonly BindableProperty AreGridlinesVisibleProperty = BindableProperty.Create(
         nameof(AreGridlinesVisible), typeof(bool), typeof(SignView), false);
 
+    // [ObservableProperty]
+    // public bool IsRefreshing;
+
     public bool AreGridlinesVisible
     {
-        get => (bool) GetValue(AreGridlinesVisibleProperty);
+        get => (bool)GetValue(AreGridlinesVisibleProperty);
         set => SetValue(AreGridlinesVisibleProperty, value);
     }
+
 }
