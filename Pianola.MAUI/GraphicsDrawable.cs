@@ -3,6 +3,8 @@ using Font = Microsoft.Maui.Graphics.Font;
 
 namespace Pianola.MAUI;
 
+// https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/graphicsview?view=net-maui-7.0
+// https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/draw?view=net-maui-7.0
 public class GraphicsDrawable : IDrawable
 {
     public void Draw(ICanvas canvas, RectF dirtyRect)

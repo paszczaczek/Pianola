@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
+<!-- https://learn.microsoft.com/en-us/dotnet/maui/user-interface/graphics/draw?view=net-maui-7.0 -->
 <!-- https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/contentview?view=net-maui-7.0 -->
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -30,8 +31,9 @@
               Y2="{Binding BaseLine}"
               Stroke="BlueViolet" />
         <!-- ramka -->
-        <Border
-            IsVisible="{Binding AreGridlinesVisible}"
-            Stroke="BlueViolet" />
+        <!-- z tą ramką na androidzie nie widać klucza, chyba ją przykrywa -->
+        <!-- <Border -->
+        <!--     IsVisible="{Binding AreGridlinesVisible}" -->
+        <!--     Stroke="BlueViolet" /> -->
     </Grid>
 </ContentView>

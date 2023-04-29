@@ -14,6 +14,7 @@ namespace Pianola.MAUI
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("feta.ttf");
                 });
             
             // https://youtu.be/xx1mve2AQr4?t=617

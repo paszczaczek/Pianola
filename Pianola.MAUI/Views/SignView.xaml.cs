@@ -4,7 +4,7 @@ namespace Pianola.MAUI.Views;
 
 public partial class SignView : ContentView
 {
-    public string FamilyName { get; } = "feta26";
+    public string FamilyName { get; } = "feta";
 
     public double FontSize { get; } = 48;
 

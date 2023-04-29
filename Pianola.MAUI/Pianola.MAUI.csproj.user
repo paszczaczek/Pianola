@@ -3,9 +3,13 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net7.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Pixel 5 - API 33 (Android 13.0 - API 33)</ActiveDebugProfile>
-    <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
+    <ActiveDebugProfile>inkBook_Calypso_plus_API_27 (Android 8.1 - API 27)</ActiveDebugProfile>
+    <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
     <DefaultDevice>pixel_5_-_api_33</DefaultDevice>
+    <SelectedDevice>Pixel_3a_API_33_x86_64</SelectedDevice>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
+    <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
     <MauiXaml Update="App.xaml">
@@ -24,6 +28,9 @@
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Resources\Styles\Styles.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\TestPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
   </ItemGroup>
