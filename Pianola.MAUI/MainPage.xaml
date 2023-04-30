@@ -4,9 +4,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:Pianola.MAUI.Views"
              x:Class="Pianola.MAUI.MainPage">
-    <!-- <v:SignViewLabel Text="{x:Static v:SignViewLabel.TrebleClef}" -->
-    <!--             AreGridlinesVisible="True" -->
-    <!--             BackgroundColor="Cornsilk" /> -->
-    <views:SignView />
-
+    <HorizontalStackLayout>
+        <views:TrebleClefView />
+        <views:BassClefView />
+        <views:SharpView />
+        <views:FlatView />
+    </HorizontalStackLayout>
 </ContentPage>
