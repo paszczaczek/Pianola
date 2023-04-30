@@ -1,70 +1,69 @@
-﻿using System.ComponentModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Font = Microsoft.Maui.Graphics.Font;
 
 namespace Pianola.MAUI.Views;
 
 public partial class SignView : ContentView
 {
-    public string FamilyName { get; } = "feta";
-
-    public double FontSize { get; } = 48;
-
-    // TODO
-    // W WPF wyznaczałem HeadHeight i BaseLine na przy pomocy FormattedText(). W MaUI ma tej funkcji.
-    // Przepiszę wartość wyliczoną na WPF do czasu aż dowiem się jak to wyznaczyć z fontu.
-    // Tera, jeśli zmienię FontSize, to HeadHeight i BaseLine będą niewłaściwe.
-    public double HeadHeight { get; } = 15.056000000000005;
-    public double BaseLine { get; private set; } = 60.951999999999998;
-
-    public const string TrebleClef = "\x00c9";
-    public const string BassClef = "\x00c7";
-    public const string Sharp = "\x002e";
-    public const string Flat = "\x003a";
-    public const string Natural = "\x0036";
-    public const string BlackNoteHead = "\x0056";
-    public const string WhiteNoteHead = "\x0055";
-
     public SignView()
     {
         InitializeComponent();
     }
 
-    [RelayCommand]
-    void Refresh()
+    private void OnMoveHoverInteraction(object sender, TouchEventArgs e)
     {
+        var graphicsView = (GraphicsView) sender;
+        var drawable = (SignViewDrawable) graphicsView.Drawable;
     }
+}
 
-    
-    [RelayCommand]
-    void PointerEntered()
+
+public class SignViewDrawable : IDrawable
+{
+    private readonly Font _font = new("feta26");
+    private const float FontSize = 48;
+
+    // private const float BaseLine = 60.951999999999998f;
+    private const float BaseLine = 65.663333333333341f;
+
+    private const string TrebleClef = "\x00c9";
+    public const string BassClef = "\x00c7";
+    public const string Sharp = "\x002e";
+    public const string Flat = "\x003a";
+    public const string Natural = "\x0036";
+    private const string BlackNoteHead = "\x0056";
+    private const string WhiteNoteHead = "\x0055";
+
+    public GraphicsView GraphicsView { get; set; }
+
+    public void Draw(ICanvas canvas, RectF dirtyRect)
     {
+        // const string sign = SignViewLabel.BlackNoteHead;
+        const string sign = TrebleClef + BlackNoteHead + WhiteNoteHead;
+
+        canvas.FontColor = Colors.Black;
+        canvas.Font = _font;
+        canvas.FontSize = FontSize; // - 1; // NOTE: reduce to prevent clipping
+        canvas.DrawString(
+            value: sign,
+            x: dirtyRect.X,
+            y: dirtyRect.Y, // - BaseLine,
+            width: dirtyRect.Width,
+            height: dirtyRect.Height,
+            horizontalAlignment: HorizontalAlignment.Left,
+            verticalAlignment: VerticalAlignment.Top,
+            textFlow: TextFlow.OverflowBounds,
+            lineSpacingAdjustment: 0);
+
+        canvas.StrokeColor = Colors.Violet;
+        canvas.DrawLine(0, BaseLine, dirtyRect.Width, BaseLine);
+
+        canvas.StrokeColor = Colors.Black;
+        var stringSize = canvas.GetStringSize(sign, _font, FontSize);
+        canvas.DrawRectangle(0, 0, stringSize.Width, stringSize.Height);
+       
+        GraphicsView.WidthRequest = stringSize.Width;
+        GraphicsView.HeightRequest = stringSize.Height;
     }
-    
-    [RelayCommand]
-    void PointerExited()
-    {
-    }
-    
-    private static readonly BindableProperty TextProperty = BindableProperty.Create(
-        nameof(Text), typeof(string), typeof(SignView), string.Empty);
-
-    public string Text
-    {
-        get => (string)GetValue(TextProperty);
-        set => SetValue(TextProperty, value);
-    }
-
-    private static readonly BindableProperty AreGridlinesVisibleProperty = BindableProperty.Create(
-        nameof(AreGridlinesVisible), typeof(bool), typeof(SignView), false);
-
-    // [ObservableProperty]
-    // public bool IsRefreshing;
-
-    public bool AreGridlinesVisible
-    {
-        get => (bool)GetValue(AreGridlinesVisibleProperty);
-        set => SetValue(AreGridlinesVisibleProperty, value);
-    }
-
 }

@@ -2,9 +2,11 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:v="clr-namespace:Pianola.MAUI.Views"
+             xmlns:views="clr-namespace:Pianola.MAUI.Views"
              x:Class="Pianola.MAUI.MainPage">
-    <v:SignView Text="{x:Static v:SignView.TrebleClef}"
-                AreGridlinesVisible="True"
-                BackgroundColor="Cornsilk" />
+    <!-- <v:SignViewLabel Text="{x:Static v:SignViewLabel.TrebleClef}" -->
+    <!--             AreGridlinesVisible="True" -->
+    <!--             BackgroundColor="Cornsilk" /> -->
+    <views:SignView />
+
 </ContentPage>

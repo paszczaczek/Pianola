@@ -11,7 +11,7 @@ public class GraphicsDrawable : IDrawable
     {
         // define and measure a string
         PointF stringLocation = new(0, 0);
-        const string stringText = SignView.TrebleClef;
+        const string stringText = SignViewLabel.TrebleClef;
         Font font = new("feta26");
         const float fontSize = 48;
         var stringSize = canvas.GetStringSize(stringText, font, fontSize);
