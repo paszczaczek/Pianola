@@ -6,6 +6,7 @@
              x:Class="Pianola.MAUI.Views.FlatView">
     <GraphicsView x:Name="GraphicsView"
                   HorizontalOptions="Start" VerticalOptions="Start"
+                  StartInteraction="OnStartInteraction"
                   WidthRequest="1" HeightRequest="1">
         <GraphicsView.Drawable>
             <views:FlatDrawable GraphicsView="{x:Reference GraphicsView}" />

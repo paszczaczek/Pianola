@@ -6,11 +6,17 @@ public partial class SharpView : ContentView
     {
         InitializeComponent();
     }
+
+    private void OnStartInteraction(object sender, TouchEventArgs e)
+    {
+        var graphicsView = (GraphicsView) sender;
+        graphicsView.Invalidate();
+    }
 }
 
 public class SharpDrawable : SignDrawable
 {
-    public SharpDrawable() : base("\x002e", -44.5f)
+    public SharpDrawable() : base("\x002e", -49)
     {
     }
 }

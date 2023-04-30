@@ -12,11 +12,17 @@ public partial class FlatView : ContentView
     {
         InitializeComponent();
     }
+
+    private void OnStartInteraction(object sender, TouchEventArgs e)
+    {
+        var graphicsView = (GraphicsView)sender;
+        graphicsView.Invalidate();
+    }
 }
 
 public class FlatDrawable : SignDrawable
 {
-    public FlatDrawable() : base("\x003a", -43)
+    public FlatDrawable() : base("\x003a", -45)
     {
     }
 }

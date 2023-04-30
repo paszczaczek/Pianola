@@ -9,5 +9,6 @@
         <views:BassClefView />
         <views:SharpView />
         <views:FlatView />
+        <views:NaturalView />
     </HorizontalStackLayout>
 </ContentPage>
