@@ -5,10 +5,10 @@
              xmlns:views="clr-namespace:Pianola.MAUI.Views"
              x:Class="Pianola.MAUI.MainPage">
     <HorizontalStackLayout>
-        <views:TrebleClefView />
-        <views:BassClefView />
-        <views:SharpView />
-        <views:FlatView />
-        <views:NaturalView />
+        <views:SignView Sign="{x:Static views:Sign.TrebleClef}" />
+        <views:SignView Sign="{x:Static views:Sign.BassClef}" />
+        <views:SignView Sign="{x:Static views:Sign.Sharp}" />
+        <views:SignView Sign="{x:Static views:Sign.Flat}" />
+        <views:SignView Sign="{x:Static views:Sign.Natural}" />
     </HorizontalStackLayout>
 </ContentPage>

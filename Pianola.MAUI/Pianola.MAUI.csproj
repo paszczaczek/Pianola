@@ -60,16 +60,4 @@
 	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Views\TestPage.xaml.cs">
-	    <DependentUpon>TestPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\TestPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>
