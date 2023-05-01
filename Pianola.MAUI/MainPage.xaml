@@ -3,12 +3,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:Pianola.MAUI.Views"
+             xmlns:models="clr-namespace:Pianola.MAUI.Models"
              x:Class="Pianola.MAUI.MainPage">
     <HorizontalStackLayout>
-        <views:SignView Sign="{x:Static views:Sign.TrebleClef}" />
-        <views:SignView Sign="{x:Static views:Sign.BassClef}" />
-        <views:SignView Sign="{x:Static views:Sign.Sharp}" />
-        <views:SignView Sign="{x:Static views:Sign.Flat}" />
-        <views:SignView Sign="{x:Static views:Sign.Natural}" />
+        <views:SignView Sign="{x:Static models:Sign.TrebleClef}" />
+        <views:SignView Sign="{x:Static models:Sign.BassClef}" />
+        <views:SignView Sign="{x:Static models:Sign.Sharp}" />
+        <views:SignView Sign="{x:Static models:Sign.Flat}" />
+        <views:SignView Sign="{x:Static models:Sign.Natural}" />
     </HorizontalStackLayout>
 </ContentPage>

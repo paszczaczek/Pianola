@@ -1,4 +1,5 @@
-﻿using Font = Microsoft.Maui.Graphics.Font;
+﻿using Pianola.MAUI.Models;
+using Font = Microsoft.Maui.Graphics.Font;
 
 namespace Pianola.MAUI.Views;
 
@@ -17,24 +18,13 @@ public partial class SignView //: ContentView
     }
 
     public static readonly BindableProperty SignProperty = BindableProperty.Create(
-        nameof(Sign), typeof(Sign), typeof(SignView), null, BindingMode.Default);
+        nameof(Sign), typeof(Sign), typeof(SignView));
 
     private void OnStartInteraction(object sender, TouchEventArgs e)
     {
         // var graphicsView = (GraphicsView) sender;
         // graphicsView.Invalidate();
     }
-}
-
-public enum Sign
-{
-    TrebleClef,
-    BassClef,
-    Sharp,
-    Flat,
-    Natural,
-    BlackNoteHead,
-    WhiteNoteHead
 }
 
 public class SignDrawable : BindableObject, IDrawable
@@ -53,9 +43,13 @@ public class SignDrawable : BindableObject, IDrawable
     }
 
     public static readonly BindableProperty SignProperty = BindableProperty.Create(
-        nameof(Sign), typeof(Sign), typeof(SignDrawable), defaultValue: null, BindingMode.Default,
-        validateValue: null,
-        propertyChanged: (bindable, _, _) => ((SignDrawable) bindable).GraphicsView.Invalidate());
+        nameof(Sign), typeof(Sign), typeof(SignDrawable), 
+        defaultValue: null, BindingMode.Default, validateValue: null,
+        propertyChanged: (bindable, _, _) =>
+        {
+            var signDrawable = (SignDrawable) bindable;
+            signDrawable.GraphicsView.Invalidate();
+        });
 
     private (string text, double moveUp) Glyph =>
         Sign switch
