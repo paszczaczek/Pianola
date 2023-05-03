@@ -5,11 +5,12 @@
              xmlns:views="clr-namespace:Pianola.MAUI.Views"
              xmlns:models="clr-namespace:Pianola.MAUI.Models"
              x:Class="Pianola.MAUI.MainPage">
-    <HorizontalStackLayout>
-        <views:SignView Sign="{x:Static models:Sign.TrebleClef}" />
-        <views:SignView Sign="{x:Static models:Sign.BassClef}" />
-        <views:SignView Sign="{x:Static models:Sign.Sharp}" />
-        <views:SignView Sign="{x:Static models:Sign.Flat}" />
-        <views:SignView Sign="{x:Static models:Sign.Natural}" />
-    </HorizontalStackLayout>
+    <!-- <HorizontalStackLayout> -->
+    <!--     <views:SignView Sign="{x:Static models:Sign.TrebleClef}" /> -->
+    <!--     <views:SignView Sign="{x:Static models:Sign.BassClef}" /> -->
+    <!--     <views:SignView Sign="{x:Static models:Sign.Sharp}" /> -->
+    <!--     <views:SignView Sign="{x:Static models:Sign.Flat}" /> -->
+    <!--     <views:SignView Sign="{x:Static models:Sign.Natural}" /> -->
+    <!-- </HorizontalStackLayout> -->
+    <views:ScoreView />
 </ContentPage>
