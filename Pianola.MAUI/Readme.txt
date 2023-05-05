@@ -1,3 +1,6 @@
 ﻿inkBook Calypso plus
 * specyfikacja techniczna: https://inkbook.pl/calypso-plus-black
 * zatrzymanie aplikacji: Ustawienia | Więcej ustawień | Manager aplikacji | Pianola MAUI | ...
+
+
+https://askxammy.com/getting-started-with-flexlayout-properties-behavior/ 
