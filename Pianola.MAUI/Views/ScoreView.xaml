@@ -7,10 +7,12 @@
         <VerticalStackLayout x:Name="Staffs"
                              HorizontalOptions="Fill" />
         <Grid ColumnDefinitions="Auto, *">
-            <VerticalStackLayout x:Name="SystemsBeginnings" Grid.Column="0" WidthRequest="100" />
+            <VerticalStackLayout x:Name="SystemsBeginnings"
+                                 Grid.Column="0" />
             <FlexLayout x:Name="Measures"
                         Grid.Column="1"
-                        AlignContent="Start" JustifyContent="Start" Wrap="Wrap"
+                        AlignContent="Start" 
+                        Wrap="Wrap"
                         SizeChanged="Measures_OnSizeChanged">
             </FlexLayout>
         </Grid>

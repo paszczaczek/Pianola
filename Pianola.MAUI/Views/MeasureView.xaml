@@ -6,7 +6,7 @@
               x:Class="Pianola.MAUI.Views.MeasureView"
               x:Name="GraphicsView"
               EndInteraction="OnEndInteraction"
-              HeightRequest="{x:Static drawables:StaffsDrawable.Height}"
+              HeightRequest="{x:Static drawables:StaffDrawable.Height}"
               WidthRequest="1">
     <GraphicsView.Drawable>
         <drawables:MeasureDrawable GraphicsView="{x:Reference GraphicsView}"/>

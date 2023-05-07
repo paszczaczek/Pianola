@@ -1,17 +1,20 @@
 ﻿namespace Pianola.MAUI.Drawables;
 
-public class StaffsDrawable : IDrawable
+public class StaffDrawable : IDrawable
 {
     private const float VerticalStaffMargin = 30; // TODO
+
     private const float SpaceHeight = 10; // TODO
+    private const double StaffHeight = SpaceHeight * 5;
 
-    public const double Height =
-        VerticalStaffMargin +
-        5 * SpaceHeight +
-        VerticalStaffMargin +
-        5 * SpaceHeight +
-        VerticalStaffMargin;
+    private const double TrebleStaffTop = VerticalStaffMargin;
+    private const double BassStaffTop = TrebleStaffTop + StaffHeight + VerticalStaffMargin;
+    
+    public const double Height = BassStaffTop + StaffHeight + VerticalStaffMargin;
 
+    public static double TrebleStaffLineTop(int line) => TrebleStaffTop + SpaceHeight * (5 - line);
+    public static double BassStaffLineTop(int line) => BassStaffTop + SpaceHeight * (5 - line);
+    
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         var trebleStaffBounds = DrawStaff(canvas, dirtyRect, VerticalStaffMargin);

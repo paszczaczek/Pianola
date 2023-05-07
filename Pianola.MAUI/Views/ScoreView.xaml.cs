@@ -31,6 +31,11 @@ public partial class ScoreView //: ContentView
 
     private void Measures_OnSizeChanged(object sender, EventArgs e)
     {
+        // Przy maksymalizacji okna ten event jest inaczej wołany niż przy zmianie rozmiaru okna:
+        // - przy zmianie rozmiaru okna event wołany jest _po_ wyliczeniu nowych położeń elementów, 
+        // - przy maksymalizacji okna _przed_ wyliczeniem nowych położeń elementów.
+        // Powoduje to, że przy maksymalizacji okna początki systemów (klucze, sygnatury przykluczowe, itd)
+        // nie są uaktualniane/
         AccomodateScoreToItems();
     }
 }

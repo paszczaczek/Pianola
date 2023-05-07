@@ -11,14 +11,14 @@ public partial class SignView //: ContentView
         InitializeComponent();
     }
 
-    public Sign Sign
+    public SignModel Sign
     {
-        get => (Sign) GetValue(SignProperty);
+        get => (SignModel) GetValue(SignProperty);
         set => SetValue(SignProperty, value);
     }
 
     public static readonly BindableProperty SignProperty = BindableProperty.Create(
-        nameof(Sign), typeof(Sign), typeof(SignView));
+        nameof(Sign), typeof(SignModel), typeof(SignView));
 
     private void OnStartInteraction(object sender, TouchEventArgs e)
     {
@@ -36,14 +36,14 @@ public class SignDrawable : BindableObject, IDrawable
 
     public GraphicsView GraphicsView { get; set; }
 
-    public Sign Sign
+    public SignModel Sign
     {
-        get => (Sign) GetValue(SignProperty);
+        get => (SignModel) GetValue(SignProperty);
         set => SetValue(SignProperty, value);
     }
 
     public static readonly BindableProperty SignProperty = BindableProperty.Create(
-        nameof(Sign), typeof(Sign), typeof(SignDrawable), 
+        nameof(Sign), typeof(SignModel), typeof(SignDrawable), 
         defaultValue: null, BindingMode.Default, validateValue: null,
         propertyChanged: (bindable, _, _) =>
         {
@@ -54,13 +54,13 @@ public class SignDrawable : BindableObject, IDrawable
     private (string text, double moveUp) Glyph =>
         Sign switch
         {
-            Sign.TrebleClef => ("\x00c9", 7),
-            Sign.BassClef => ("\x00c7", 55),
-            Sign.Sharp => ("\x002e", 49),
-            Sign.Flat => ("\x003a", 45),
-            Sign.Natural => ("\x0036", 49),
-            Sign.BlackNoteHead => ("\x0056", 0 /*TODO*/),
-            Sign.WhiteNoteHead => ("\x0055", 0 /*TODO*/),
+            SignModel.TrebleClef => ("\x00c9", 7),
+            SignModel.BassClef => ("\x00c7", 55),
+            SignModel.Sharp => ("\x002e", 49),
+            SignModel.Flat => ("\x003a", 45),
+            SignModel.Natural => ("\x0036", 49),
+            SignModel.BlackNoteHead => ("\x0056", 0 /*TODO*/),
+            SignModel.WhiteNoteHead => ("\x0055", 0 /*TODO*/),
             _ => throw new ArgumentOutOfRangeException()
         };
 

@@ -4,6 +4,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:drawables="using:Pianola.MAUI.Drawables"
              x:Class="Pianola.MAUI.Views.SystemBeginning"
-             HeightRequest="{x:Static drawables:StaffsDrawable.Height}">
-    <Label FontSize="11">SystemBeginning</Label>
+             HeightRequest="{x:Static drawables:StaffDrawable.Height}"
+             SizeChanged="OnSizeChanged">
 </HorizontalStackLayout>

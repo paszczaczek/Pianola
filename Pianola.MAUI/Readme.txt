@@ -2,5 +2,6 @@
 * specyfikacja techniczna: https://inkbook.pl/calypso-plus-black
 * zatrzymanie aplikacji: Ustawienia | Więcej ustawień | Manager aplikacji | Pianola MAUI | ...
 
+https://dictionary.onmusic.org/
 
 https://askxammy.com/getting-started-with-flexlayout-properties-behavior/ 
