@@ -25,19 +25,21 @@ public class StaffDrawable : IDrawable
         canvas.DrawBounds(bounds);
     }
 
-    private static RectF DrawStaff(ICanvas canvas, RectF dirtyRect, float y)
+    private static RectF DrawStaff(ICanvas canvas, RectF dirtyRect, float top)
     {
         canvas.StrokeColor = Colors.Black;
+        // canvas.StrokeSize = 1;
 
+        var lineY = dirtyRect.Y = top;
         const int linesInStaff = 5;
         for (var i = 0; i < linesInStaff; i++)
         {
-            canvas.DrawLine(dirtyRect.X, dirtyRect.Y + y, dirtyRect.Width, y);
-            y += SpaceHeight;
+            canvas.DrawLine(x1: dirtyRect.X, y1: lineY, x2: dirtyRect.Width, y2: lineY);
+            lineY += SpaceHeight;
         }
 
         var bounds = dirtyRect;
-        bounds.Bottom = y;
+        bounds.Bottom = lineY;
         return bounds;
     }
 }
