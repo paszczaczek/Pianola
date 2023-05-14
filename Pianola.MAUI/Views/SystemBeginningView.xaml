@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<HorizontalStackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:drawables="using:Pianola.MAUI.Drawables"
+                       xmlns:views="clr-namespace:Pianola.MAUI.Views"
+                       x:Class="Pianola.MAUI.Views.SystemBeginningView"
+                       x:Name="SystemBeginnings"
+                       HeightRequest="{x:Static drawables:StaffDrawable.Height}"
+                       SizeChanged="OnSizeChanged">
+</HorizontalStackLayout>

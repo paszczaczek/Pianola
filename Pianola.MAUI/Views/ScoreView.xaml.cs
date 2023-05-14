@@ -1,9 +1,13 @@
-﻿using Pianola.MAUI.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Pianola.MAUI.Models;
 
 namespace Pianola.MAUI.Views;
 
+[ObservableObject]
 public partial class ScoreView //: ContentView
 {
+    [ObservableProperty] private KeySignature _keySignature = new KeySignature(0, ChromaticSign.Sharp);
+
     public ScoreView()
     {
         InitializeComponent();
@@ -13,16 +17,22 @@ public partial class ScoreView //: ContentView
 
     private void AccomodateScoreToItems()
     {
-        AccomodateScoreLayout<Staffs>(Staffs);
-        AccomodateScoreLayout<SystemBeginning>(SystemsBeginnings);
+        AccomodateScoreLayout(Staffs, () => new Staffs());
+        AccomodateScoreLayout(SystemsBeginnings, () =>
+        {
+            var sbv = new SystemBeginningView();
+            sbv.SetBinding(SystemBeginningView.KeySignatureProperty,
+                new Binding(nameof(Models.KeySignature)) {Source = this});
+            return sbv;
+        });
 
-        void AccomodateScoreLayout<TView>(Layout layout) where TView : View, new()
+        void AccomodateScoreLayout<TView>(Layout layout, Func<TView> createView) where TView : View, new()
         {
             var systemCount = Measures.Children.Cast<View>().GroupBy(v => v.Y).Count();
             if (layout.Count == systemCount) return;
             if (layout.Count < systemCount)
                 for (var i = layout.Count; i < systemCount; i++)
-                    layout.Add(new TView());
+                    layout.Add(createView());
             if (layout.Count == systemCount) return;
             for (var i = systemCount; i < layout.Count; i++)
                 layout.RemoveAt(0);
@@ -37,5 +47,10 @@ public partial class ScoreView //: ContentView
         // Powoduje to, że przy maksymalizacji okna początki systemów (klucze, sygnatury przykluczowe, itd)
         // nie są uaktualniane/
         AccomodateScoreToItems();
+    }
+
+    private void OnClicked(object sender, EventArgs e)
+    {
+        // nie działa, hmm...
     }
 }

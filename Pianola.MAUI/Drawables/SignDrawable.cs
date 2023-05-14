@@ -13,7 +13,10 @@ public static class SignDrawable
         new Dictionary<SignModel, SignInfo>
         {
             {SignModel.TrebleClef, new(code: "\x00c9", ascender: 1249, descender: 654)},
-            {SignModel.BassClef, new(code: "\x00c7", ascender: 261, descender: 511)}
+            {SignModel.BassClef, new(code: "\x00c7", ascender: 261, descender: 511)},
+            {SignModel.Sharp, new(code: "\x002e", ascender: 375, descender: 375)},
+            {SignModel.Flat, new(code: "\x003a", ascender: 470, descender: 157)},
+            {SignModel.Natural, new(code: "\x0036", ascender: 381, descender: 381)},
         };
 
     public static void Draw(ICanvas canvas, double top, SignModel signModel)

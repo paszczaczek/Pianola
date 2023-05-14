@@ -3,6 +3,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Pianola.MAUI.Views.ScoreView">
+    <ContentView.GestureRecognizers>
+        <ClickGestureRecognizer Clicked="OnClicked" />
+    </ContentView.GestureRecognizers>
     <Grid>
         <VerticalStackLayout x:Name="Staffs"
                              HorizontalOptions="Fill" />
@@ -11,7 +14,7 @@
                                  Grid.Column="0" />
             <FlexLayout x:Name="Measures"
                         Grid.Column="1"
-                        AlignContent="Start" 
+                        AlignContent="Start"
                         Wrap="Wrap"
                         SizeChanged="Measures_OnSizeChanged">
             </FlexLayout>
