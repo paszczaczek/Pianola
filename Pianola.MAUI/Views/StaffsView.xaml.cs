@@ -1,8 +1,8 @@
 ﻿namespace Pianola.MAUI.Views;
 
-public partial class Staffs : GraphicsView
+public partial class StaffsView : GraphicsView
 {
-    public Staffs()
+    public StaffsView()
     {
         InitializeComponent();
     }

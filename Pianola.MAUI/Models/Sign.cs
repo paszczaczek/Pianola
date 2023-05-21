@@ -1,6 +1,6 @@
 ﻿namespace Pianola.MAUI.Models;
 
-public enum SignModel
+public enum Sign
 {
     TrebleClef,
     BassClef,

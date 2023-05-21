@@ -6,7 +6,7 @@ namespace Pianola.MAUI.Views;
 [ObservableObject]
 public partial class ScoreView //: ContentView
 {
-    [ObservableProperty] private KeySignature _keySignature = new KeySignature(0, ChromaticSign.Sharp);
+    [ObservableProperty] private KeySignature _keySignature = new KeySignature(7, ChromaticSign.Flat);
 
     public ScoreView()
     {
@@ -17,22 +17,23 @@ public partial class ScoreView //: ContentView
 
     private void AccomodateScoreToItems()
     {
-        AccomodateScoreLayout(Staffs, () => new Staffs());
-        AccomodateScoreLayout(SystemsBeginnings, () =>
+        AccomodateScoreLayout(Staffs, () => new StaffsView());
+        AccomodateScoreLayout(SystemsBeginnings, viewConstructor: () =>
         {
             var sbv = new SystemBeginningView();
-            sbv.SetBinding(SystemBeginningView.KeySignatureProperty,
+            sbv.SetBinding(
+                SystemBeginningView.KeySignatureProperty,
                 new Binding(nameof(Models.KeySignature)) {Source = this});
             return sbv;
         });
 
-        void AccomodateScoreLayout<TView>(Layout layout, Func<TView> createView) where TView : View, new()
+        void AccomodateScoreLayout<TView>(Layout layout, Func<TView> viewConstructor) where TView : View, new()
         {
             var systemCount = Measures.Children.Cast<View>().GroupBy(v => v.Y).Count();
             if (layout.Count == systemCount) return;
             if (layout.Count < systemCount)
                 for (var i = layout.Count; i < systemCount; i++)
-                    layout.Add(createView());
+                    layout.Add(viewConstructor());
             if (layout.Count == systemCount) return;
             for (var i = systemCount; i < layout.Count; i++)
                 layout.RemoveAt(0);

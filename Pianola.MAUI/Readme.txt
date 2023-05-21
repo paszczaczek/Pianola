@@ -4,4 +4,5 @@
 
 https://dictionary.onmusic.org/
 
+https://pl.wikipedia.org/wiki/Klawiatura_muzyczna#/media/Plik:Klaviatur-wIKI.jpg
 https://askxammy.com/getting-started-with-flexlayout-properties-behavior/ 

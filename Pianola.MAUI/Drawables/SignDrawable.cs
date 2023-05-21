@@ -9,36 +9,26 @@ public static class SignDrawable
     private const float FontBaseline = 67.5f;
     private const float FontSize = 48;
 
-    private static readonly IReadOnlyDictionary<SignModel, SignInfo> FontSignInfos =
-        new Dictionary<SignModel, SignInfo>
+    private static readonly IReadOnlyDictionary<Sign, SignInfo> FontSignInfos =
+        new Dictionary<Sign, SignInfo>
         {
-            {SignModel.TrebleClef, new(code: "\x00c9", ascender: 1249, descender: 654)},
-            {SignModel.BassClef, new(code: "\x00c7", ascender: 261, descender: 511)},
-            {SignModel.Sharp, new(code: "\x002e", ascender: 375, descender: 375)},
-            {SignModel.Flat, new(code: "\x003a", ascender: 470, descender: 157)},
-            {SignModel.Natural, new(code: "\x0036", ascender: 381, descender: 381)},
+            {Sign.TrebleClef, new(code: "\x00c9", ascender: 1249, descender: 654)},
+            {Sign.BassClef, new(code: "\x00c7", ascender: 261, descender: 511)},
+            {Sign.Sharp, new(code: "\x002e", ascender: 375, descender: 375)},
+            {Sign.Flat, new(code: "\x003a", ascender: 470, descender: 157)},
+            {Sign.Natural, new(code: "\x0036", ascender: 381, descender: 381)},
         };
 
-    public static void Draw(ICanvas canvas, double top, SignModel signModel)
+    public static Rect Draw(ICanvas canvas, Point baselineLocation, Sign sign, bool calculateBoundsOnly = false)
     {
-        var location = new Point(0, top);
-        Draw(canvas, location, signModel);
-    }
-
-    private static void Draw(ICanvas canvas, Point location, SignModel signModel)
-    {
-        var signInfo = FontSignInfos[signModel];
-        var bounds = CalculateBounds(canvas, location, signInfo);
+        var signInfo = FontSignInfos[sign];
+        var bounds = CalculateBounds(canvas, baselineLocation, signInfo);
+        if (calculateBoundsOnly) return bounds;
+        
         canvas.DrawBounds(bounds);
-        DrawBaseline(canvas, bounds, location);
-        DrawSign(canvas, location, signInfo);
-    }
-
-    public static Rect CalculateBounds(ICanvas canvas, double top, SignModel signModel)
-    {
-        var signInfo = FontSignInfos[signModel];
-        var location = new Point(0, top);
-        return CalculateBounds(canvas, location, signInfo);
+        DrawBaseline(canvas, bounds, baselineLocation);
+        DrawSign(canvas, baselineLocation, signInfo);
+        return bounds;
     }
 
     private static Rect CalculateBounds(ICanvas canvas, Point location, SignInfo signInfo)
@@ -56,8 +46,8 @@ public static class SignDrawable
 
     private static void DrawBaseline(ICanvas canvas, RectF bounds, PointF location)
     {
-        canvas.StrokeColor = Colors.Violet;
-        canvas.DrawLine(0, location.Y, bounds.Width, location.Y);
+        canvas.StrokeColor = Colors.BlueViolet;
+        canvas.DrawLine(bounds.X, location.Y, bounds.X + bounds.Width, location.Y);
     }
 
     private static void DrawSign(ICanvas canvas, PointF location, SignInfo signInfo)

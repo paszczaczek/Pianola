@@ -1,37 +1,60 @@
 ﻿using Pianola.MAUI.Models;
+using Pianola.MAUI.Views;
 
 namespace Pianola.MAUI.Drawables;
 
-public class ClefDrawable : IDrawable
+public class ClefDrawable : ViewResizer<ClefView>, IDrawable
 {
-    private const int TrebleClefLocatesG4OnLine = 2;
-    private const int BassClefLocatesF3OnLine = 4;
+    // definicja kluczy
+    public record ClefDefinition(Pitch Pitch, Octave Octave, Staff.Position StaffPosition);
 
-    private static readonly double TrebleClefBaseline = StaffDrawable.TrebleStaffLineTop(TrebleClefLocatesG4OnLine);
-    private static readonly double BassClefBaseline = StaffDrawable.BassStaffLineTop(BassClefLocatesF3OnLine);
-
-    private Rect? _trebleClefBounds; 
-    private Rect? _bassClefBounds; 
-    
-    public GraphicsView GraphicsView { get; set; }
+    public static readonly IReadOnlyDictionary<Clef, ClefDefinition> ClefDefinitions =
+        new Dictionary<Clef, ClefDefinition>
+        {
+            {Clef.Treble, new(Pitch.G, Octave.O4, Staff.Position.Line.Second)},
+            {Clef.Bass, new(Pitch.F, Octave.O3, Staff.Position.Line.Fourth)}
+        };
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        if (Resized(canvas)) return;
-
-        SignDrawable.Draw(canvas, TrebleClefBaseline, SignModel.TrebleClef);
-        SignDrawable.Draw(canvas, BassClefBaseline, SignModel.BassClef);
+        if (ResizeView(canvas, dirtyRect)) return;
+        DrawClefs(canvas);
     }
 
-    private bool Resized(ICanvas canvas)
+    protected override Rect CalculateBounds(ICanvas canvas, RectF dirtyRect)
     {
-        _trebleClefBounds ??= SignDrawable.CalculateBounds(canvas, TrebleClefBaseline, SignModel.TrebleClef);
-        _bassClefBounds ??= SignDrawable.CalculateBounds(canvas, BassClefBaseline, SignModel.BassClef);
+        return DrawClefs(canvas, calculateBoundsOnly: true);
+    }
 
-        var width = Math.Max(_trebleClefBounds.Value.Width, _bassClefBounds.Value.Width);
-        var resized = Math.Abs(GraphicsView.WidthRequest - width) >= 0.01;
-        if (resized) GraphicsView.WidthRequest = width + 0;
+    private static Rect DrawClefs(ICanvas canvas, bool calculateBoundsOnly = false)
+    {
+        var bounds = new Rect();
 
-        return resized;
+        // trzeba narysować dwa klucze
+        foreach (var clef in new[] {Clef.Treble, Clef.Bass})
+        {
+            // na której linii narysować klucz?
+            var (_, _, clefStaffPosition) = ClefDefinitions[clef];
+            
+            // jaka to będzie współrzędna y?
+            var clefBaseLineY = StaffDrawable.StaffPositionToY(clefStaffPosition, clef);
+            var clefLocation = new Point(0, clefBaseLineY);
+            
+            // jakiego znaku trzeba użyć do narysowania klucza?
+            var clefSign = clef switch
+            {
+                Clef.Treble => Sign.TrebleClef,
+                Clef.Bass => Sign.BassClef,
+                _ => throw new ArgumentOutOfRangeException(nameof(clef), clef, "")
+            };
+            
+            // narysuj klucz
+            var clefBounds = SignDrawable.Draw(canvas, clefLocation, clefSign, calculateBoundsOnly);
+            
+            // wyznacz granice obu kluczy
+            bounds = bounds.Union(clefBounds);
+        }
+
+        return bounds;
     }
 }

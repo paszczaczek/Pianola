@@ -5,12 +5,12 @@
              xmlns:maui="clr-namespace:Pianola.MAUI"
              xmlns:drawables="clr-namespace:Pianola.MAUI.Drawables"
              x:Class="Pianola.MAUI.Views.KeySignatureView"
-             x:Name="GraphicsView"
+             x:Name="This"
              StartInteraction="OnStartInteraction"
              VerticalOptions="Start"
              WidthRequest="1" 
              HeightRequest="{x:Static drawables:StaffDrawable.Height}">
     <GraphicsView.Drawable>
-        <drawables:KeySignatureDrawable GraphicsView="{x:Reference GraphicsView}"/>
+        <drawables:KeySignatureStaffDrawable View="{x:Reference This}"/>
     </GraphicsView.Drawable>
 </GraphicsView>

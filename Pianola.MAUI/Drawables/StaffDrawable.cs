@@ -1,4 +1,6 @@
-﻿namespace Pianola.MAUI.Drawables;
+﻿using Pianola.MAUI.Models;
+
+namespace Pianola.MAUI.Drawables;
 
 public class StaffDrawable : IDrawable
 {
@@ -9,12 +11,25 @@ public class StaffDrawable : IDrawable
 
     private const double TrebleStaffTop = VerticalStaffMargin;
     private const double BassStaffTop = TrebleStaffTop + StaffHeight + VerticalStaffMargin;
-    
+
     public const double Height = BassStaffTop + StaffHeight + VerticalStaffMargin;
 
-    public static double TrebleStaffLineTop(int line) => TrebleStaffTop + SpaceHeight * (5 - line);
+    public static double StaffPositionToY(Staff.Position staffPosition, Clef clef)
+    {
+        var staffPositionY = SpaceHeight * (double) staffPosition.Number / 2;
+        var clefTop = clef switch
+        {
+            Clef.Treble => TrebleStaffTop,
+            Clef.Bass => BassStaffTop,
+            _ => throw new ArgumentOutOfRangeException(nameof(clef), clef, null)
+        };
+        var top = clefTop + staffPositionY;
+        return top;
+    }
+
+    // public static double TrebleStaffLineTop(int line) => TrebleStaffTop + SpaceHeight * (5 - line);
     public static double BassStaffLineTop(int line) => BassStaffTop + SpaceHeight * (5 - line);
-    
+
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
         var trebleStaffBounds = DrawStaff(canvas, dirtyRect, VerticalStaffMargin);
