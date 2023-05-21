@@ -6,6 +6,6 @@
                        xmlns:views="clr-namespace:Pianola.MAUI.Views"
                        x:Class="Pianola.MAUI.Views.SystemBeginningView"
                        x:Name="SystemBeginnings"
-                       HeightRequest="{x:Static drawables:StaffDrawable.Height}"
+                       HeightRequest="{x:Static drawables:SystemDrawable.Height}"
                        SizeChanged="OnSizeChanged">
 </HorizontalStackLayout>

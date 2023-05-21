@@ -7,7 +7,7 @@
         <ClickGestureRecognizer Clicked="OnClicked" />
     </ContentView.GestureRecognizers>
     <Grid>
-        <VerticalStackLayout x:Name="Staffs"
+        <VerticalStackLayout x:Name="Systems"
                              HorizontalOptions="Fill" />
         <Grid ColumnDefinitions="Auto, *">
             <VerticalStackLayout x:Name="SystemsBeginnings"

@@ -1,21 +1,31 @@
 ﻿using Pianola.MAUI.Models;
+using Pianola.MAUI.Views;
 
 namespace Pianola.MAUI.Drawables;
 
-// TODO Tu skonczyłem. Przerobić Measure* na wzór KeySignature*
-public class MeasureDrawable : BindableObject, IDrawable
+public class MeasureDrawable : ViewResizer<MeasureView>, IDrawable
 {
-    public GraphicsView GraphicsView { get; set; }
-
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        var model = (MeasureModel) GraphicsView.BindingContext;
-        
-        canvas.DrawBounds(dirtyRect);
+        if (ResizeView(canvas, dirtyRect)) return;
+        DrawMeasure(canvas, dirtyRect);
+    }
 
+    protected override Rect CalculateBounds(ICanvas canvas, RectF dirtyRect)
+    {
+        return DrawMeasure(canvas, dirtyRect, calculateBoundsOnly: true);
+    }
+
+    private Rect DrawMeasure(ICanvas canvas, RectF dirtyRect, bool calculateBoundsOnly = false)
+    {
+        var bounds = new Rect(0, 0, 100, 0); // TODO
+        if (calculateBoundsOnly) return bounds;
+
+        var model = (MeasureModel) View.BindingContext;
+        canvas.DrawBounds(dirtyRect);
         canvas.FontColor = Colors.Black;
         canvas.DrawString(model.DebugText, 0, 10, HorizontalAlignment.Left);
-
-        GraphicsView.WidthRequest = GraphicsView.MaximumWidthRequest = 100; // TODO
+        
+        return bounds;
     }
 }

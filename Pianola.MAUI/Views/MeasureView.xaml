@@ -4,11 +4,11 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:drawables="using:Pianola.MAUI.Drawables"
               x:Class="Pianola.MAUI.Views.MeasureView"
-              x:Name="GraphicsView"
+              x:Name="This"
               EndInteraction="OnEndInteraction"
-              HeightRequest="{x:Static drawables:StaffDrawable.Height}"
+              HeightRequest="{x:Static drawables:SystemDrawable.Height}"
               WidthRequest="1">
     <GraphicsView.Drawable>
-        <drawables:MeasureDrawable GraphicsView="{x:Reference GraphicsView}"/>
+        <drawables:MeasureDrawable View="{x:Reference This}"/>
     </GraphicsView.Drawable>
 </GraphicsView>

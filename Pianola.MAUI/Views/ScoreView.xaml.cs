@@ -17,7 +17,7 @@ public partial class ScoreView //: ContentView
 
     private void AccomodateScoreToItems()
     {
-        AccomodateScoreLayout(Staffs, () => new StaffsView());
+        AccomodateScoreLayout(Systems, () => new SystemView());
         AccomodateScoreLayout(SystemsBeginnings, viewConstructor: () =>
         {
             var sbv = new SystemBeginningView();

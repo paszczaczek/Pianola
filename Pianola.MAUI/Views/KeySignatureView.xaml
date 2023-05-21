@@ -9,7 +9,7 @@
              StartInteraction="OnStartInteraction"
              VerticalOptions="Start"
              WidthRequest="1" 
-             HeightRequest="{x:Static drawables:StaffDrawable.Height}">
+             HeightRequest="{x:Static drawables:SystemDrawable.Height}">
     <GraphicsView.Drawable>
         <drawables:KeySignatureDrawable View="{x:Reference This}"/>
     </GraphicsView.Drawable>

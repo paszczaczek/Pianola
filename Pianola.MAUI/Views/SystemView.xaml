@@ -3,9 +3,9 @@
 <controls:GraphicsView xmlns:controls="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:drawables="clr-namespace:Pianola.MAUI.Drawables"
-                       x:Class="Pianola.MAUI.Views.StaffsView"
-                       HeightRequest="{x:Static drawables:StaffDrawable.Height}">
+                       x:Class="Pianola.MAUI.Views.SystemView"
+                       HeightRequest="{x:Static drawables:SystemDrawable.Height}">
     <controls:GraphicsView.Drawable>
-        <drawables:StaffDrawable />
+        <drawables:SystemDrawable />
     </controls:GraphicsView.Drawable>
 </controls:GraphicsView>

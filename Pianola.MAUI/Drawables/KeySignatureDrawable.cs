@@ -74,7 +74,7 @@ public class KeySignatureDrawable : ViewResizer<KeySignatureView>, IDrawable
                 var staffPosition = Staff.Position.For(pitch, octave, clef);
 
                 // jaka to będzie jego współrzędna y?
-                var signTop = StaffDrawable.StaffPositionToY(staffPosition, clef);
+                var signTop = SystemDrawable.StaffPositionToY(staffPosition, clef);
                 signLocation.Y = signTop;
 
                 // narysuj znak chromatyczny lub tylko wyznacz jego granice

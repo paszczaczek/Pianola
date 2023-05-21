@@ -37,7 +37,7 @@ public class ClefDrawable : ViewResizer<ClefView>, IDrawable
             var (_, _, clefStaffPosition) = ClefDefinitions[clef];
             
             // jaka to będzie współrzędna y?
-            var clefBaseLineY = StaffDrawable.StaffPositionToY(clefStaffPosition, clef);
+            var clefBaseLineY = SystemDrawable.StaffPositionToY(clefStaffPosition, clef);
             var clefLocation = new Point(0, clefBaseLineY);
             
             // jakiego znaku trzeba użyć do narysowania klucza?
