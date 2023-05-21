@@ -2,6 +2,7 @@
 
 namespace Pianola.MAUI.Drawables;
 
+// TODO Tu skonczyłem. Przerobić Measure* na wzór KeySignature*
 public class MeasureDrawable : BindableObject, IDrawable
 {
     public GraphicsView GraphicsView { get; set; }

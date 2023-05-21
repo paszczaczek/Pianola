@@ -3,7 +3,7 @@ using Pianola.MAUI.Views;
 
 namespace Pianola.MAUI.Drawables;
 
-public class KeySignatureStaffDrawable : ViewResizer<KeySignatureView>, IDrawable
+public class KeySignatureDrawable : ViewResizer<KeySignatureView>, IDrawable
 {
     // ułożenie znaków chromatycznych w ...
     private static readonly IReadOnlyDictionary<ChromaticSign, (Pitch, Octave)[]> Definitions =

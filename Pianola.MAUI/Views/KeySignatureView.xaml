@@ -11,6 +11,6 @@
              WidthRequest="1" 
              HeightRequest="{x:Static drawables:StaffDrawable.Height}">
     <GraphicsView.Drawable>
-        <drawables:KeySignatureStaffDrawable View="{x:Reference This}"/>
+        <drawables:KeySignatureDrawable View="{x:Reference This}"/>
     </GraphicsView.Drawable>
 </GraphicsView>
