@@ -5,7 +5,11 @@ namespace Pianola.MAUI.Drawables;
 
 public static class SignDrawable
 {
+#if ANDROID
+    private static readonly Font Font = new("feta.ttf");
+#else
     private static readonly Font Font = new("feta26");
+#endif
     private const float FontBaseline = 67.5f;
     private const float FontSize = 48;
 
@@ -24,7 +28,7 @@ public static class SignDrawable
         var signInfo = FontSignInfos[sign];
         var bounds = CalculateBounds(canvas, baselineLocation, signInfo);
         if (calculateBoundsOnly) return bounds;
-        
+
         canvas.DrawBounds(bounds);
         DrawBaseline(canvas, bounds, baselineLocation);
         DrawSign(canvas, baselineLocation, signInfo);
