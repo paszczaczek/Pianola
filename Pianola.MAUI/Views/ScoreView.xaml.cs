@@ -50,8 +50,7 @@ public partial class ScoreView //: ContentView
         AccomodateScoreToItems();
     }
 
-    private void OnClicked(object sender, EventArgs e)
+    private void OnTapped(object sender, TappedEventArgs e)
     {
-        // nie działa, hmm...
     }
 }

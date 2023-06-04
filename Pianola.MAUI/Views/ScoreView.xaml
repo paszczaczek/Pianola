@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Pianola.MAUI.Views.ScoreView">
     <ContentView.GestureRecognizers>
-        <ClickGestureRecognizer Clicked="OnClicked" />
+        <TapGestureRecognizer Tapped="OnTapped" />
     </ContentView.GestureRecognizers>
     <Grid>
         <VerticalStackLayout x:Name="Systems"
