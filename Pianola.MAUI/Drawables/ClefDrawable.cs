@@ -17,7 +17,7 @@ public class ClefDrawable : ViewResizer<ClefView>, IDrawable
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        if (ResizeView(canvas, dirtyRect)) return;
+        if (ViewResized(canvas, dirtyRect)) return;
         DrawClefs(canvas);
     }
 

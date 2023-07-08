@@ -21,6 +21,7 @@ public static class SignDrawable
             {Sign.Sharp, new(code: "\x002e", ascender: 375, descender: 375)},
             {Sign.Flat, new(code: "\x003a", ascender: 470, descender: 157)},
             {Sign.Natural, new(code: "\x0036", ascender: 381, descender: 381)},
+            {Sign.BlackNoteHead, new(code: "\x0056", ascender: 136, descender: 136)},
         };
 
     public static Rect Draw(ICanvas canvas, Point baselineLocation, Sign sign, bool calculateBoundsOnly = false)

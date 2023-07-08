@@ -1,22 +1,50 @@
 ﻿using Pianola.MAUI.Models;
+using Pianola.MAUI.Views;
 
 namespace Pianola.MAUI.Drawables;
 
-public class SystemDrawable : IDrawable
+public class SystemDrawable : ViewResizer<SystemView>, IDrawable
 {
-    private const float VerticalStaffMargin = 30; // TODO
+    private const float VerticalStaffMargin = 30;
     private const int LinesInStaff = 5;
-    private const float SpaceHeight = 10; // TODO
-    private const double StaffHeight = SpaceHeight * LinesInStaff;
-
+    private static float _staffSpaceHeight;
+    private static double StaffHeight => _staffSpaceHeight * (LinesInStaff - 1);
     private const double TrebleStaffTop = VerticalStaffMargin;
-    private const double BassStaffTop = TrebleStaffTop + StaffHeight + VerticalStaffMargin;
+    private static double BassStaffTop => TrebleStaffTop + StaffHeight + VerticalStaffMargin;
+    public static double Height => BassStaffTop + StaffHeight + VerticalStaffMargin;
 
-    public const double Height = BassStaffTop + StaffHeight + VerticalStaffMargin;
+    public void Draw(ICanvas canvas, RectF dirtyRect)
+    {
+        if (ViewResized(canvas, dirtyRect, Property.Height)) return;
+
+        DrawStaff(TrebleStaffTop);
+        DrawStaff(BassStaffTop);
+
+        canvas.DrawBounds(Bounds);
+        return;
+
+        void DrawStaff(double top)
+        {
+            canvas.StrokeColor = Colors.Black;
+            var lineY = (float) top;
+            for (var i = 0; i < LinesInStaff; i++)
+            {
+                canvas.DrawLine(x1: dirtyRect.X, y1: lineY, x2: dirtyRect.Width, y2: lineY);
+                lineY += _staffSpaceHeight;
+            }
+        }
+    }
+
+    protected override Rect CalculateBounds(ICanvas canvas, RectF dirtyRect)
+    {
+        var bounds = dirtyRect;
+        bounds.Bottom = (float) Height;
+        return bounds;
+    }
 
     public static double StaffPositionToY(Staff.Position staffPosition, Clef clef)
     {
-        var staffPositionY = SpaceHeight * (double) staffPosition.Number / 2;
+        var staffPositionY = _staffSpaceHeight * (double) staffPosition.Number / 2;
         var clefTop = clef switch
         {
             Clef.Treble => TrebleStaffTop,
@@ -27,31 +55,10 @@ public class SystemDrawable : IDrawable
         return top;
     }
 
-    public void Draw(ICanvas canvas, RectF dirtyRect)
+    public static void CalculateStaffSpaceHeight(ICanvas canvas)
     {
-        // narysuj pięciolinię wiolinową i basową
-        DrawStaff(canvas, dirtyRect, (float) TrebleStaffTop);
-        DrawStaff(canvas, dirtyRect, (float) BassStaffTop);
-
-        var bounds = dirtyRect;
-        bounds.Bottom = (float) Height;
-        canvas.DrawBounds(bounds);
-    }
-
-    private static RectF DrawStaff(ICanvas canvas, RectF dirtyRect, float top)
-    {
-        canvas.StrokeColor = Colors.Black;
-
-        var lineY = dirtyRect.Y = top;
-        for (var i = 0; i < LinesInStaff; i++)
-        {
-            canvas.DrawLine(x1: dirtyRect.X, y1: lineY, x2: dirtyRect.Width, y2: lineY);
-            lineY += SpaceHeight;
-        }
-
-        var bounds = dirtyRect;
-        bounds.Top = top;
-        bounds.Bottom = lineY;
-        return bounds;
+        if (_staffSpaceHeight != 0) return;
+        var bounds = SignDrawable.Draw(canvas, Point.Zero, Sign.BlackNoteHead, calculateBoundsOnly: true);
+        _staffSpaceHeight = (float) bounds.Height;
     }
 }

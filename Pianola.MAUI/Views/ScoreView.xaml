@@ -2,16 +2,25 @@
 
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawables="using:Pianola.MAUI.Drawables"
+             xmlns:views="using:Pianola.MAUI.Views"
              x:Class="Pianola.MAUI.Views.ScoreView">
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer Tapped="OnTapped" />
     </ContentView.GestureRecognizers>
     <Grid>
-        <VerticalStackLayout x:Name="Systems"
-                             HorizontalOptions="Fill" />
+        <!-- ScoreDrawable służy wyłącznie do wyliczenia wysokości pola w pięciolinii -->
+        <GraphicsView WidthRequest="1" HeightRequest="1">
+            <GraphicsView.Drawable>
+                <drawables:ScoreDrawable />
+            </GraphicsView.Drawable>
+        </GraphicsView>
+        <!-- systemy pięciolinii -->
+        <VerticalStackLayout x:Name="Systems" />
         <Grid ColumnDefinitions="Auto, *">
-            <VerticalStackLayout x:Name="SystemsBeginnings"
-                                 Grid.Column="0" />
+            <!-- elementy na początku pięciolinii, tj. klucz, sygnatura przykluczowa, metrum, itp. -->
+            <VerticalStackLayout x:Name="SystemsBeginnings" Grid.Column="0" />
+            <!-- takty -->
             <FlexLayout x:Name="Measures"
                         Grid.Column="1"
                         AlignContent="Start"

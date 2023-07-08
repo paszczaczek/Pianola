@@ -17,8 +17,8 @@ public partial class ScoreView //: ContentView
 
     private void AccomodateScoreToItems()
     {
-        AccomodateScoreLayout(Systems, () => new SystemView());
-        AccomodateScoreLayout(SystemsBeginnings, viewConstructor: () =>
+        AccomodateScoreLayout(Systems, viewFactory: () => new SystemView());
+        AccomodateScoreLayout(SystemsBeginnings, viewFactory: () =>
         {
             var sbv = new SystemBeginningView();
             sbv.SetBinding(
@@ -26,14 +26,15 @@ public partial class ScoreView //: ContentView
                 new Binding(nameof(Models.KeySignature)) {Source = this});
             return sbv;
         });
+        return;
 
-        void AccomodateScoreLayout<TView>(Layout layout, Func<TView> viewConstructor) where TView : View, new()
+        void AccomodateScoreLayout<TView>(Layout layout, Func<TView> viewFactory) where TView : View, new()
         {
             var systemCount = Measures.Children.Cast<View>().GroupBy(v => v.Y).Count();
             if (layout.Count == systemCount) return;
             if (layout.Count < systemCount)
                 for (var i = layout.Count; i < systemCount; i++)
-                    layout.Add(viewConstructor());
+                    layout.Add(viewFactory());
             if (layout.Count == systemCount) return;
             for (var i = systemCount; i < layout.Count; i++)
                 layout.RemoveAt(0);

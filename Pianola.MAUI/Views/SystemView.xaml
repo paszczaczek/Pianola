@@ -4,8 +4,9 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:drawables="clr-namespace:Pianola.MAUI.Drawables"
                        x:Class="Pianola.MAUI.Views.SystemView"
-                       HeightRequest="{x:Static drawables:SystemDrawable.Height}">
+                       x:Name="This" 
+                       MinimumHeightRequest="1">
     <controls:GraphicsView.Drawable>
-        <drawables:SystemDrawable />
+        <drawables:SystemDrawable View="{x:Reference This}"/>
     </controls:GraphicsView.Drawable>
 </controls:GraphicsView>

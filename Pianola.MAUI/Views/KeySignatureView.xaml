@@ -8,8 +8,8 @@
              x:Name="This"
              StartInteraction="OnStartInteraction"
              VerticalOptions="Start"
-             WidthRequest="1" 
-             HeightRequest="{x:Static drawables:SystemDrawable.Height}">
+             MinimumWidthRequest="1" 
+             MinimumHeightRequest="1">
     <GraphicsView.Drawable>
         <drawables:KeySignatureDrawable View="{x:Reference This}"/>
     </GraphicsView.Drawable>

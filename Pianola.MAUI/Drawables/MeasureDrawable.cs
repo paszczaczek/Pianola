@@ -7,7 +7,7 @@ public class MeasureDrawable : ViewResizer<MeasureView>, IDrawable
 {
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        if (ResizeView(canvas, dirtyRect)) return;
+        if (ViewResized(canvas, dirtyRect)) return;
         DrawMeasure(canvas, dirtyRect);
     }
 
@@ -18,7 +18,7 @@ public class MeasureDrawable : ViewResizer<MeasureView>, IDrawable
 
     private Rect DrawMeasure(ICanvas canvas, RectF dirtyRect, bool calculateBoundsOnly = false)
     {
-        var bounds = new Rect(0, 0, 100, 0); // TODO
+        var bounds = new Rect(0, 0, 100, SystemDrawable.Height); // TODO
         if (calculateBoundsOnly) return bounds;
 
         var model = (MeasureModel) View.BindingContext;

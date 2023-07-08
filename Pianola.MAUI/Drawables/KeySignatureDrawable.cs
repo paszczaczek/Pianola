@@ -39,7 +39,7 @@ public class KeySignatureDrawable : ViewResizer<KeySignatureView>, IDrawable
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        if (ResizeView(canvas, dirtyRect)) return;
+        if (ViewResized(canvas, dirtyRect)) return;
         DrawKeySignatures(canvas);
     }
 
